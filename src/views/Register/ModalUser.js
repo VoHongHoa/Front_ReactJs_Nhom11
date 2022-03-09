@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { handleRegisterUser } from "../../services/UserService";
+import { toast } from "react-toastify";
 import "./ModalUser.scss";
 class ModalRegister extends Component {
   constructor(props) {
@@ -28,7 +30,14 @@ class ModalRegister extends Component {
   };
   checkValidateInput = () => {
     let isValid = true;
-    let arrInput = ["email", "password", "firstName", "lastName", "address"];
+    let arrInput = [
+      "email",
+      "password",
+      "fullName",
+      "address",
+      "phoneNumber",
+      "gender",
+    ];
     for (let i = 0; i < arrInput.length; i++) {
       // console.log(this.state[arrInput[i]]);
       if (!this.state[arrInput[i]]) {
@@ -39,15 +48,20 @@ class ModalRegister extends Component {
     }
     return isValid;
   };
-  //   handleAddNewUser = () => {
-  //     let isValid = this.checkValidateInput();
-  //     if (isValid === true) {
-  //       //call api create modal
-  //       this.props.createNewUser(this.state);
-  //       //console.log("data modal", this.state);
-  //     }
-  //     //
-  //   };
+  handleRegisterUser = async () => {
+    let isValid = this.checkValidateInput();
+    if (isValid === true) {
+      //call api create modal
+      console.log("check state:", this.state);
+      let response = await handleRegisterUser(this.state);
+      if (response.message === "User created") {
+        toast.success(response.message);
+      } else {
+        toast.error("Register Failed");
+      }
+    }
+    //
+  };
   render() {
     return (
       <Modal
@@ -152,7 +166,11 @@ class ModalRegister extends Component {
           </div>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" className="px-3">
+          <Button
+            color="primary"
+            className="px-3"
+            onClick={() => this.handleRegisterUser()}
+          >
             Save
           </Button>{" "}
           <Button
