@@ -1,0 +1,19 @@
+.list-todo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .list-todo-content {
+    .todo-child {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid gray;
+      align-items: center;
+      .action-todochild {
+        display: flex;
+        gap: 5px;
+      }
+    }
+  }
+}
