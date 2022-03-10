@@ -10,11 +10,11 @@ import rootReducer from "./store/reducers/rootReducers";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 const reduxStore = createStore(rootReducer, applyMiddleware(thunk));
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={reduxStore}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Provider store={reduxStore}>
+    <App />
+  </Provider>,
+  // </React.StrictMode>
   document.getElementById("root")
 );
 
