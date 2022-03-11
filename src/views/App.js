@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Homepage from "./Homepage/Homepage";
 import Product from "./Products/Product";
 import Login from "./Login/Login";
-import Register from "./Register/Register";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 function App() {
   return (
@@ -21,9 +20,6 @@ function App() {
           </Route>
           <Route path="/login" exact>
             <Login />
-          </Route>
-          <Route path="/register" exact>
-            <Register />
           </Route>
         </Switch>
         <ToastContainer

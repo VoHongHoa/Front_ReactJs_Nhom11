@@ -55,10 +55,18 @@ class ModalRegister extends Component {
     return isValid;
   };
   handleRegisterUser = async () => {
+    console.log(this.state);
     let isValid = this.checkValidateInput();
     if (isValid === true) {
       //call api create modal
-      let response = await handleRegisterUser(this.state);
+      let response = await handleRegisterUser({
+        email: this.state.email,
+        password: this.state.password,
+        name: this.state.name,
+        address: this.state.address,
+        telephone: this.state.phoneNumber,
+        gender: this.state.selectedOption.label,
+      });
       console.log("check respone", response);
       if (response && response.errorCode === 1) {
         toast.success(response.message);
@@ -74,7 +82,6 @@ class ModalRegister extends Component {
         toast.error(response.message);
       }
     }
-    //
   };
   render() {
     const options = [
