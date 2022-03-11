@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import ModalRegister from "../Register/ModalRegister";
 import "./Login.scss";
-import Homeheader from "../Homepage/Homeheader/Homeheader";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +11,7 @@ class Login extends Component {
       password: "",
       isShowpassword: true,
       errMessage: "",
+      isOpenModal: false,
     };
   }
   handleOnChangeUsername = (event) => {
@@ -25,38 +26,38 @@ class Login extends Component {
     });
     // console.log(event.target.value)
   };
-  //   handleLogin = async () => {
-  //     //alert("Login")
-  //     this.setState({
-  //       errMessage: "",
-  //     });
-  //     // console.log(this.state.username)
-  //     // console.log(this.state.password)
-  //     try {
-  //       let data = await handleLoginApi(this.state.username, this.state.password);
-  //       //console.log(data);
-  //       if (data && data.errorCode !== 0) {
+  // handleLogin = async () => {
+  //   //alert("Login")
+  //   this.setState({
+  //     errMessage: "",
+  //   });
+  //   // console.log(this.state.username)
+  //   // console.log(this.state.password)
+  //   try {
+  //     let data = await handleLoginApi(this.state.username, this.state.password);
+  //     //console.log(data);
+  //     if (data && data.errorCode !== 0) {
+  //       this.setState({
+  //         errMessage: data.message,
+  //       });
+  //     }
+  //     if (data && data.errorCode === 0) {
+  //       //todo
+  //       // console.log('login succeed')
+  //       this.props.userLoginSuccess(data.user);
+  //     }
+  //   } catch (error) {
+  //     // console.log(e);
+  //     if (error.response) {
+  //       if (error.response.data) {
   //         this.setState({
-  //           errMessage: data.message,
+  //           errMessage: error.response.data.message,
   //         });
   //       }
-  //       if (data && data.errorCode === 0) {
-  //         //todo
-  //         // console.log('login succeed')
-  //         this.props.userLoginSuccess(data.user);
-  //       }
-  //     } catch (error) {
-  //       // console.log(e);
-  //       if (error.response) {
-  //         if (error.response.data) {
-  //           this.setState({
-  //             errMessage: error.response.data.message,
-  //           });
-  //         }
-  //       }
   //     }
-  //     // await handleLoginApi(this.state.username,this.state.password)
-  //   };
+  //   }
+  //   // await handleLoginApi(this.state.username,this.state.password)
+  // };
   handleShowHidePassword = () => {
     //alert("click hide")
     this.setState({
@@ -71,15 +72,24 @@ class Login extends Component {
   handleLogin = () => {
     this.props.history.push(`/`);
   };
+  handleOpenModal = () => {
+    this.setState({
+      isOpenModal: true,
+    });
+  };
+  toggleFromParent = () => {
+    this.setState({
+      isOpenModal: false,
+    });
+  };
   render() {
     //JSX
     return (
       <>
-        <Homeheader />
         <div className="login-background">
           <div className="login-container">
             <div className="login-content row">
-              <div className="col-12 text-center textLogin">Login</div>
+              <div className="col-12 text-center textLogin">Đăng nhập</div>
               <div className="col-12 form-group login-input">
                 <label>Username:</label>
                 <input
@@ -114,32 +124,33 @@ class Login extends Component {
                   </span>
                 </div>
               </div>
-              <div className="col-12" style={{ color: "red" }}>
+              {/* <div className="col-12" style={{ color: "red" }}>
                 {this.state.errMessage}
-              </div>
-
-              <div className="col-12 btn-div">
+              </div> */}
+              <div className="col-6 btn-div">
                 <button
                   className="btn-login"
                   onClick={() => this.handleLogin()}
                 >
-                  Login
+                  Đăng nhập
                 </button>
               </div>
 
-              <div className="col-12">
-                <span className="forgot-password">Forgot your password ?</span>
-              </div>
-              <div className="col-12 text-center">
-                <span className="loginwith-span"> Or login with:</span>
-              </div>
-              <div className="col-12 other-login">
-                <i className="fab fa-google-plus google-icon"></i>
-                <i className="fab fa-facebook facebook-icon"></i>
+              <div className="col-6 btn-div">
+                <button
+                  className="btn-login"
+                  onClick={() => this.handleOpenModal()}
+                >
+                  Đăng kí
+                </button>
               </div>
             </div>
           </div>
         </div>
+        <ModalRegister
+          isOpen={this.state.isOpenModal}
+          toggleFromParent={this.toggleFromParent}
+        />
       </>
     );
   }

@@ -5,14 +5,13 @@ import { handleRegisterUser } from "../../services/UserService";
 import { toast } from "react-toastify";
 import Select from "react-select";
 
-import "./ModalUser.scss";
 class ModalRegister extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
-      fullName: "",
+      name: "",
       address: "",
       phoneNumber: "",
       selectedOption: "",
@@ -40,7 +39,7 @@ class ModalRegister extends Component {
     let arrInput = [
       "email",
       "password",
-      "fullName",
+      "name",
       "address",
       "phoneNumber",
       "selectedOption",
@@ -59,20 +58,20 @@ class ModalRegister extends Component {
     let isValid = this.checkValidateInput();
     if (isValid === true) {
       //call api create modal
-      console.log("check state:", this.state);
       let response = await handleRegisterUser(this.state);
-      if (response && response.message === "User created") {
+      console.log("check respone", response);
+      if (response && response.errorCode === 1) {
         toast.success(response.message);
         this.setState({
           email: "",
           password: "",
-          fullName: "",
+          name: "",
           address: "",
           phoneNumber: "",
           selectedOption: "",
         });
       } else {
-        toast.error("Register Failed");
+        toast.error(response.message);
       }
     }
     //
@@ -92,19 +91,19 @@ class ModalRegister extends Component {
         }}
         className={"modal-user-container"}
         size="lg"
-        //centered
+        centered
       >
         <ModalHeader
           toggle={() => {
             this.toggle();
           }}
         >
-          Create New User
+          Đăng kí người dùng
         </ModalHeader>
         <ModalBody>
           <div className="modalBody-user-container row">
             <div className="form-group col-6 mt-2">
-              <label>Email address</label>
+              <label>Email </label>
               <input
                 type="email"
                 className="form-control"
@@ -130,24 +129,24 @@ class ModalRegister extends Component {
             </div>
 
             <div className="form-group mt-2">
-              <label>Name</label>
+              <label>Họ và tên</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your Name"
+                placeholder="Enter your Fullname"
                 onChange={(event) => {
-                  this.handleOnchangeInput(event, "fullName");
+                  this.handleOnchangeInput(event, "name");
                 }}
-                value={this.state.firstName}
+                value={this.state.name}
               />
             </div>
 
             <div className="form-group mt-2">
-              <label>Address</label>
+              <label>Địa chỉ</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your Name"
+                placeholder="Enter your address"
                 onChange={(event) => {
                   this.handleOnchangeInput(event, "address");
                 }}
@@ -156,7 +155,7 @@ class ModalRegister extends Component {
             </div>
 
             <div className="form-group col-6 mt-2">
-              <label>Phone Number</label>
+              <label>Số điện thoại</label>
               <input
                 type="text"
                 className="form-control"
@@ -168,7 +167,7 @@ class ModalRegister extends Component {
               />
             </div>
             <div className="form-group col-6 mt-2">
-              <label>Gender</label>
+              <label>Giới tính</label>
               <Select
                 value={selectedOption}
                 onChange={this.handleOnchangeSelect}
@@ -183,7 +182,7 @@ class ModalRegister extends Component {
             className="px-3"
             onClick={() => this.handleRegisterUser()}
           >
-            Save
+            Đăng kí
           </Button>{" "}
           <Button
             color="secondary"
@@ -192,7 +191,7 @@ class ModalRegister extends Component {
             }}
             className="px-3"
           >
-            Cancel
+            Hủy
           </Button>
         </ModalFooter>
       </Modal>
