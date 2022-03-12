@@ -33,14 +33,14 @@ class Homeheader extends Component {
         <div className="header-container container-fluid">
           <div className="top-header row">
             <div className="col-3 logo-container">
-              <i class="fab fa-phoenix-squadron fa-3x"></i>
+              <i className="fab fa-phoenix-squadron fa-3x"></i>
               <span>UITPHONE</span>
             </div>
 
             <div className="col-6 search-container">
               <input className="form-control" placeholder="Search..." />
               <button type="submit" className="btn-submit">
-                <i class="fa fa-search fa-2x"></i>
+                <i className="fa fa-search fa-2x"></i>
               </button>
             </div>
             <div className="col-3 log-in">
