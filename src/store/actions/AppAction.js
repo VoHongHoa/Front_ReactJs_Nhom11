@@ -46,3 +46,15 @@ export const deleteItemSuccess = (item) => ({
 export const deleteCart = () => ({
   type: "DELETE_CART",
 });
+
+export const handleSaveUserInforRedux = (userInfor) => {
+  //console.log("check user:", userInfor);
+
+  return async (dispatch, getState) => {
+    dispatch(loginSuccess(userInfor));
+  };
+};
+export const loginSuccess = (userInfor) => ({
+  type: "LOGIN_SUCCESS",
+  userInfor: userInfor,
+});

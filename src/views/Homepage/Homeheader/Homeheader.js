@@ -14,6 +14,10 @@ class Homeheader extends Component {
       isOpenCart: false,
     };
   }
+  componentDidMount() {
+    console.log("check login chua:", this.props.isLogin);
+    console.log("check login chua:", this.props.userInfor);
+  }
   handleIsOpenCart = () => {
     this.setState({
       isOpenCart: true,
@@ -28,6 +32,7 @@ class Homeheader extends Component {
     this.props.history.push("/login");
   };
   render() {
+    let { isLogin } = this.props;
     return (
       <React.Fragment>
         <div className="header-container container-fluid">
@@ -46,12 +51,21 @@ class Homeheader extends Component {
             <div className="col-3 log-in">
               <div className="btn-log-in">
                 {/* <i className="fas fa-sign-in fa-2x"></i> */}
-                <button
-                  className="btn btn-light"
-                  onClick={() => this.handleOpenLogin()}
-                >
-                  Đăng nhập
-                </button>
+                {isLogin && isLogin === true ? (
+                  <>
+                    <button className="btn btn-light">
+                      Xin chào, {this.props.userInfor.user.fullname}
+                    </button>
+                    <i className="fas fa-sign-out fa-2x"></i>
+                  </>
+                ) : (
+                  <button
+                    className="btn btn-light"
+                    onClick={() => this.handleOpenLogin()}
+                  >
+                    Đăng nhập
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -93,7 +107,10 @@ class Homeheader extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    isLogin: state.isLogin,
+    userInfor: state.userInfor,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

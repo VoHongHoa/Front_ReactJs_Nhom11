@@ -3,6 +3,8 @@ const initState = {
   users: [],
   post: [],
   cart: [],
+  userInfor: {},
+  isLogin: false,
 };
 const rootReducer = (state = initState, action) => {
   switch (action.type) {
@@ -45,6 +47,10 @@ const rootReducer = (state = initState, action) => {
       return { ...state, cart };
     case "DELETE_CART":
       state.cart = [];
+      return { ...state };
+    case "LOGIN_SUCCESS":
+      state.userInfor = action.userInfor;
+      state.isLogin = true;
       return { ...state };
     default:
       return state;

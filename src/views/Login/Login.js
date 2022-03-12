@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import ModalRegister from "../Register/ModalRegister";
+import { handleLogin, handlegetUserInfor } from "../../services/UserService";
+import { handleSaveUserInforRedux } from "../../store/actions/AppAction";
 import "./Login.scss";
+import { toast } from "react-toastify";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +13,6 @@ class Login extends Component {
       username: "",
       password: "",
       isShowpassword: true,
-      errMessage: "",
       isOpenModal: false,
     };
   }
@@ -26,38 +28,7 @@ class Login extends Component {
     });
     // console.log(event.target.value)
   };
-  // handleLogin = async () => {
-  //   //alert("Login")
-  //   this.setState({
-  //     errMessage: "",
-  //   });
-  //   // console.log(this.state.username)
-  //   // console.log(this.state.password)
-  //   try {
-  //     let data = await handleLoginApi(this.state.username, this.state.password);
-  //     //console.log(data);
-  //     if (data && data.errorCode !== 0) {
-  //       this.setState({
-  //         errMessage: data.message,
-  //       });
-  //     }
-  //     if (data && data.errorCode === 0) {
-  //       //todo
-  //       // console.log('login succeed')
-  //       this.props.userLoginSuccess(data.user);
-  //     }
-  //   } catch (error) {
-  //     // console.log(e);
-  //     if (error.response) {
-  //       if (error.response.data) {
-  //         this.setState({
-  //           errMessage: error.response.data.message,
-  //         });
-  //       }
-  //     }
-  //   }
-  //   // await handleLoginApi(this.state.username,this.state.password)
-  // };
+
   handleShowHidePassword = () => {
     //alert("click hide")
     this.setState({
@@ -69,8 +40,22 @@ class Login extends Component {
       this.handleLogin();
     }
   };
-  handleLogin = () => {
-    this.props.history.push(`/`);
+  handleLogin = async () => {
+    //console.log("check state:", this.state);
+    let respone = await handleLogin({
+      username: this.state.username,
+      password: this.state.password,
+    });
+    //console.log("check respone:", respone);
+    if (respone && respone.success === false) {
+      toast.error(respone.message);
+    } else {
+      let accessToken = respone.tokens.accessToken;
+      let userInfor = await handlegetUserInfor(accessToken);
+      console.log("userInfor:", userInfor);
+      this.props.handleSaveUserInforRedux(userInfor);
+      this.props.history.push("/");
+    }
   };
   handleOpenModal = () => {
     this.setState({
@@ -161,7 +146,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    handleSaveUserInforRedux: (data) =>
+      dispatch(handleSaveUserInforRedux(data)),
+  };
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

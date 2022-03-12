@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { handleRegisterUser } from "../../services/UserService";
 import { toast } from "react-toastify";
-import Select from "react-select";
+//import Select from "react-select";
 
 class ModalRegister extends Component {
   constructor(props) {
@@ -11,10 +11,10 @@ class ModalRegister extends Component {
     this.state = {
       email: "",
       password: "",
-      name: "",
+      username: "",
       address: "",
       phoneNumber: "",
-      selectedOption: "",
+      fullname: "",
     };
   }
   componentDidMount() {}
@@ -29,20 +29,20 @@ class ModalRegister extends Component {
       ...copyState,
     });
   };
-  handleOnchangeSelect = (selectedOption) => {
-    this.setState({
-      selectedOption: selectedOption,
-    });
-  };
+  // handleOnchangeSelect = (selectedOption) => {
+  //   this.setState({
+  //     selectedOption: selectedOption,
+  //   });
+  // };
   checkValidateInput = () => {
     let isValid = true;
     let arrInput = [
       "email",
       "password",
-      "name",
+      "fullname",
+      "username",
       "address",
       "phoneNumber",
-      "selectedOption",
     ];
     for (let i = 0; i < arrInput.length; i++) {
       // console.log(this.state[arrInput[i]]);
@@ -55,41 +55,43 @@ class ModalRegister extends Component {
     return isValid;
   };
   handleRegisterUser = async () => {
-    console.log(this.state);
+    //console.log(this.state);
     let isValid = this.checkValidateInput();
     if (isValid === true) {
       //call api create modal
       let response = await handleRegisterUser({
         email: this.state.email,
         password: this.state.password,
-        name: this.state.name,
+        username: this.state.username,
+        fullname: this.state.fullname,
         address: this.state.address,
         telephone: this.state.phoneNumber,
-        gender: this.state.selectedOption.label,
+        //gender: this.state.selectedOption.label,
       });
-      console.log("check respone", response);
-      if (response && response.errorCode === 1) {
+      //console.log("check respone", response);
+      if (response && response.success === true) {
         toast.success(response.message);
         this.setState({
           email: "",
           password: "",
-          name: "",
+          username: "",
           address: "",
           phoneNumber: "",
-          selectedOption: "",
+          //selectedOption: "",
         });
+        this.toggle();
       } else {
         toast.error(response.message);
       }
     }
   };
   render() {
-    const options = [
-      { value: "F", label: "Nam" },
-      { value: "M", label: "Nữ" },
-      { value: "O", label: "Khác" },
-    ];
-    let { selectedOption } = this.state;
+    // const options = [
+    //   { value: "F", label: "Nam" },
+    //   { value: "M", label: "Nữ" },
+    //   { value: "O", label: "Khác" },
+    // ];
+    // let { selectedOption } = this.state;
     return (
       <Modal
         isOpen={this.props.isOpen}
@@ -109,19 +111,18 @@ class ModalRegister extends Component {
         </ModalHeader>
         <ModalBody>
           <div className="modalBody-user-container row">
-            <div className="form-group col-6 mt-2">
-              <label>Email </label>
+            <div className="form-group mt-2 col-6">
+              <label>Username</label>
               <input
-                type="email"
+                type="text"
                 className="form-control"
-                placeholder="Enter email"
+                placeholder="Enter your username"
                 onChange={(event) => {
-                  this.handleOnchangeInput(event, "email");
+                  this.handleOnchangeInput(event, "username");
                 }}
-                value={this.state.email}
+                value={this.state.username}
               />
             </div>
-
             <div className="form-group mt-2 col-6">
               <label>Password</label>
               <input
@@ -135,20 +136,31 @@ class ModalRegister extends Component {
               />
             </div>
 
-            <div className="form-group mt-2">
-              <label>Họ và tên</label>
+            <div className="form-group col-6 mt-2">
+              <label>Email </label>
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Enter email"
+                onChange={(event) => {
+                  this.handleOnchangeInput(event, "email");
+                }}
+                value={this.state.email}
+              />
+            </div>
+            <div className="form-group mt-2 col-6">
+              <label>Fullname</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your Fullname"
+                placeholder="Enter your fullname"
                 onChange={(event) => {
-                  this.handleOnchangeInput(event, "name");
+                  this.handleOnchangeInput(event, "fullname");
                 }}
-                value={this.state.name}
+                value={this.state.fullname}
               />
             </div>
-
-            <div className="form-group mt-2">
+            <div className="form-group mt-2 col-6">
               <label>Địa chỉ</label>
               <input
                 type="text"
@@ -160,7 +172,6 @@ class ModalRegister extends Component {
                 value={this.state.address}
               />
             </div>
-
             <div className="form-group col-6 mt-2">
               <label>Số điện thoại</label>
               <input
@@ -173,14 +184,14 @@ class ModalRegister extends Component {
                 value={this.state.phoneNumber}
               />
             </div>
-            <div className="form-group col-6 mt-2">
+            {/* <div className="form-group col-6 mt-2">
               <label>Giới tính</label>
               <Select
                 value={selectedOption}
                 onChange={this.handleOnchangeSelect}
                 options={options}
               />
-            </div>
+            </div> */}
           </div>
         </ModalBody>
         <ModalFooter>

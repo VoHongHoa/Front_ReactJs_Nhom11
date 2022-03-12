@@ -9,6 +9,9 @@ class HomePage extends Component {
   //   returnToHome = () => {
   //     this.props.history.push(path.HOMEPAGE);
   //   };
+  componentDidMount() {
+    console.log("check login chua:", this.props.isLogin);
+  }
   render() {
     const settings = {
       dots: true,
@@ -32,7 +35,6 @@ class HomePage extends Component {
           </Slider>
           <div className="detail-banner col-5"></div>
         </div>
-
         <HomeFooter />
       </React.Fragment>
     );
@@ -40,7 +42,9 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    isLogin: state.isLogin,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
