@@ -50,7 +50,7 @@ class Homeheader extends Component {
     this.props.history.push("/");
   };
   handleOpenEditUser = (id) => {
-    this.props.history.push(`/user:${id}`);
+    this.props.history.push(`/user/${id}`);
   };
   render() {
     let { userInfor, isLogin } = this.state;

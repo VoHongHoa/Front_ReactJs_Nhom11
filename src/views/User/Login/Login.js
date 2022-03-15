@@ -127,7 +127,6 @@ class Login extends Component {
         <ModalRegister
           isOpen={this.state.isOpenModal}
           toggleFromParent={this.toggleFromParent}
-          action={this.state.action}
         />
       </>
     );

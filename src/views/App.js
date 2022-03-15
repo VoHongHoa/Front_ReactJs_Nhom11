@@ -33,7 +33,7 @@ class App extends Component {
             <Route exact path="/login">
               {isLogin ? <Redirect to="/" /> : <Login />}
             </Route>
-            <Route exact path="/user:id">
+            <Route exact path="/user/:id">
               {isLogin === false ? <Redirect to="/login" /> : <EditUser />}
             </Route>
 

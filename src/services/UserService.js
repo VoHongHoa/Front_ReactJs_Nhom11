@@ -9,10 +9,16 @@ const handlegetUserInfor = () => {
   return axios.get("/api/user/");
 };
 const handleEditUser = (data) => {
-  return axios.put(`/api/user/:${data.id}`, data);
+  return axios.put(`/api/user/${data.id}`, data);
 };
 const getAlluser = () => {
   return axios.get("/api/user/all");
+};
+const deleteuser = (userId) => {
+  return axios.delete(`/api/user/${userId}`);
+};
+const editUserFromAdmin = (data) => {
+  return axios.put(`/api/user/all/${data.id}`, data);
 };
 export {
   handleRegisterUser,
@@ -20,4 +26,6 @@ export {
   handlegetUserInfor,
   handleEditUser,
   getAlluser,
+  deleteuser,
+  editUserFromAdmin,
 };

@@ -2,13 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import AdminHeader from "../Adminheader/AdminHeader";
-import { getAlluser } from "../../../services/UserService";
+import {
+  getAlluser,
+  deleteuser,
+  editUserFromAdmin,
+} from "../../../services/UserService";
+import { toast } from "react-toastify";
+import ModalEditUserAdmin from "./ModalEditUserAdmin";
 import "./UserManage.scss";
 class UserManage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       alluser: [],
+      isOpenModal: false,
+      currentUserEdit: {},
     };
   }
   async componentDidMount() {
@@ -18,8 +26,54 @@ class UserManage extends Component {
         alluser: respone.users,
       });
     }
-    console.log("check respone", respone);
+    //console.log("check respone", respone);
   }
+  handleDeleteUser = async (userId) => {
+    let res = await deleteuser(userId);
+    if (res && res.success === true) {
+      toast.success("Xoá user thành công");
+      let respone = await getAlluser();
+      if (respone && respone.success === true && respone.users) {
+        this.setState({
+          alluser: respone.users,
+        });
+      }
+    } else {
+      toast.error("Xóa không thành công");
+    }
+  };
+  doEditUser = async (data) => {
+    try {
+      let res = await editUserFromAdmin(data);
+      if (res && res.success === true) {
+        toast.success(res.message);
+        this.setState({
+          isOpenModal: false,
+        });
+        let respone = await getAlluser();
+        if (respone && respone.success === true && respone.users) {
+          this.setState({
+            alluser: respone.users,
+          });
+        }
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  handleOpenModalEdit = (item) => {
+    this.setState({
+      isOpenModal: true,
+      currentUserEdit: item,
+    });
+  };
+  toggleFromParent = () => {
+    this.setState({
+      isOpenModal: false,
+    });
+  };
   render() {
     let { alluser } = this.state;
     return (
@@ -50,8 +104,14 @@ class UserManage extends Component {
                       <td>{item.address}</td>
                       <td>{item.role}</td>
                       <td className="action-edit-del">
-                        <i class="fas fa-edit"></i>
-                        <i className="fas fa-trash"></i>
+                        <i
+                          className="fas fa-edit"
+                          onClick={() => this.handleOpenModalEdit(item)}
+                        ></i>
+                        <i
+                          className="fas fa-trash"
+                          onClick={() => this.handleDeleteUser(item._id)}
+                        ></i>
                       </td>
                     </tr>
                   );
@@ -59,6 +119,12 @@ class UserManage extends Component {
             </tbody>
           </table>
         </div>
+        <ModalEditUserAdmin
+          isOpen={this.state.isOpenModal}
+          toggleFromParent={this.toggleFromParent}
+          userEdit={this.state.currentUserEdit}
+          doEditUser={this.doEditUser}
+        />
       </>
     );
   }
