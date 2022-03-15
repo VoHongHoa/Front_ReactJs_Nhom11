@@ -1,0 +1,22 @@
+.text-manage {
+  font-size: 30px;
+  color: blue;
+  font-weight: bold;
+}
+
+.user-container {
+  table {
+    tbody {
+      tr {
+        .action-edit-del {
+          display: flex;
+          justify-content: left;
+          gap: 15px;
+          i {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

@@ -9,9 +9,17 @@ import Login from "./User/Login/Login";
 import EditUser from "./User/EditUser/EditUser";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import UserManage from "./Admin/AdminPage/UserManage";
+import ProductManage from "./Admin/AdminPage/ProductManage";
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  componentDidMount() {}
   render() {
-    let { isLogin } = this.props;
+    let { isLogin, userInfor } = this.props;
+
     return (
       <BrowserRouter>
         <div className="App">
@@ -22,18 +30,26 @@ class App extends Component {
             <Route path="/product" exact>
               <Product />
             </Route>
-            {/* <Route path="/login" exact>
-              <Login />
-            </Route> */}
             <Route exact path="/login">
               {isLogin ? <Redirect to="/" /> : <Login />}
             </Route>
-            {/* <Route path="/user:id" exact>
-              <EditUser />
-            </Route> */}
-
             <Route exact path="/user:id">
               {isLogin === false ? <Redirect to="/login" /> : <EditUser />}
+            </Route>
+
+            <Route exact path="/admin/user">
+              {isLogin === true &&
+              userInfor &&
+              userInfor.user &&
+              userInfor.user.role === "admin" ? (
+                <UserManage />
+              ) : (
+                <Redirect to="/login" />
+              )}
+            </Route>
+
+            <Route path="/admin/product" exact>
+              <ProductManage />
             </Route>
           </Switch>
           <ToastContainer
@@ -55,6 +71,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     isLogin: state.isLogin,
+    userInfor: state.userInfor,
   };
 };
 

@@ -83,7 +83,7 @@ class Homeheader extends Component {
                           this.handleOpenEditUser(userInfor.user._id)
                         }
                       >
-                        Xin chào, {userInfor.user.fullname}
+                        Wel, {userInfor.user.fullname}
                       </button>
                     )}
 

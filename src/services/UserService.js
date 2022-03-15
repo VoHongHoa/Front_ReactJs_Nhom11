@@ -5,22 +5,19 @@ const handleRegisterUser = (data) => {
 const handleLoginService = (data) => {
   return axios.post("/api/auth/login", data);
 };
-// const handlegetUserInfor = (accessToken) => {
-//   const AuthStr = "Bearer ".concat(accessToken);
-//   //console.log(AuthStr);
-//   return axios.get("/api/user/", {
-//     headers: { Authorization: AuthStr },
-//   });
-// };
 const handlegetUserInfor = () => {
   return axios.get("/api/user/");
 };
 const handleEditUser = (data) => {
   return axios.put(`/api/user/:${data.id}`, data);
 };
+const getAlluser = () => {
+  return axios.get("/api/user/all");
+};
 export {
   handleRegisterUser,
   handleLoginService,
   handlegetUserInfor,
   handleEditUser,
+  getAlluser,
 };
