@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { handleRegisterUser } from "../../services/UserService";
+import { handleRegisterUser } from "../../../services/UserService";
 import { toast } from "react-toastify";
 //import Select from "react-select";
 
@@ -18,6 +18,7 @@ class ModalRegister extends Component {
     };
   }
   componentDidMount() {}
+  componentDidUpdate(preProps, preState) {}
 
   toggle = () => {
     this.props.toggleFromParent();
@@ -56,6 +57,7 @@ class ModalRegister extends Component {
   };
   handleRegisterUser = async () => {
     //console.log(this.state);
+
     let isValid = this.checkValidateInput();
     if (isValid === true) {
       //call api create modal
@@ -84,6 +86,16 @@ class ModalRegister extends Component {
         toast.error(response.message);
       }
     }
+
+    //   this.setState({
+    //     email: this.props.userInfor.user.email,
+    //     password: this.props.userInfor.user.password,
+    //     username: this.props.userInfor.user.username,
+    //     address: this.props.userInfor.user.address,
+    //     phoneNumber: this.props.userInfor.user.phoneNumber,
+    //     fullname: this.props.userInfor.user.fullname,
+    //   });
+    // }
   };
   render() {
     // const options = [

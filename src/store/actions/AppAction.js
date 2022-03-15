@@ -1,18 +1,10 @@
-export const addUser = (user) => {
-  //console.log("check user:", user);
-  return async (dispatch, getState) => {
-    dispatch(addUserSuccess(user));
-  };
-};
-export const addUserFailded = () => ({
-  type: "ADD_USER_FAIDLED",
-  user: [],
-});
-export const addUserSuccess = (user) => ({
-  type: "EDIT_USER_SUCCESS",
-  user: user,
-});
-
+import {
+  handleLoginService,
+  handlegetUserInfor,
+  handleEditUser,
+} from "../../services/UserService";
+import { toast } from "react-toastify";
+//------------------cart action------------------------------
 export const addToCart = (item) => {
   //console.log("check user:", user);
   return async (dispatch, getState) => {
@@ -42,19 +34,67 @@ export const deleteItemSuccess = (item) => ({
   type: "DELETE_ITEM_SUCCESS",
   itemDelete: item,
 });
-
 export const deleteCart = () => ({
   type: "DELETE_CART",
 });
+//----------------------------------------------------------
 
-export const handleSaveUserInforRedux = (userInfor) => {
-  //console.log("check user:", userInfor);
+//------------------user action------------------------------
 
+export const handleLogin = (data) => {
   return async (dispatch, getState) => {
-    dispatch(loginSuccess(userInfor));
+    try {
+      let respone = await handleLoginService(data);
+      if (respone && respone.success === true) {
+        localStorage.setItem("token", respone.tokens.accessToken);
+        let userData = await handlegetUserInfor();
+        dispatch(loginSuccess(userData, respone));
+      } else {
+        dispatch(loginFailed());
+      }
+    } catch (e) {
+      console.error(e);
+      dispatch(loginFailed());
+    }
   };
 };
-export const loginSuccess = (userInfor) => ({
+export const loginSuccess = (data, loginInfor) => ({
   type: "LOGIN_SUCCESS",
-  userInfor: userInfor,
+  userData: data,
+  loginInfor: loginInfor,
+});
+export const loginFailed = () => ({
+  type: "LOGIN_FAILED",
+  userData: {},
+});
+
+export const logOutSuccess = () => ({
+  type: "LOGOUT_SUCCESS",
+  userData: {},
+  loginInfor: {},
+});
+
+export const editUser = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let respone = await handleEditUser(data);
+      if (respone && respone.success === true) {
+        toast.success(respone.message);
+        dispatch(editUserSuccess(respone));
+      } else {
+        dispatch(editUserFailed());
+      }
+    } catch (e) {
+      console.error(e);
+      dispatch(editUserFailed());
+    }
+  };
+};
+export const editUserSuccess = (data) => ({
+  type: "EDIT_USER_SUCCESS",
+  userData: data,
+});
+export const editUserFailed = () => ({
+  type: "EDIT_USER_FAILED",
+  userData: {},
 });

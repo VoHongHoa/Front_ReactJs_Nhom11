@@ -1,26 +1,12 @@
 import { toast } from "react-toastify";
 const initState = {
-  users: [],
-  post: [],
   cart: [],
-  userInfor: {},
+  loginInfor: {},
   isLogin: false,
+  userInfor: {},
 };
-const rootReducer = (state = initState, action) => {
+const AppReducer = (state = initState, action) => {
   switch (action.type) {
-    case "DELETE_USER":
-      //console.log("dhsakjfhdsjkf", action);
-      let user = state.users;
-      const index = user.indexOf(action.payload);
-      if (index > -1) {
-        user.splice(index, 1); // 2nd parameter means remove one item only
-      }
-      console.log("check state redux:", state);
-      return { ...state };
-    case "EDIT_USER_SUCCESS":
-      console.log(action);
-      state.users.push(action.user);
-      return { ...state };
     case "ADD_TO_CART_SUCCESS":
       let isAdd = true;
       for (let index = 0; index < state.cart.length; index++) {
@@ -37,8 +23,6 @@ const rootReducer = (state = initState, action) => {
       } else {
         toast.error("Sản phẩm đã có trong giỏ hàng!");
       }
-
-      //console.log(state.cart);
       return { ...state };
     case "DELETE_ITEM_SUCCESS":
       let cart = state.cart;
@@ -49,11 +33,27 @@ const rootReducer = (state = initState, action) => {
       state.cart = [];
       return { ...state };
     case "LOGIN_SUCCESS":
-      state.userInfor = action.userInfor;
+      state.userInfor = action.userData;
+      state.loginInfor = action.loginInfor;
       state.isLogin = true;
       return { ...state };
+    case "LOGIN_FAILED":
+      state.userData = action.userData;
+      state.isLogin = false;
+      return { ...state };
+    case "LOGOUT_SUCCESS":
+      localStorage.removeItem("token");
+      state.userInfor = action.userData;
+      state.loginInfor = action.loginInfor;
+      state.isLogin = false;
+      return { ...state };
+    case "EDIT_USER_SUCCESS":
+      state.userInfor = action.userData;
+      return { ...state };
+    case "EDIT_USER_FAILED":
+      return initState;
     default:
       return state;
   }
 };
-export default rootReducer;
+export default AppReducer;

@@ -9,9 +9,7 @@ class HomePage extends Component {
   //   returnToHome = () => {
   //     this.props.history.push(path.HOMEPAGE);
   //   };
-  componentDidMount() {
-    console.log("check login chua:", this.props.isLogin);
-  }
+  componentDidMount() {}
   render() {
     const settings = {
       dots: true,

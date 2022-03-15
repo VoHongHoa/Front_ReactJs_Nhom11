@@ -15,7 +15,7 @@ class Products extends Component {
     this.state = {};
   }
   handleAddToCart = (item) => {
-    console.log("check item add to cart:", item);
+    // console.log("check item add to cart:", item);
     this.props.addToCart(item);
   };
   render() {

@@ -1,0 +1,17 @@
+.edituser-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  .edituser-content {
+    width: 60%;
+  }
+  .user-avt {
+    height: 200px;
+    width: 200px;
+    background: url("../../../assets//images/avatarDefault.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 8px 8px 8px grey;
+  }
+}

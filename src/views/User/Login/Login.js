@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import ModalRegister from "../Register/ModalRegister";
-import { handleLogin, handlegetUserInfor } from "../../services/UserService";
-import { handleSaveUserInforRedux } from "../../store/actions/AppAction";
+// import { handlegetUserInfor } from "../../../services/UserService";
+import { handleLogin } from "../../../store/actions/AppAction";
 import "./Login.scss";
-import { toast } from "react-toastify";
+//import { toast } from "react-toastify";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -14,23 +14,23 @@ class Login extends Component {
       password: "",
       isShowpassword: true,
       isOpenModal: false,
+      // isLogin: false,
     };
   }
+  componentDidMount() {}
+  componentDidUpdate(preProps) {}
   handleOnChangeUsername = (event) => {
     this.setState({
       username: event.target.value,
     });
-    //console.log(event.target.value)
   };
   handleOnChangePassword = (event) => {
     this.setState({
       password: event.target.value,
     });
-    // console.log(event.target.value)
   };
 
   handleShowHidePassword = () => {
-    //alert("click hide")
     this.setState({
       isShowpassword: !this.state.isShowpassword,
     });
@@ -40,22 +40,14 @@ class Login extends Component {
       this.handleLogin();
     }
   };
-  handleLogin = async () => {
-    //console.log("check state:", this.state);
-    let respone = await handleLogin({
+  handleLoginSubmit = async () => {
+    this.props.handleLogin({
       username: this.state.username,
       password: this.state.password,
     });
-    //console.log("check respone:", respone);
-    if (respone && respone.success === false) {
-      toast.error(respone.message);
-    } else {
-      let accessToken = respone.tokens.accessToken;
-      let userInfor = await handlegetUserInfor(accessToken);
-      console.log("userInfor:", userInfor);
-      this.props.handleSaveUserInforRedux(userInfor);
-      this.props.history.push("/");
-    }
+    // if (this.state.isLogin === true) {
+    //   this.props.history.push("/");
+    // }
   };
   handleOpenModal = () => {
     this.setState({
@@ -115,7 +107,7 @@ class Login extends Component {
               <div className="col-6 btn-div">
                 <button
                   className="btn-login"
-                  onClick={() => this.handleLogin()}
+                  onClick={() => this.handleLoginSubmit()}
                 >
                   Đăng nhập
                 </button>
@@ -135,6 +127,7 @@ class Login extends Component {
         <ModalRegister
           isOpen={this.state.isOpenModal}
           toggleFromParent={this.toggleFromParent}
+          action={this.state.action}
         />
       </>
     );
@@ -142,13 +135,14 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    isLogin: state.isLogin,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSaveUserInforRedux: (data) =>
-      dispatch(handleSaveUserInforRedux(data)),
+    handleLogin: (data) => dispatch(handleLogin(data)),
   };
 };
 

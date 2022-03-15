@@ -4,19 +4,31 @@ import "./Homeheader.scss";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 import ModalCart from "./ModalCart/ModalCart";
+import { logOutSuccess } from "../../../store/actions/AppAction";
+// import _ from "lodash";
 class Homeheader extends Component {
-  //   returnToHome = () => {
-  //     this.props.history.push(path.HOMEPAGE);
-  //   };
   constructor(props) {
     super(props);
     this.state = {
       isOpenCart: false,
+      isOpenModal: false,
+      userInfor: "",
+      isLogin: "",
     };
   }
   componentDidMount() {
-    console.log("check login chua:", this.props.isLogin);
-    console.log("check login chua:", this.props.userInfor);
+    this.setState({
+      userInfor: this.props.userInfor,
+      isLogin: this.props.isLogin,
+    });
+  }
+  componentDidUpdate(preProps) {
+    if (this.state.userInfor !== this.props.userInfor) {
+      this.setState({
+        userInfor: this.props.userInfor,
+        isLogin: this.props.isLogin,
+      });
+    }
   }
   handleIsOpenCart = () => {
     this.setState({
@@ -31,17 +43,28 @@ class Homeheader extends Component {
   handleOpenLogin = () => {
     this.props.history.push("/login");
   };
+  handleLogout = () => {
+    this.props.logOutSuccess();
+  };
+  returnToHome = () => {
+    this.props.history.push("/");
+  };
+  handleOpenEditUser = (id) => {
+    this.props.history.push(`/user:${id}`);
+  };
   render() {
-    let { isLogin } = this.props;
+    let { userInfor, isLogin } = this.state;
     return (
       <React.Fragment>
         <div className="header-container container-fluid">
           <div className="top-header row">
-            <div className="col-3 logo-container">
+            <div
+              className="col-3 logo-container"
+              onClick={() => this.returnToHome()}
+            >
               <i className="fab fa-phoenix-squadron fa-3x"></i>
               <span>UITPHONE</span>
             </div>
-
             <div className="col-6 search-container">
               <input className="form-control" placeholder="Search..." />
               <button type="submit" className="btn-submit">
@@ -53,10 +76,21 @@ class Homeheader extends Component {
                 {/* <i className="fas fa-sign-in fa-2x"></i> */}
                 {isLogin && isLogin === true ? (
                   <>
-                    <button className="btn btn-light">
-                      Xin chào, {this.props.userInfor.user.fullname}
-                    </button>
-                    <i className="fas fa-sign-out fa-2x"></i>
+                    {userInfor && userInfor.user && (
+                      <button
+                        className="btn btn-light"
+                        onClick={() =>
+                          this.handleOpenEditUser(userInfor.user._id)
+                        }
+                      >
+                        Xin chào, {userInfor.user.fullname}
+                      </button>
+                    )}
+
+                    <i
+                      className="fas fa-sign-out fa-2x"
+                      onClick={() => this.handleLogout()}
+                    ></i>
                   </>
                 ) : (
                   <button
@@ -77,15 +111,6 @@ class Homeheader extends Component {
               <NavLink to="/product" activeClassName="active" exact={true}>
                 Sam Sum
               </NavLink>
-              {/* <NavLink to="/product" activeClassName="active" exact={true}>
-                Sam Sum
-              </NavLink>
-              <NavLink to="/product" activeClassName="active" exact={true}>
-                Sam Sum
-              </NavLink>
-              <NavLink to="/product" activeClassName="active" exact={true}>
-                Sam Sum
-              </NavLink> */}
               <button
                 type="button"
                 className="btn-cart"
@@ -105,16 +130,16 @@ class Homeheader extends Component {
     );
   }
 }
-
 const mapStateToProps = (state) => {
   return {
     isLogin: state.isLogin,
     userInfor: state.userInfor,
   };
 };
-
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    logOutSuccess: () => dispatch(logOutSuccess()),
+  };
 };
 
 export default withRouter(

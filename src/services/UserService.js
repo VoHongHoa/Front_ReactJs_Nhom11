@@ -2,14 +2,25 @@ import axios from "../axios";
 const handleRegisterUser = (data) => {
   return axios.post("/api/auth/register", data);
 };
-const handleLogin = (data) => {
+const handleLoginService = (data) => {
   return axios.post("/api/auth/login", data);
 };
-const handlegetUserInfor = (data) => {
-  const AuthStr = "Bearer ".concat(data);
-  //console.log(AuthStr);
-  return axios.get("/api/user/", {
-    headers: { Authorization: AuthStr },
-  });
+// const handlegetUserInfor = (accessToken) => {
+//   const AuthStr = "Bearer ".concat(accessToken);
+//   //console.log(AuthStr);
+//   return axios.get("/api/user/", {
+//     headers: { Authorization: AuthStr },
+//   });
+// };
+const handlegetUserInfor = () => {
+  return axios.get("/api/user/");
 };
-export { handleRegisterUser, handleLogin, handlegetUserInfor };
+const handleEditUser = (data) => {
+  return axios.put(`/api/user/:${data.id}`, data);
+};
+export {
+  handleRegisterUser,
+  handleLoginService,
+  handlegetUserInfor,
+  handleEditUser,
+};
