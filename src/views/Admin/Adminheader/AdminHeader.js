@@ -10,8 +10,8 @@ class AdminHeader extends Component {
     return (
       <>
         <div className="admin-header-container">
-          <div className="topnav">
-            <div className="item-manage">
+          <div className="topnav row">
+            <div className="item-manage col-5">
               <NavLink to="/admin/user" activeClassName="active" exact={true}>
                 User
               </NavLink>
@@ -23,8 +23,7 @@ class AdminHeader extends Component {
                 Product
               </NavLink>
             </div>
-
-            <div className="admin-name">
+            <div className="admin-name col-3">
               {userInfor && userInfor.user && userInfor.user.fullname && (
                 <button className="btn btn-light">
                   Wel,{userInfor.user.fullname}{" "}

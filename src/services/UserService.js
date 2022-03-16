@@ -20,6 +20,12 @@ const deleteuser = (userId) => {
 const editUserFromAdmin = (data) => {
   return axios.put(`/api/user/all/${data.id}`, data);
 };
+const findUser = (data) => {
+  return axios.get(`/api/user/find-user/?keyword=${data}`);
+};
+const countUser = () => {
+  return axios.get("/api/user/stats");
+};
 export {
   handleRegisterUser,
   handleLoginService,
@@ -28,4 +34,6 @@ export {
   getAlluser,
   deleteuser,
   editUserFromAdmin,
+  findUser,
+  countUser,
 };

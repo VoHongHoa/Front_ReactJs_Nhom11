@@ -6,6 +6,7 @@ import {
   getAlluser,
   deleteuser,
   editUserFromAdmin,
+  findUser,
 } from "../../../services/UserService";
 import { toast } from "react-toastify";
 import ModalEditUserAdmin from "./ModalEditUserAdmin";
@@ -17,6 +18,7 @@ class UserManage extends Component {
       alluser: [],
       isOpenModal: false,
       currentUserEdit: {},
+      name: "",
     };
   }
   async componentDidMount() {
@@ -69,17 +71,55 @@ class UserManage extends Component {
       currentUserEdit: item,
     });
   };
+  handleOnchangeInput = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
   toggleFromParent = () => {
     this.setState({
       isOpenModal: false,
     });
+  };
+  handleSearchUser = async (name) => {
+    try {
+      let res = await findUser(name);
+      //console.log("check res:", res);
+      if (res && res.errorCode === 1 && res.result) {
+        toast.success(res.message);
+        this.setState({
+          alluser: res.result,
+        });
+      } else {
+        toast.error(res.message);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
   render() {
     let { alluser } = this.state;
     return (
       <>
         <AdminHeader />
-        <span className="text-manage ">Quản lý người dùng</span>
+        <div className="top-user-manage row mt-3">
+          <span className="text-manage col-6">Quản lý người dùng</span>
+          <div className="col-6 search-container">
+            <input
+              className="form-control"
+              placeholder="Tìm kiếm người dùng...."
+              onChange={(event) => this.handleOnchangeInput(event)}
+            />
+            <button
+              type="submit"
+              className="btn-submit"
+              onClick={() => this.handleSearchUser(this.state.name)}
+            >
+              <i className="fa fa-search fa-2x"></i>
+            </button>
+          </div>
+        </div>
+
         <div className="user-container mt-3">
           <table>
             <thead>
@@ -105,11 +145,11 @@ class UserManage extends Component {
                       <td>{item.role}</td>
                       <td className="action-edit-del">
                         <i
-                          className="fas fa-edit"
+                          className="fas fa-edit fa-2x"
                           onClick={() => this.handleOpenModalEdit(item)}
                         ></i>
                         <i
-                          className="fas fa-trash"
+                          className="fas fa-trash fa-2x"
                           onClick={() => this.handleDeleteUser(item._id)}
                         ></i>
                       </td>
