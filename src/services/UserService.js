@@ -26,6 +26,9 @@ const findUser = (data) => {
 const countUser = () => {
   return axios.get("/api/user/stats");
 };
+const forgotPassword = (data) => {
+  return axios.post("/api/user/reset-password", data);
+};
 export {
   handleRegisterUser,
   handleLoginService,
@@ -36,4 +39,5 @@ export {
   editUserFromAdmin,
   findUser,
   countUser,
+  forgotPassword,
 };

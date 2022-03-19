@@ -11,6 +11,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import UserManage from "./Admin/AdminPage/UserManage";
 import ProductManage from "./Admin/AdminPage/ProductManage";
+import ForgotPassword from "./User/ForgotPassword/ForgotPassword";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +37,9 @@ class App extends Component {
             <Route exact path="/user/:id">
               {isLogin === false ? <Redirect to="/login" /> : <EditUser />}
             </Route>
-
+            <Route path="/forgotpassword" exact>
+              <ForgotPassword />
+            </Route>
             <Route exact path="/admin">
               <Redirect exact to="/admin/user" />
             </Route>

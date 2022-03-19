@@ -56,8 +56,10 @@ class Login extends Component {
       isOpenModal: false,
     });
   };
+  handleForgotPassword = () => {
+    this.props.history.push("/forgotpassword");
+  };
   render() {
-    //JSX
     return (
       <>
         <div className="login-background">
@@ -101,22 +103,36 @@ class Login extends Component {
               {/* <div className="col-12" style={{ color: "red" }}>
                 {this.state.errMessage}
               </div> */}
-              <div className="col-6 btn-div">
+              <div className="btn-div">
                 <button
                   className="btn-login"
                   onClick={() => this.handleLoginSubmit()}
                 >
                   Đăng nhập
                 </button>
+                <div className="mt-2">
+                  <p
+                    className="text"
+                    onClick={() => this.handleForgotPassword()}
+                  >
+                    Quên mật khẩu?
+                  </p>
+                </div>
               </div>
 
-              <div className="col-6 btn-div">
-                <button
-                  className="btn-login"
-                  onClick={() => this.handleOpenModal()}
-                >
-                  Đăng kí
-                </button>
+              <div className="btn-div">
+                <div className="mt-1">
+                  <p>
+                    Bạn chưa có tài khoản?
+                    <span
+                      className="text"
+                      onClick={() => this.handleOpenModal()}
+                    >
+                      {" "}
+                      Đăng kí
+                    </span>{" "}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

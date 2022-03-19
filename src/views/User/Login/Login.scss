@@ -49,20 +49,27 @@
     }
 
     .btn-div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       .btn-login {
-        width: 100%;
+        width: 40%;
         text-align: center;
         height: 30px;
         outline: none;
         border: none;
         border-radius: 15px;
-        background: linear-gradient(
-          135deg,
-          rgba(34, 193, 195, 1) 0%,
-          rgba(253, 187, 45, 1) 100%
-        );
+        background: rgb(110, 110, 154);
         color: white;
         font-size: 20px;
+      }
+      .text {
+        cursor: pointer;
+        &:hover {
+          color: gray;
+          text-decoration: underline;
+        }
       }
     }
     .forgot-password {
