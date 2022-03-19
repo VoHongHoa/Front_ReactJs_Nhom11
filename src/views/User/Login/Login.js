@@ -37,7 +37,7 @@ class Login extends Component {
   };
   handelKeyPressLogin = (event) => {
     if (event.key === "Enter") {
-      this.handleLogin();
+      this.handleLoginSubmit();
     }
   };
   handleLoginSubmit = async () => {
@@ -45,9 +45,6 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password,
     });
-    // if (this.state.isLogin === true) {
-    //   this.props.history.push("/");
-    // }
   };
   handleOpenModal = () => {
     this.setState({

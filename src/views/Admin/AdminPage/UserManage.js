@@ -107,7 +107,7 @@ class UserManage extends Component {
           <div className="col-6 search-container">
             <input
               className="form-control"
-              placeholder="Tìm kiếm người dùng...."
+              placeholder="Tìm kiếm người dùng theo tên, địa chỉ, quyền, ..."
               onChange={(event) => this.handleOnchangeInput(event)}
             />
             <button

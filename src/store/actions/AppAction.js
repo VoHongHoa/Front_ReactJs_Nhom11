@@ -50,6 +50,7 @@ export const handleLogin = (data) => {
         let userData = await handlegetUserInfor();
         dispatch(loginSuccess(userData, respone));
       } else {
+        toast.error(respone.message);
         dispatch(loginFailed());
       }
     } catch (e) {

@@ -37,6 +37,9 @@ class App extends Component {
               {isLogin === false ? <Redirect to="/login" /> : <EditUser />}
             </Route>
 
+            <Route exact path="/admin">
+              <Redirect exact to="/admin/user" />
+            </Route>
             <Route exact path="/admin/user">
               {isLogin === true &&
               userInfor &&

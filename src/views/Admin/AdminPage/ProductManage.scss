@@ -1,0 +1,42 @@
+.top-product-manage {
+  width: 95%;
+  margin: 0 auto;
+  .text-manage {
+    font-size: 30px;
+    color: blue;
+    font-weight: bold;
+  }
+  .search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    //border: 1px solid yellow;
+    .btn-submit {
+      border: none;
+      background: none;
+      i {
+        color: black;
+      }
+    }
+  }
+}
+
+.product-container {
+  width: 90%;
+  margin: 0 auto;
+  table {
+    tbody {
+      tr {
+        .action-edit-del {
+          display: flex;
+          justify-content: left;
+          gap: 20px;
+          i {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

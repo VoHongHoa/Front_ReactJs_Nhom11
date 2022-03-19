@@ -6,9 +6,6 @@ import Homeheader from "./Homeheader/Homeheader";
 import HomeFooter from "./HomeFooter/HomeFooter";
 import "./Homepage.scss";
 class HomePage extends Component {
-  //   returnToHome = () => {
-  //     this.props.history.push(path.HOMEPAGE);
-  //   };
   componentDidMount() {}
   render() {
     const settings = {
