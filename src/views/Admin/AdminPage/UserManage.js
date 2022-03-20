@@ -19,13 +19,17 @@ class UserManage extends Component {
       isOpenModal: false,
       currentUserEdit: {},
       name: "",
+      numOfpage: "",
+      currentPage: 0,
     };
   }
   async componentDidMount() {
-    let respone = await getAlluser();
+    let respone = await getAlluser(this.state.currentPage);
+    //console.log(respone);
     if (respone && respone.success === true && respone.users) {
       this.setState({
         alluser: respone.users,
+        numOfpage: respone.sumOfPage,
       });
     }
     //console.log("check respone", respone);
@@ -97,8 +101,37 @@ class UserManage extends Component {
       console.log(e);
     }
   };
+  handleChangePage = async (currentPage) => {
+    this.setState({
+      currentPage: currentPage,
+    });
+    let res = await getAlluser(currentPage);
+    console.log(res);
+    if (res && res.success === true) {
+      this.setState({
+        alluser: res.users,
+      });
+    }
+  };
+  // handleChangeNextPage = async () => {
+  //   this.setState({
+  //     currentPage: this.state.currentPage++,
+  //   });
+  //   let res = await getAlluser(this.state.currentPage);
+  //   console.log(res);
+  //   if (res && res.success === true) {
+  //     this.setState({
+  //       alluser: res.users,
+  //     });
+  //   }
+  // };
   render() {
-    let { alluser } = this.state;
+    let { alluser, numOfpage, currentPage } = this.state;
+    let arr = [];
+    for (var i = 0; i < numOfpage; i++) {
+      arr.push(i);
+    }
+    //console.log(arr);
     return (
       <>
         <AdminHeader />
@@ -158,6 +191,24 @@ class UserManage extends Component {
                 })}
             </tbody>
           </table>
+          <div className="pagination">
+            <span>&laquo;</span>
+            {arr &&
+              arr.length > 0 &&
+              arr.map((item, index) => {
+                return (
+                  <span
+                    key={index}
+                    onClick={() => this.handleChangePage(item)}
+                    className={currentPage === item ? "active" : " "}
+                  >
+                    {item}
+                  </span>
+                );
+              })}
+
+            <span>&raquo;</span>
+          </div>
         </div>
         <ModalEditUserAdmin
           isOpen={this.state.isOpenModal}

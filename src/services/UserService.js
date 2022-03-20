@@ -11,8 +11,8 @@ const handlegetUserInfor = () => {
 const handleEditUser = (data) => {
   return axios.put(`/api/user/${data.id}`, data);
 };
-const getAlluser = () => {
-  return axios.get("/api/user/all");
+const getAlluser = (currentPage) => {
+  return axios.get(`/api/user/all?page=${currentPage}`);
 };
 const deleteuser = (userId) => {
   return axios.delete(`/api/user/${userId}`);
