@@ -4,6 +4,7 @@ import Homeheader from "../../Homepage/Homeheader/Homeheader";
 import HomeFooter from "../../Homepage/HomeFooter/HomeFooter";
 import { editUser } from "../../../store/actions/AppAction";
 import { withRouter } from "react-router-dom";
+import ChangePassword from "../ChangePassword/ChangePassword";
 import "./EditUser.scss";
 class EditUser extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class EditUser extends Component {
       fullname: "",
       accessToken: "",
       id: "",
+      isOpenModal: false,
     };
   }
   componentDidMount() {
@@ -50,13 +52,15 @@ class EditUser extends Component {
     this.props.editUser(data);
     this.props.history.push("/");
   };
+  handleEditPassworduser = () => {
+    this.setState({ isOpenModal: true });
+  };
+  toggleFromParent = () => {
+    this.setState({
+      isOpenModal: false,
+    });
+  };
   render() {
-    // const options = [
-    //   { value: "F", label: "Nam" },
-    //   { value: "M", label: "Nữ" },
-    //   { value: "O", label: "Khác" },
-    // ];
-    // let { selectedOption } = this.state;
     return (
       <>
         <Homeheader />
@@ -143,9 +147,19 @@ class EditUser extends Component {
             >
               Lưu thay đổi
             </button>
+            <button
+              className="btn btn-primary mt-2 mb-2"
+              onClick={() => this.handleEditPassworduser()}
+            >
+              Đổi mật khẩu
+            </button>
           </div>
         </div>
-
+        <ChangePassword
+          isOpen={this.state.isOpenModal}
+          toggleFromParent={this.toggleFromParent}
+          userId={this.state.id}
+        />
         <HomeFooter />
       </>
     );

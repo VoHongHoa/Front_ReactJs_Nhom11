@@ -48,6 +48,41 @@
           color: white;
           cursor: pointer;
         }
+        .user-infor {
+          display: flex;
+          align-items: center;
+          background-color: white;
+          border-radius: 5px;
+          gap: 6px;
+          padding: 2px;
+          cursor: pointer;
+          .user-avatar {
+            border-radius: 50%;
+            height: 30px;
+            width: 30px;
+            display: flex;
+            border: 1px solid black;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+
+            i {
+              font-size: 20px;
+              color: black;
+            }
+          }
+          i {
+            font-size: 20px;
+          }
+          .user-action {
+            .more-action {
+              i {
+                color: black;
+                font-size: 15px;
+              }
+            }
+          }
+        }
       }
     }
   }

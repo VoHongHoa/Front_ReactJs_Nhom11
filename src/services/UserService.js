@@ -29,6 +29,9 @@ const countUser = () => {
 const forgotPassword = (data) => {
   return axios.post("/api/user/reset-password", data);
 };
+const changePassword = (data) => {
+  return axios.post("/api/user/changepassword", data);
+};
 export {
   handleRegisterUser,
   handleLoginService,
@@ -40,4 +43,5 @@ export {
   findUser,
   countUser,
   forgotPassword,
+  changePassword,
 };

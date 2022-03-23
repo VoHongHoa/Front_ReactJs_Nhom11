@@ -77,18 +77,30 @@ class Homeheader extends Component {
                 {isLogin && isLogin === true ? (
                   <>
                     {userInfor && userInfor.user && (
-                      <button
-                        className="btn btn-light"
+                      <div
+                        className="user-infor"
                         onClick={() =>
                           this.handleOpenEditUser(userInfor.user._id)
                         }
                       >
-                        Wel, {userInfor.user.fullname}
-                      </button>
+                        <div className="user-avatar">
+                          {!userInfor.user.img ? (
+                            <i className="fa-solid fa-user"></i>
+                          ) : (
+                            " "
+                          )}
+                        </div>
+                        <span>{userInfor.user.fullname}</span>
+                        <div className="user-action">
+                          <div className="more-action">
+                            <i className="fas fa-angle-down"></i>
+                          </div>
+                        </div>
+                      </div>
                     )}
 
                     <i
-                      className="fas fa-sign-out fa-2x"
+                      className="fas fa-sign-out"
                       onClick={() => this.handleLogout()}
                     ></i>
                   </>
