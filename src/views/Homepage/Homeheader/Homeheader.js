@@ -132,12 +132,11 @@ class Homeheader extends Component {
               </button>
             </div>
           </div>
+          <ModalCart
+            isOpen={this.state.isOpenCart}
+            toggleFromParent={this.handleCloseCart}
+          />
         </div>
-
-        <ModalCart
-          isOpen={this.state.isOpenCart}
-          toggleFromParent={this.handleCloseCart}
-        />
       </React.Fragment>
     );
   }

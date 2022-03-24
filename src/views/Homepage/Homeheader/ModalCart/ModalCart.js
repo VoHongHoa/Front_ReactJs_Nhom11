@@ -62,9 +62,9 @@ class ModalCart extends Component {
         toggle={() => {
           this.toggle();
         }}
-        className={"modal-user-container"}
+        className={"modal-cart-container"}
         size="lg"
-        //centered
+        scrollable="true"
       >
         <ModalHeader
           toggle={() => {
@@ -79,7 +79,7 @@ class ModalCart extends Component {
               <tr>
                 <th>Tên sản phẩm</th>
                 <th>Giá</th>
-                <th>Mô tả</th>
+                <th>Hình ảnh</th>
                 <th>Số lượng</th>
                 <th>Action</th>
               </tr>
@@ -90,10 +90,22 @@ class ModalCart extends Component {
                 allItems.map((item, index) => {
                   total = total + item.price * item.quantity;
                   return (
-                    <tr key={item.id}>
-                      <td>{item.name}</td>
+                    <tr key={item._id}>
+                      <td>{item.title}</td>
                       <td>{item.price}</td>
-                      <td>{item.des}</td>
+                      <td>
+                        <div
+                          className="img-product"
+                          style={{
+                            backgroundImage: `url(${item.base64Img})`,
+                            height: "80px",
+                            width: "50px",
+                            backgroundPosition: "center",
+                            backgroundRepeat: "none",
+                            backgroundSize: "cover",
+                          }}
+                        ></div>
+                      </td>
                       <td>
                         <input
                           value={item.quantity}

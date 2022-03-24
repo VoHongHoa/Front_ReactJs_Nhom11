@@ -68,7 +68,6 @@ class ProductManage extends Component {
     }
   };
   handleDeleteProduct = async (product) => {
-    console.log("check product:", product);
     try {
       if (product && product._id) {
         let res = await deleteProduct(product._id);
@@ -125,6 +124,7 @@ class ProductManage extends Component {
   };
   render() {
     let { allProducts } = this.state;
+    console.log(allProducts);
     return (
       <>
         <AdminHeader />
@@ -180,11 +180,12 @@ class ProductManage extends Component {
                         <div
                           className="img-product"
                           style={{
-                            backgroundImage: `url(${item.img})`,
+                            backgroundImage: `url(${item.base64Img})`,
                             backgroundRepeat: "none",
-                            backgroundSize: "contain",
+                            backgroundSize: "cover",
                             width: "50px",
                             height: "50px",
+                            backgroundPosition: "center",
                           }}
                         ></div>
                       </td>

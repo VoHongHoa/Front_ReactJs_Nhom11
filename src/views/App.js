@@ -68,6 +68,7 @@ class App extends Component {
             pauseOnFocusLoss
             draggable
             pauseOnHover
+            theme="dark"
           />
         </div>
       </BrowserRouter>

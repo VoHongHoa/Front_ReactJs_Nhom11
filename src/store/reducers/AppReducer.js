@@ -10,7 +10,7 @@ const AppReducer = (state = initState, action) => {
     case "ADD_TO_CART_SUCCESS":
       let isAdd = true;
       for (let index = 0; index < state.cart.length; index++) {
-        if (state.cart[index].id === action.item.id) {
+        if (state.cart[index]._id === action.item._id) {
           isAdd = false;
           break;
         }
@@ -30,6 +30,7 @@ const AppReducer = (state = initState, action) => {
       //console.log(state.cart);
       return { ...state, cart };
     case "DELETE_CART":
+      console.log(state.cart);
       state.cart = [];
       return { ...state };
     case "LOGIN_SUCCESS":

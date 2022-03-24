@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 import Slider from "react-slick";
 import Homeheader from "./Homeheader/Homeheader";
 import HomeFooter from "./HomeFooter/HomeFooter";
+import SectionProducts from "./SectionProducts/SectionProducts";
 import "./Homepage.scss";
 class HomePage extends Component {
   componentDidMount() {}
@@ -24,13 +25,21 @@ class HomePage extends Component {
         </section>
 
         <div className="slide-container mt-2 mb-4">
-          <Slider {...settings}>
+          <Slider {...settings} className="col-8">
             <div className="banner-1"></div>
             <div className="banner-2"></div>
             <div className="banner-3"></div>
             <div className="banner-4"></div>
           </Slider>
-          <div className="detail-banner col-5"></div>
+          <div className="detail-banner col-4">
+            <div className="logo">
+              <i className="fab fa-phoenix-squadron fa-8x"></i>
+            </div>
+            <div className="slogan">UITPHONE</div>
+          </div>
+        </div>
+        <div className="section-product mt-2 mb-2">
+          <SectionProducts />
         </div>
         <HomeFooter />
       </React.Fragment>

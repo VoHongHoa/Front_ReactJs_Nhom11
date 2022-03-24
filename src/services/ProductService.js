@@ -14,10 +14,14 @@ const editProduct = (data) => {
 const findProduct = (keyword) => {
   return axios.get(`/api/product/find?keyword=${keyword}`);
 };
+const getTopProduct = () => {
+  return axios.get("/api/product/get-top-product");
+};
 export {
   addNewProduct,
   getAllProduct,
   deleteProduct,
   editProduct,
   findProduct,
+  getTopProduct,
 };

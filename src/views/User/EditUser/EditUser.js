@@ -66,6 +66,7 @@ class EditUser extends Component {
         <Homeheader />
         <div className="edituser-container row mt-3">
           <div className="user-avt"></div>
+
           <div className="edituser-content">
             <div className="form-group col-12">
               <label>Username</label>
@@ -80,19 +81,6 @@ class EditUser extends Component {
                 readOnly
               />
             </div>
-            {/* <div className="form-group mt-2 col-12">
-              <label>Password</label>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Enter password"
-                onChange={(event) => {
-                  this.handleOnchangeInput(event, "password");
-                }}
-                value={this.state.password}
-                readOnly
-              />
-            </div> */}
             <div className="form-group col-12 mt-2">
               <label>Email </label>
               <input

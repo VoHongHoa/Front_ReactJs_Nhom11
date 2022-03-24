@@ -4,11 +4,16 @@
   z-index: 1000;
 }
 .slide-container {
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  width: 95%;
+  margin: 0 auto;
   .slick-slider {
-    width: 60%;
-    margin: 0 auto;
+    // width: 90%;
     .slick-prev {
       &:before {
+        display: none;
         color: black;
         font-size: 25px;
       }
@@ -17,38 +22,66 @@
       &:before {
         color: black;
         font-size: 25px;
+        display: none;
       }
     }
     .slick-list {
       .slick-track {
-        height: 340px;
+        height: 350px;
         .slick-slide {
           .banner-1 {
             background: url("../../assets/images/banner-1.png");
             height: 340px;
             background-repeat: no-repeat;
-            background-size: contain;
+            background-size: cover;
+            background-position: center;
           }
           .banner-2 {
             background: url("../../assets/images/banner-2.jpg");
-            height: 340px;
+            height: 350px;
             background-repeat: no-repeat;
-            background-size: contain;
+            background-size: cover;
+            background-position: center;
           }
           .banner-3 {
             background: url("../../assets/images/banner-3.png");
-            height: 340px;
+            height: 350px;
             background-repeat: no-repeat;
-            background-size: contain;
+            background-size: cover;
+            background-position: center;
           }
           .banner-4 {
             background: url("../../assets/images/banner-4.png");
-            height: 340px;
+            height: 350px;
             background-repeat: no-repeat;
-            background-size: contain;
+            background-size: cover;
+            background-position: center;
           }
         }
       }
     }
   }
+  .detail-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    border-left: 2px solid grey;
+    .logo {
+      text-shadow: 5px 5px 5px black;
+    }
+    .slogan {
+      font-size: xx-large;
+      text-align: center;
+      text-shadow: 5px 5px 5px black;
+    }
+  }
+}
+.section-product {
+  background: linear-gradient(
+    135deg,
+    rgb(159, 177, 177) 0%,
+    rgb(233, 231, 227) 100%
+  );
 }

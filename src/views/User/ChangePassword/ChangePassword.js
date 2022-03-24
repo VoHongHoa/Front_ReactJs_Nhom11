@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { toast } from "react-toastify";
 import { changePassword } from "../../../services/UserService";
+import { logOutSuccess } from "../../../store/actions/AppAction";
 import "./ChangePassword.scss";
 class ChangePassword extends Component {
   constructor(props) {
@@ -52,7 +53,8 @@ class ChangePassword extends Component {
           newPassword: this.state.newPassword,
         });
         if (res && res.errCode === 0) {
-          toast.success(res.message);
+          toast.success(`${res.message}! Vui lòng đăng nhập lại`);
+          this.props.logOutSuccess();
         } else {
           toast.error(res.errMessage);
         }
@@ -60,14 +62,12 @@ class ChangePassword extends Component {
     }
   };
   render() {
-    // console.log("check state", this.state);
     return (
       <Modal
         isOpen={this.props.isOpen}
         toggle={() => {
           this.toggle();
         }}
-        className={"modal-user-container"}
         size="sm"
         centered
       >
@@ -147,7 +147,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return { logOutSuccess: () => dispatch(logOutSuccess()) };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);
