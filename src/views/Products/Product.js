@@ -15,11 +15,11 @@ class Products extends Component {
   };
   render() {
     return (
-      <React.Fragment>
+      <div className="container-fluid">
         <Homeheader />
         <p>Hello product page</p>
         <HomeFooter />
-      </React.Fragment>
+      </div>
     );
   }
 }

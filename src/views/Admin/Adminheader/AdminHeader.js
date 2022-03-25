@@ -8,37 +8,31 @@ class AdminHeader extends Component {
   render() {
     let { userInfor } = this.props;
     return (
-      <>
-        <div className="admin-header-container">
-          <div className="topnav row">
-            <div className="item-manage col-5">
-              <NavLink to="/admin/user" activeClassName="active" exact={true}>
-                User
-              </NavLink>
-              <NavLink
-                to="/admin/product"
-                activeClassName="active"
-                exact={true}
-              >
-                Product
-              </NavLink>
-            </div>
-            <div className="admin-name col-3">
-              {userInfor && userInfor.user && userInfor.user.fullname && (
-                <button className="btn btn-light">
-                  Wel,{userInfor.user.fullname}{" "}
-                </button>
-              )}
-            </div>
+      <div className="admin-header-container container-fluid">
+        <div className="topnav">
+          <div className="item-manage col-5">
+            <NavLink to="/admin/user" activeClassName="active" exact={true}>
+              User
+            </NavLink>
+            <NavLink to="/admin/product" activeClassName="active" exact={true}>
+              Product
+            </NavLink>
+          </div>
+          <div className="admin-name col-3">
+            {userInfor && userInfor.user && userInfor.user.fullname && (
+              <button className="btn btn-light">
+                Wel,{userInfor.user.fullname}{" "}
+              </button>
+            )}
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
 const mapStateToProps = (state) => {
   return {
-    userInfor: state.userInfor,
+    userInfor: state.user.userInfor,
   };
 };
 

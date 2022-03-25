@@ -64,7 +64,7 @@ class ModalCart extends Component {
         }}
         className={"modal-cart-container"}
         size="lg"
-        scrollable="true"
+        scrollable
       >
         <ModalHeader
           toggle={() => {
@@ -149,7 +149,7 @@ class ModalCart extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    itemInCart: state.cart,
+    itemInCart: state.cart.cart,
   };
 };
 

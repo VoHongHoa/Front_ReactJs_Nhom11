@@ -23,7 +23,7 @@ class ModalEditProduct extends Component {
         id: this.props.currentProduct._id,
         tittle: this.props.currentProduct.title,
         desc: this.props.currentProduct.desc,
-        img: this.props.currentProduct.img,
+        img: this.props.currentProduct.base64Img,
         categories: {
           value: this.props.currentProduct.categories,
           label: this.props.currentProduct.categories,

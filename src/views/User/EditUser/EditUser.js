@@ -62,8 +62,10 @@ class EditUser extends Component {
   };
   render() {
     return (
-      <>
-        <Homeheader />
+      <div className="container-fluid">
+        <section className="homepage-header-container">
+          <Homeheader />
+        </section>
         <div className="edituser-container row mt-3">
           <div className="user-avt"></div>
 
@@ -149,13 +151,13 @@ class EditUser extends Component {
           userId={this.state.id}
         />
         <HomeFooter />
-      </>
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { isLogin: state.isLogin, userInfor: state.userInfor };
+  return { isLogin: state.user.isLogin, userInfor: state.user.userInfor };
 };
 
 const mapDispatchToProps = (dispatch) => {

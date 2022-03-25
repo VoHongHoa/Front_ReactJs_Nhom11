@@ -126,7 +126,7 @@ class ProductManage extends Component {
     let { allProducts } = this.state;
     console.log(allProducts);
     return (
-      <>
+      <div className="container-fluid">
         <AdminHeader />
         <div className="top-product-manage row mt-3">
           <span className="text-manage col-6">Quản lý sản phẩm</span>
@@ -145,7 +145,6 @@ class ProductManage extends Component {
             </button>
           </div>
         </div>
-
         <div className="product-container mt-3">
           <div className="button-add mb-3">
             <button
@@ -155,7 +154,7 @@ class ProductManage extends Component {
               Thêm mới
             </button>
           </div>
-          <table>
+          <table className="customers">
             <thead>
               <tr>
                 <th>STT</th>
@@ -216,13 +215,13 @@ class ProductManage extends Component {
           handleEditProduct={this.handleEditProduct}
           currentProduct={this.state.currentProduct}
         />
-      </>
+      </div>
     );
   }
 }
 const mapStateToProps = (state) => {
   return {
-    isLogin: state.isLogin,
+    isLogin: state.user.isLogin,
   };
 };
 

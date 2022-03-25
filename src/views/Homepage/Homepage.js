@@ -20,28 +20,30 @@ class HomePage extends Component {
     };
     return (
       <React.Fragment>
-        <section className="homepage-header-container">
-          <Homeheader />
-        </section>
+        <div className="container-fluid">
+          <section className="homepage-header-container">
+            <Homeheader />
+          </section>
 
-        <div className="slide-container mt-2 mb-4">
-          <Slider {...settings} className="col-8">
-            <div className="banner-1"></div>
-            <div className="banner-2"></div>
-            <div className="banner-3"></div>
-            <div className="banner-4"></div>
-          </Slider>
-          <div className="detail-banner col-4">
-            <div className="logo">
-              <i className="fab fa-phoenix-squadron fa-8x"></i>
+          <div className="slide-container mt-2 mb-4">
+            <Slider {...settings} className="col-8">
+              <div className="banner-1"></div>
+              <div className="banner-2"></div>
+              <div className="banner-3"></div>
+              <div className="banner-4"></div>
+            </Slider>
+            <div className="detail-banner col-4">
+              <div className="logo">
+                <i className="fab fa-phoenix-squadron fa-8x"></i>
+              </div>
+              <div className="slogan">UITPHONE</div>
             </div>
-            <div className="slogan">UITPHONE</div>
           </div>
+          <div className="section-product mt-2 mb-2">
+            <SectionProducts />
+          </div>
+          <HomeFooter />
         </div>
-        <div className="section-product mt-2 mb-2">
-          <SectionProducts />
-        </div>
-        <HomeFooter />
       </React.Fragment>
     );
   }
@@ -49,7 +51,7 @@ class HomePage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isLogin: state.isLogin,
+    isLogin: state.user.isLogin,
   };
 };
 

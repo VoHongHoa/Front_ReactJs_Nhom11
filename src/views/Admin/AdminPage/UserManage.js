@@ -133,7 +133,7 @@ class UserManage extends Component {
     }
     //console.log(arr);
     return (
-      <>
+      <div className="container-fluid">
         <AdminHeader />
         <div className="top-user-manage row mt-3">
           <span className="text-manage col-6">Quản lý người dùng</span>
@@ -154,7 +154,7 @@ class UserManage extends Component {
         </div>
 
         <div className="user-container mt-3">
-          <table>
+          <table id="customers">
             <thead>
               <tr>
                 <th>STT</th>
@@ -191,6 +191,7 @@ class UserManage extends Component {
                 })}
             </tbody>
           </table>
+          <table></table>
           <div className="pagination">
             <span>&laquo;</span>
             {arr &&
@@ -216,7 +217,7 @@ class UserManage extends Component {
           userEdit={this.state.currentUserEdit}
           doEditUser={this.doEditUser}
         />
-      </>
+      </div>
     );
   }
 }

@@ -77,8 +77,8 @@ class App extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    isLogin: state.isLogin,
-    userInfor: state.userInfor,
+    isLogin: state.user.isLogin,
+    userInfor: state.user.userInfor,
   };
 };
 
