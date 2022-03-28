@@ -125,16 +125,7 @@ class ModalProduct extends Component {
                 value={this.state.desc}
               />
             </div>
-            <div className="form-group mt-2 col-6">
-              <label>Hình ảnh</label>
-              <input
-                type="file"
-                className="form-control"
-                onChange={(event) => {
-                  this.handleOnchangeImage(event);
-                }}
-              />
-            </div>
+
             <div className="form-group mt-2 col-6">
               <label>Loại sản phẩm</label>
               <Select
@@ -164,6 +155,30 @@ class ModalProduct extends Component {
                 }}
                 value={this.state.price}
               />
+            </div>
+            <div className="form-group mt-2 col-6">
+              <label>Hình ảnh</label>
+              <input
+                type="file"
+                className="form-control"
+                onChange={(event) => {
+                  this.handleOnchangeImage(event);
+                }}
+              />
+
+              <div
+                className="mt-2"
+                style={{
+                  backgroundImage: `url(${this.state.img})`,
+                  backgroundRepeat: "none",
+                  backgroundSize: "cover",
+                  width: "80px",
+                  height: "100px",
+                  backgroundPosition: "center",
+                  margin: "0 auto",
+                  border: " 1px solid black",
+                }}
+              ></div>
             </div>
           </div>
         </ModalBody>

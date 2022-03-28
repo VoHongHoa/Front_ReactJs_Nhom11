@@ -27,8 +27,11 @@ const cartReducer = (state = initState, action) => {
       //console.log(state.cart);
       return { ...state, cart };
     case "DELETE_CART":
-      console.log(state.cart);
       state.cart = [];
+      return { ...state };
+    case "CHANGE_INPUT_ITEM_SUCCESS":
+      let newAllItems = action.allItems;
+      state.cart = newAllItems;
       return { ...state };
     default:
       return state;

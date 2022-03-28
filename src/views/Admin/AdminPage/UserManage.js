@@ -21,6 +21,7 @@ class UserManage extends Component {
       name: "",
       numOfpage: "",
       currentPage: 0,
+      action: "",
     };
   }
   async componentDidMount() {
@@ -93,6 +94,7 @@ class UserManage extends Component {
         toast.success(res.message);
         this.setState({
           alluser: res.result,
+          action: "SEARCH_USER",
         });
       } else {
         toast.error(res.message);
@@ -192,24 +194,28 @@ class UserManage extends Component {
             </tbody>
           </table>
           <table></table>
-          <div className="pagination">
-            <span>&laquo;</span>
-            {arr &&
-              arr.length > 0 &&
-              arr.map((item, index) => {
-                return (
-                  <span
-                    key={index}
-                    onClick={() => this.handleChangePage(item)}
-                    className={currentPage === item ? "active" : " "}
-                  >
-                    {item}
-                  </span>
-                );
-              })}
+          {this.state.action !== "SEARCH_USER" ? (
+            <div className="pagination">
+              <span>&laquo;</span>
+              {arr &&
+                arr.length > 0 &&
+                arr.map((item, index) => {
+                  return (
+                    <span
+                      key={index}
+                      onClick={() => this.handleChangePage(item)}
+                      className={currentPage === item ? "active" : " "}
+                    >
+                      {item}
+                    </span>
+                  );
+                })}
 
-            <span>&raquo;</span>
-          </div>
+              <span>&raquo;</span>
+            </div>
+          ) : (
+            " "
+          )}
         </div>
         <ModalEditUserAdmin
           isOpen={this.state.isOpenModal}

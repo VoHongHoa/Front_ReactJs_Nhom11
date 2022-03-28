@@ -124,7 +124,6 @@ class ProductManage extends Component {
   };
   render() {
     let { allProducts } = this.state;
-    console.log(allProducts);
     return (
       <div className="container-fluid">
         <AdminHeader />

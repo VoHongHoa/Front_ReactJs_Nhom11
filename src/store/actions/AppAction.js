@@ -21,6 +21,20 @@ export const addToCartSuccess = (item) => ({
   item: item,
 });
 
+export const changeInputItem = (allItems) => {
+  return async (dispatch, getState) => {
+    dispatch(changeInputItemSuccess(allItems));
+  };
+};
+export const changeInputItemFailded = () => ({
+  type: "CHANGE_INPUT_ITEM_FAILED",
+  allItems: [],
+});
+export const changeInputItemSuccess = (allItems) => ({
+  type: "CHANGE_INPUT_ITEM_SUCCESS",
+  allItems: allItems,
+});
+
 export const deleteItem = (item) => {
   return async (dispatch, getState) => {
     dispatch(deleteItemSuccess(item));

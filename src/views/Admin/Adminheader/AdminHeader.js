@@ -17,6 +17,9 @@ class AdminHeader extends Component {
             <NavLink to="/admin/product" activeClassName="active" exact={true}>
               Product
             </NavLink>
+            <NavLink to="/admin/oder" activeClassName="active" exact={true}>
+              Oder
+            </NavLink>
           </div>
           <div className="admin-name col-3">
             {userInfor && userInfor.user && userInfor.user.fullname && (

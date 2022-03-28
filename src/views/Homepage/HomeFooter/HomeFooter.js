@@ -35,13 +35,9 @@ class HomeFooter extends Component {
               <div className="row mt-3">
                 <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                   <h6 className="text-uppercase fw-bold mb-4">
-                    <i className="fas fa-gem me-3"></i>Company name
+                    <i className="fas fa-gem me-3"></i>UITPHONE
                   </h6>
-                  <p>
-                    Here you can use rows and columns to organize your footer
-                    content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit.
-                  </p>
+                  <p>Nhóm 11 - IE213.M22</p>
                 </div>
 
                 <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">

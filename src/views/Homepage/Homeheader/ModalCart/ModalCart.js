@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-// import { toast } from "react-toastify";
-// import Select from "react-select";
-import { deleteItem, deleteCart } from "../../../../store/actions/AppAction";
+import {
+  deleteItem,
+  deleteCart,
+  changeInputItem,
+} from "../../../../store/actions/AppAction";
 import "./ModalCart.scss";
 class ModalCart extends Component {
   constructor(props) {
@@ -33,7 +35,7 @@ class ModalCart extends Component {
     let copyState = { ...this.state };
     let quantity = event.target.value;
     for (let index = 0; index < copyState.allItems.length; index++) {
-      if (copyState.allItems[index].id === item.id) {
+      if (copyState.allItems[index]._id === item._id) {
         copyState.allItems[index].quantity = quantity;
         break;
       }
@@ -41,6 +43,7 @@ class ModalCart extends Component {
     this.setState({
       ...copyState,
     });
+    this.props.changeInputItem(this.state.allItems);
   };
   handleDeleteItem = (item) => {
     this.props.deleteItem(item);
@@ -49,7 +52,10 @@ class ModalCart extends Component {
     });
   };
   handleSubmit = (total) => {
-    toast.success(`Thanh toán thành công số tiền là: ${total}`);
+    let data = {
+      userId: this.props.userInfor._id,
+      products: []
+    };
     this.props.deleteCart();
     this.toggle();
   };
@@ -150,6 +156,7 @@ class ModalCart extends Component {
 const mapStateToProps = (state) => {
   return {
     itemInCart: state.cart.cart,
+    userInfor: state.user.userInfor,
   };
 };
 
@@ -157,6 +164,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     deleteItem: (item) => dispatch(deleteItem(item)),
     deleteCart: () => dispatch(deleteCart()),
+    changeInputItem: (allItems) => dispatch(changeInputItem(allItems)),
   };
 };
 

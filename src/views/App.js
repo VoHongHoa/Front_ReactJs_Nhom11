@@ -55,7 +55,14 @@ class App extends Component {
             </Route>
 
             <Route path="/admin/product" exact>
-              <ProductManage />
+              {isLogin === true &&
+              userInfor &&
+              userInfor.user &&
+              userInfor.user.role === "admin" ? (
+                <ProductManage />
+              ) : (
+                <Redirect to="/login" />
+              )}
             </Route>
           </Switch>
           <ToastContainer

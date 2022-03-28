@@ -178,12 +178,16 @@ class ModalEditProduct extends Component {
                 }}
               />
               <div
+                className="mt-2"
                 style={{
                   backgroundImage: `url(${this.state.img})`,
                   backgroundRepeat: "none",
                   backgroundSize: "cover",
                   width: "80px",
                   height: "100px",
+                  backgroundPosition: "center",
+                  margin: "0 auto",
+                  border: " 1px solid black",
                 }}
               ></div>
             </div>
