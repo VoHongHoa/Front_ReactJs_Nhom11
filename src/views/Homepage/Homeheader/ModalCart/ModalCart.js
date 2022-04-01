@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import {
   deleteItem,
   deleteCart,
   changeInputItem,
 } from "../../../../store/actions/AppAction";
+import { addNewOder } from "../../../../services/OderService";
 import "./ModalCart.scss";
 class ModalCart extends Component {
   constructor(props) {
@@ -51,13 +52,26 @@ class ModalCart extends Component {
       allItems: this.props.itemInCart,
     });
   };
-  handleSubmit = (total) => {
-    let data = {
-      userId: this.props.userInfor._id,
-      products: []
-    };
-    this.props.deleteCart();
-    this.toggle();
+  handleSubmit = async (total) => {
+    let products = this.state.allItems;
+
+    if (products && products.length > 0) {
+      products.map((item, index) => {
+        delete item.base64Img;
+        return item;
+      });
+      let data = {
+        userId: this.props.userInfor.user._id,
+        products: this.state.allItems,
+        address: this.props.userInfor.user.address,
+        amount: total,
+      };
+      let res = await addNewOder(data);
+      if (res) {
+        this.props.deleteCart();
+        this.toggle();
+      }
+    }
   };
   render() {
     let { allItems } = this.state;

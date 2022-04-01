@@ -1,17 +1,52 @@
 .edituser-container {
+  width: 80%;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
-  gap: 40px;
+  justify-content: space-around;
+  flex-direction: row;
   .edituser-content {
-    width: 60%;
+    width: 50%;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
   }
   .user-avt {
-    height: 200px;
-    width: 200px;
-    background: url("../../../assets//images/avatarDefault.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    box-shadow: 8px 8px 8px grey;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    .user-avt-img {
+      height: 200px;
+      width: 200px;
+      background: url("../../../assets//images/avatarDefault.jpeg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 8px 8px 8px grey;
+      border-radius: 50%;
+    }
+    .user-name {
+      font-weight: bold;
+    }
+  }
+  .edituser-action {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .action {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+
+      &:hover {
+        color: rgb(110, 110, 154);
+        span {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 }

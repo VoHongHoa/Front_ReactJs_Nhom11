@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 import ModalCart from "./ModalCart/ModalCart";
 import { logOutSuccess } from "../../../store/actions/AppAction";
-// import _ from "lodash";
 class Homeheader extends Component {
   constructor(props) {
     super(props);

@@ -12,6 +12,8 @@ import { connect } from "react-redux";
 import UserManage from "./Admin/AdminPage/UserManage";
 import ProductManage from "./Admin/AdminPage/ProductManage";
 import ForgotPassword from "./User/ForgotPassword/ForgotPassword";
+import Oder from "./User/Oder/Oder";
+import ManageOrder from "./Admin/AdminPage/ManageOrder";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -60,6 +62,17 @@ class App extends Component {
               userInfor.user &&
               userInfor.user.role === "admin" ? (
                 <ProductManage />
+              ) : (
+                <Redirect to="/login" />
+              )}
+            </Route>
+
+            <Route path="/admin/order" exact>
+              {isLogin === true &&
+              userInfor &&
+              userInfor.user &&
+              userInfor.user.role === "admin" ? (
+                <ManageOrder />
               ) : (
                 <Redirect to="/login" />
               )}

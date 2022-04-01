@@ -85,3 +85,67 @@
     rgb(233, 231, 227) 100%
   );
 }
+.product-collection {
+  .product-collection-wrapper {
+    height: 120vh;
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+    .product-col-left {
+      width: 50%;
+      background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)),
+        url("../../assets/images/fashion-img-1.jpg") center/cover no-repeat;
+      .product-col-content {
+        text-align: center;
+        color: white;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    .product-col-right {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5em;
+      .product-col-r-top {
+        height: 60%;
+        background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)),
+          url("../../assets/images/fashion-img-2.png") center/cover no-repeat;
+        .product-col-content {
+          text-align: center;
+          color: white;
+          position: relative;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+      .product-col-r-bottom {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.5em;
+
+        .flex {
+          width: 50%;
+          height: 100%;
+
+          .product-col-content {
+            text-align: center;
+            color: white;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 1.6em;
+          }
+          :first-child {
+            background: #eaa001;
+          }
+        }
+      }
+    }
+  }
+}

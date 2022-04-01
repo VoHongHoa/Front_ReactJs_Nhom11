@@ -4,6 +4,7 @@ import Homeheader from "../../Homepage/Homeheader/Homeheader";
 import HomeFooter from "../../Homepage/HomeFooter/HomeFooter";
 import { editUser } from "../../../store/actions/AppAction";
 import { withRouter } from "react-router-dom";
+import { logOutSuccess } from "../../../store/actions/AppAction";
 import ChangePassword from "../ChangePassword/ChangePassword";
 import "./EditUser.scss";
 class EditUser extends Component {
@@ -60,6 +61,9 @@ class EditUser extends Component {
       isOpenModal: false,
     });
   };
+  handleLogout = () => {
+    this.props.logOutSuccess();
+  };
   render() {
     return (
       <div className="container-fluid">
@@ -67,7 +71,11 @@ class EditUser extends Component {
           <Homeheader />
         </section>
         <div className="edituser-container row mt-3">
-          <div className="user-avt"></div>
+          <div className="user-avt">
+            <div className="user-avt-img"></div>
+            <span className="user-name">{this.state.fullname}</span>
+            <span className="user-email">{this.state.email}</span>
+          </div>
 
           <div className="edituser-content">
             <div className="form-group col-12">
@@ -137,12 +145,26 @@ class EditUser extends Component {
             >
               Lưu thay đổi
             </button>
-            <button
-              className="btn btn-primary mt-2 mb-2"
+          </div>
+
+          <div className="edituser-action">
+            <span
               onClick={() => this.handleEditPassworduser()}
+              className="action"
             >
-              Đổi mật khẩu
-            </button>
+              <span>Đổi mật khẩu</span>
+              <i className="fas fa-key"></i>
+            </span>
+            <span
+              onClick={() => this.handleEditPassworduser()}
+              className="action"
+            >
+              <span>Đăng xuất</span>
+              <i
+                className="fas fa-sign-out"
+                onClick={() => this.handleLogout()}
+              ></i>
+            </span>
           </div>
         </div>
         <ChangePassword
@@ -163,6 +185,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     editUser: (data) => dispatch(editUser(data)),
+    logOutSuccess: () => dispatch(logOutSuccess()),
   };
 };
 

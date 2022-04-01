@@ -9,7 +9,6 @@ const userReducer = (state = initState, action) => {
       state.userInfor = action.userData;
       state.loginInfor = action.loginInfor;
       state.isLogin = true;
-      console.log("check state user redux:", state);
       return { ...state };
     case "LOGIN_FAILED":
       state.userData = action.userData;
