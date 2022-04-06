@@ -5,4 +5,7 @@ const addNewOder = (data) => {
 const getAllOrder = () => {
   return axios.get("/api/order/");
 };
-export { addNewOder, getAllOrder };
+const deleteOrder = (item) => {
+  return axios.delete(`/api/order/${item._id}`);
+};
+export { addNewOder, getAllOrder, deleteOrder };
