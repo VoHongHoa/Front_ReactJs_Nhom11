@@ -20,6 +20,7 @@ class EditUser extends Component {
       accessToken: "",
       id: "",
       isOpenModal: false,
+      img: " ",
     };
   }
   componentDidMount() {
@@ -31,6 +32,9 @@ class EditUser extends Component {
       phoneNumber: this.props.userInfor.user.phonenumber,
       fullname: this.props.userInfor.user.fullname,
       id: this.props.userInfor.user._id,
+      img: this.props.userInfor.user.base64Img
+        ? this.props.userInfor.user.base64Img
+        : " ",
     });
   }
   componentDidUpdate(preProps, preState) {}
@@ -48,7 +52,7 @@ class EditUser extends Component {
       address: this.state.address,
       phonenumber: this.state.phoneNumber,
       fullname: this.state.fullname,
-      accessToken: this.state.accessToken,
+      // accessToken: this.state.accessToken,
     };
     this.props.editUser(data);
     this.props.history.push("/");
@@ -72,7 +76,20 @@ class EditUser extends Component {
         </section>
         <div className="edituser-container row mt-3">
           <div className="user-avt">
-            <div className="user-avt-img"></div>
+            {this.state.img === " " ? (
+              <div className="user-avt-img"></div>
+            ) : (
+              <div
+                className="user-avt-img"
+                style={{
+                  backgroundImage: `url(${this.state.img})`,
+                  backgroundRepeat: "none",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              ></div>
+            )}
+
             <span className="user-name">{this.state.fullname}</span>
             <span className="user-email">{this.state.email}</span>
           </div>
@@ -186,6 +203,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     editUser: (data) => dispatch(editUser(data)),
     logOutSuccess: () => dispatch(logOutSuccess()),
+    // getUserInfor: () => dispatch(getUserInfor()),
   };
 };
 

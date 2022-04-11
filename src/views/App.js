@@ -30,7 +30,7 @@ class App extends Component {
             <Route path="/" exact>
               <Homepage />
             </Route>
-            <Route path="/product" exact>
+            <Route path="/samsum" exact>
               <Product />
             </Route>
             <Route exact path="/login">

@@ -18,7 +18,7 @@ class UserManage extends Component {
       alluser: [],
       isOpenModal: false,
       currentUserEdit: {},
-      name: "",
+      keyword: "",
       numOfpage: "",
       currentPage: 0,
       action: "",
@@ -78,7 +78,7 @@ class UserManage extends Component {
   };
   handleOnchangeInput = (event) => {
     this.setState({
-      name: event.target.value,
+      keyword: event.target.value,
     });
   };
   toggleFromParent = () => {
@@ -86,9 +86,9 @@ class UserManage extends Component {
       isOpenModal: false,
     });
   };
-  handleSearchUser = async (name) => {
+  handleSearchUser = async (keyWord) => {
     try {
-      let res = await findUser(name);
+      let res = await findUser(keyWord);
       //console.log("check res:", res);
       if (res && res.errorCode === 1 && res.result) {
         toast.success(res.message);
@@ -108,7 +108,7 @@ class UserManage extends Component {
       currentPage: currentPage,
     });
     let res = await getAlluser(currentPage);
-    console.log(res);
+    // console.log(res);
     if (res && res.success === true) {
       this.setState({
         alluser: res.users,
@@ -144,11 +144,12 @@ class UserManage extends Component {
               className="form-control"
               placeholder="Tìm kiếm người dùng theo tên, địa chỉ, quyền, ..."
               onChange={(event) => this.handleOnchangeInput(event)}
+              //onChange ={()=>  this.handleSearchUser(this.state.name)}
             />
             <button
               type="submit"
               className="btn-submit"
-              onClick={() => this.handleSearchUser(this.state.name)}
+              onClick={() => this.handleSearchUser(this.state.keyword)}
             >
               <i className="fa fa-search fa-2x"></i>
             </button>

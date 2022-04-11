@@ -7,10 +7,12 @@
   height: 100px;
   //border: 1px solid red;
   background-color: rgb(33, 37, 41);
+
   .top-header {
     height: 50%;
     // border: 1px solid black;
     border-bottom: 1px solid white;
+
     .logo-container {
       display: flex;
       flex-direction: row;
@@ -20,34 +22,41 @@
       color: white;
       cursor: pointer;
     }
+
     .search-container {
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
+
       //border: 1px solid yellow;
       .btn-submit {
         border: none;
         background: none;
+
         i {
           color: white;
         }
       }
     }
+
     .log-in {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
+
       .btn-log-in {
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 10px;
+
         i {
           color: white;
           cursor: pointer;
         }
+
         .user-infor {
           display: flex;
           align-items: center;
@@ -56,12 +65,13 @@
           gap: 6px;
           padding: 2px;
           cursor: pointer;
+
           .user-avatar {
             border-radius: 50%;
             height: 30px;
             width: 30px;
             display: flex;
-            border: 1px solid black;
+            border: 1px solid grey;
             justify-content: center;
             align-items: center;
             background-color: white;
@@ -71,9 +81,11 @@
               color: black;
             }
           }
+
           i {
             font-size: 20px;
           }
+
           .user-action {
             .more-action {
               i {
@@ -86,6 +98,7 @@
       }
     }
   }
+
   .bottom-header {
     .navbar {
       justify-content: center;
@@ -96,17 +109,21 @@
         font-size: 20px;
         color: white;
         padding: 4px;
+
         &:hover {
           background-color: white;
           color: black;
         }
       }
+
       .active {
         border-bottom: 4px solid white;
       }
+
       .btn-cart {
         background: none;
         border: none;
+
         i {
           color: white;
         }

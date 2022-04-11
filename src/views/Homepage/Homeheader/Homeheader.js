@@ -82,13 +82,22 @@ class Homeheader extends Component {
                           this.handleOpenEditUser(userInfor.user._id)
                         }
                       >
-                        <div className="user-avatar">
-                          {!userInfor.user.img ? (
+                        {!userInfor.user.base64Img ? (
+                          <div className="user-avatar">
                             <i className="fa-solid fa-user"></i>
-                          ) : (
-                            " "
-                          )}
-                        </div>
+                          </div>
+                        ) : (
+                          <div
+                            className="user-avatar"
+                            style={{
+                              backgroundImage: `url(${userInfor.user.base64Img})`,
+                              backgroundRepeat: "none",
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                            }}
+                          ></div>
+                        )}
+
                         <span>{userInfor.user.fullname}</span>
                         <div className="user-action">
                           <div className="more-action">
@@ -119,8 +128,14 @@ class Homeheader extends Component {
               <NavLink to="/" activeClassName="active" exact={true}>
                 Home
               </NavLink>
-              <NavLink to="/product" activeClassName="active" exact={true}>
-                Sam Sum
+              <NavLink to="/samsum" activeClassName="active" exact={true}>
+                SamSum
+              </NavLink>
+              <NavLink to="/iphone" activeClassName="active" exact={true}>
+                Iphone
+              </NavLink>
+              <NavLink to="/oppo" activeClassName="active" exact={true}>
+                Oppo
               </NavLink>
               <button
                 type="button"

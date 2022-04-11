@@ -75,7 +75,7 @@ class HomePage extends Component {
                       architecto odit, quisquam repellat. Deleniti, architecto
                       ab.
                     </p>
-                    <button type="button" class="btn-dark">
+                    <button type="button" className="btn-dark">
                       Shop now
                     </button>
                   </div>

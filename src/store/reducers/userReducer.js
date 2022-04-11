@@ -2,6 +2,7 @@ const initState = {
   loginInfor: {},
   isLogin: false,
   userInfor: {},
+  pageUserCurrent: 0,
 };
 const userReducer = (state = initState, action) => {
   switch (action.type) {

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { handleRegisterUser } from "../../../services/UserService";
 import { toast } from "react-toastify";
+import CommonUtils from "../../../utils/CommonUtils";
 //import Select from "react-select";
 
 class ModalRegister extends Component {
@@ -15,6 +16,7 @@ class ModalRegister extends Component {
       address: "",
       phoneNumber: "",
       fullname: "",
+      img: "",
     };
   }
   componentDidMount() {}
@@ -55,6 +57,16 @@ class ModalRegister extends Component {
     }
     return isValid;
   };
+  handleOnchangeImage = async (event) => {
+    let filedata = event.target.files;
+    let file = filedata[0];
+    if (file) {
+      let base64 = await CommonUtils.getBase64(file);
+      this.setState({
+        img: base64,
+      });
+    }
+  };
   handleRegisterUser = async () => {
     //console.log(this.state);
 
@@ -67,8 +79,9 @@ class ModalRegister extends Component {
         username: this.state.username,
         fullname: this.state.fullname,
         address: this.state.address,
-        telephone: this.state.phoneNumber,
+        phonenumber: this.state.phoneNumber,
         //gender: this.state.selectedOption.label,
+        img: this.state.img,
       });
       //console.log("check respone", response);
       if (response && response.success === true) {
@@ -86,24 +99,8 @@ class ModalRegister extends Component {
         toast.error(response.message);
       }
     }
-
-    //   this.setState({
-    //     email: this.props.userInfor.user.email,
-    //     password: this.props.userInfor.user.password,
-    //     username: this.props.userInfor.user.username,
-    //     address: this.props.userInfor.user.address,
-    //     phoneNumber: this.props.userInfor.user.phoneNumber,
-    //     fullname: this.props.userInfor.user.fullname,
-    //   });
-    // }
   };
   render() {
-    // const options = [
-    //   { value: "F", label: "Nam" },
-    //   { value: "M", label: "Nữ" },
-    //   { value: "O", label: "Khác" },
-    // ];
-    // let { selectedOption } = this.state;
     return (
       <Modal
         isOpen={this.props.isOpen}
@@ -204,6 +201,30 @@ class ModalRegister extends Component {
                 options={options}
               />
             </div> */}
+            <div className="form-group mt-2 col-6">
+              <label>Hình ảnh</label>
+              <input
+                type="file"
+                className="form-control"
+                onChange={(event) => {
+                  this.handleOnchangeImage(event);
+                }}
+              />
+
+              <div
+                className="mt-2"
+                style={{
+                  backgroundImage: `url(${this.state.img})`,
+                  backgroundRepeat: "none",
+                  backgroundSize: "cover",
+                  width: "80px",
+                  height: "100px",
+                  backgroundPosition: "center",
+                  margin: "0 auto",
+                  border: " 1px solid black",
+                }}
+              ></div>
+            </div>
           </div>
         </ModalBody>
         <ModalFooter>
