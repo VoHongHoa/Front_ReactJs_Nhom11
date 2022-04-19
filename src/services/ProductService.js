@@ -17,6 +17,13 @@ const findProduct = (keyword) => {
 const getTopProduct = () => {
   return axios.get("/api/product/get-top-product");
 };
+
+const getProductByFilter = (data) => {
+  //console.log(data);
+  return axios.get(
+    `/api/product/get-product-filter?category=${data.category}&filterCondition=${data.filterCondition}`
+  );
+};
 export {
   addNewProduct,
   getAllProduct,
@@ -24,4 +31,5 @@ export {
   editProduct,
   findProduct,
   getTopProduct,
+  getProductByFilter,
 };

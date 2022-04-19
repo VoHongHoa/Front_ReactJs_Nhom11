@@ -23,8 +23,8 @@ const editUserFromAdmin = (data) => {
 const findUser = (data) => {
   return axios.get(`/api/user/find-user/?keyword=${data}`);
 };
-const countUser = () => {
-  return axios.get("/api/user/stats");
+const countUserByMonth = () => {
+  return axios.get("/api/user/status");
 };
 const forgotPassword = (data) => {
   return axios.post("/api/user/reset-password", data);
@@ -41,7 +41,7 @@ export {
   deleteuser,
   editUserFromAdmin,
   findUser,
-  countUser,
+  countUserByMonth,
   forgotPassword,
   changePassword,
 };

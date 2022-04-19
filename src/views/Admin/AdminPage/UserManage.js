@@ -11,6 +11,7 @@ import {
 import { toast } from "react-toastify";
 import ModalEditUserAdmin from "./ModalEditUserAdmin";
 import "./UserManage.scss";
+import Chart from "../Chart/Chart";
 class UserManage extends Component {
   constructor(props) {
     super(props);
@@ -137,6 +138,11 @@ class UserManage extends Component {
     return (
       <div className="container-fluid">
         <AdminHeader />
+        <div className="row">
+          <div className="col-6">
+            <Chart />
+          </div>
+        </div>
         <div className="top-user-manage row mt-3">
           <span className="text-manage col-6">Quản lý người dùng</span>
           <div className="col-6 search-container">
@@ -218,6 +224,7 @@ class UserManage extends Component {
             " "
           )}
         </div>
+
         <ModalEditUserAdmin
           isOpen={this.state.isOpenModal}
           toggleFromParent={this.toggleFromParent}
