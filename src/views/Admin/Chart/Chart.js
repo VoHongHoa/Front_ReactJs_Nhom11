@@ -17,7 +17,7 @@ class Chart extends Component {
   }
   async componentDidMount() {
     let res = await countUserByMonth();
-    console.log(res);
+    // console.log(res);
     if (res && res.errorCode === 1) {
       this.setState({
         chartData: res.data,
