@@ -5,4 +5,7 @@ const addNewOder = (data) => {
 const getAllOrder = () => {
   return axios.get("/api/order/");
 };
-export { addNewOder, getAllOrder };
+const countOrderByMonth = () => {
+  return axios.get("/api/order/income");
+};
+export { addNewOder, getAllOrder, countOrderByMonth };

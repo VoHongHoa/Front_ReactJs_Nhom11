@@ -1,0 +1,21 @@
+.chartContainer {
+    .chart-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 50px;
+
+        .chart-detail {
+            display: flex;
+            flex-direction: column;
+
+
+            .chart-title {
+                text-align: center;
+            }
+        }
+
+    }
+
+
+}

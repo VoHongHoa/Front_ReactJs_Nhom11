@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
-import { countUserByMonth } from "../../../services/UserService";
+import { countOrderByMonth } from "../../../services/OderService";
 ChartJS.register(...registerables);
 
-class Chart extends Component {
+class ChartOrder extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,11 +16,10 @@ class Chart extends Component {
     };
   }
   async componentDidMount() {
-    let res = await countUserByMonth();
-    // console.log(res);
-    if (res && res.errorCode === 1) {
+    let res = await countOrderByMonth();
+    if (res) {
       this.setState({
-        chartData: res.data,
+        chartData: res,
       });
       this.buiDataChart(this.state.chartData);
     }
@@ -50,8 +49,8 @@ class Chart extends Component {
       labels: this.state.allMonth,
       datasets: [
         {
-          label: "Số tài khoản đăng kí theo từng tháng",
-          backgroundColor: "rgba(75,192,192,1)",
+          label: "Doanh thu bán hàng theo từng tháng",
+          backgroundColor: "rgb(240,175,0)",
           borderColor: "rgba(0,0,0,1)",
           borderWidth: 2,
           data: this.state.numOfUserByMonth,
@@ -87,4 +86,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Chart));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ChartOrder)
+);

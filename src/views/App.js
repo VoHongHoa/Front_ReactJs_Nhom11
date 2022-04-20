@@ -14,6 +14,7 @@ import ProductManage from "./Admin/AdminPage/ProductManage";
 import ForgotPassword from "./User/ForgotPassword/ForgotPassword";
 import Oder from "./User/Oder/Oder";
 import ManageOrder from "./Admin/AdminPage/ManageOrder";
+import Dashboard from "./Admin/AdminPage/Dashboard";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +44,14 @@ class App extends Component {
               <ForgotPassword />
             </Route>
             <Route exact path="/admin">
-              <Redirect exact to="/admin/user" />
+              {isLogin === true &&
+              userInfor &&
+              userInfor.user &&
+              userInfor.user.role === "admin" ? (
+                <Dashboard />
+              ) : (
+                <Redirect to="/login" />
+              )}
             </Route>
             <Route exact path="/admin/user">
               {isLogin === true &&

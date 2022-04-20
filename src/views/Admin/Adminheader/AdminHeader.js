@@ -11,6 +11,9 @@ class AdminHeader extends Component {
       <div className="admin-header-container container-fluid">
         <div className="topnav">
           <div className="item-manage col-5">
+            <NavLink to="/admin" activeClassName="active" exact={true}>
+              Thống kê
+            </NavLink>
             <NavLink to="/admin/user" activeClassName="active" exact={true}>
               User
             </NavLink>
