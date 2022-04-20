@@ -15,11 +15,25 @@ class Homeheader extends Component {
       isLogin: "",
     };
   }
+
+  // // Things to do before unloading/closing the tab
+  // doSomethingBeforeUnload = () => {
+  //   this.props.logOutSuccess();
+  // };
+
+  // // Setup the `beforeunload` event listener
+  // setupBeforeUnloadListener = () => {
+  //   window.addEventListener("beforeunload", (ev) => {
+  //     ev.preventDefault();
+  //     return this.doSomethingBeforeUnload();
+  //   });
+  // };
   componentDidMount() {
     this.setState({
       userInfor: this.props.userInfor,
       isLogin: this.props.isLogin,
     });
+    // this.setupBeforeUnloadListener();
   }
   componentDidUpdate(preProps) {
     if (this.state.userInfor !== this.props.userInfor) {
@@ -45,6 +59,7 @@ class Homeheader extends Component {
   handleLogout = () => {
     this.props.logOutSuccess();
   };
+
   returnToHome = () => {
     this.props.history.push("/");
   };

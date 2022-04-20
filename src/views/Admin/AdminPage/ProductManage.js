@@ -159,6 +159,8 @@ class ProductManage extends Component {
                 <th>STT</th>
                 <th>Title</th>
                 <th>Màu</th>
+                <th>Ram</th>
+                <th>Rom</th>
                 <th>Giá</th>
                 <th>Ảnh</th>
                 <th>Action</th>
@@ -173,6 +175,8 @@ class ProductManage extends Component {
                       <td>{index}</td>
                       <td>{item.title}</td>
                       <td>{item.color}</td>
+                      <td>{item.ram}</td>
+                      <td>{item.rom}</td>
                       <td>{item.price}</td>
                       <td>
                         <div

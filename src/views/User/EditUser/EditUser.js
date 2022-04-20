@@ -176,6 +176,10 @@ class EditUser extends Component {
               <span>Đăng xuất</span>
               <i className="fas fa-sign-out"></i>
             </span>
+            <span className="action" onClick={() => this.handleLogout()}>
+              <span>Go Admin</span>
+              <i className="fas fa-sign-out"></i>
+            </span>
           </div>
         </div>
         <ChangePassword

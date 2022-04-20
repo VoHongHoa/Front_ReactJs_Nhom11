@@ -3,6 +3,12 @@ import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Select from "react-select";
 import CommonUtils from "../../../utils/CommonUtils";
+import {
+  optionsColor,
+  optionsRam,
+  optionsRom,
+  optionsCategories,
+} from "../../../utils/constants";
 class ModalProduct extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +19,8 @@ class ModalProduct extends Component {
       categories: "",
       color: "",
       price: "",
+      ram: "",
+      rom: "",
     };
   }
   componentDidMount() {}
@@ -55,6 +63,8 @@ class ModalProduct extends Component {
       categories: this.state.categories.value,
       color: this.state.color.value,
       price: this.state.price,
+      ram: this.state.ram.value,
+      rom: this.state.rom.value,
     });
     this.setState({
       tittle: "",
@@ -63,26 +73,12 @@ class ModalProduct extends Component {
       categories: "",
       color: "",
       price: "",
+      ram: "",
+      rom: "",
     });
   };
 
   render() {
-    const optionsColor = [
-      { value: "Đen", label: "Đen" },
-      { value: "Đỏ", label: "Đỏ" },
-      { value: "vàng", label: "Vàng" },
-      { value: "Bạch kim ", label: "Bạch kim" },
-      { value: "Xanh ngọc", label: "Xanh ngọc" },
-      { value: "Tím", label: "Tím" },
-    ];
-
-    const optionsCategories = [
-      { value: "SamSum", label: "SamSum" },
-      { value: "Iphone", label: "Iphone" },
-      { value: "Oppo", label: "Oppo" },
-      { value: "Sony", label: "Sony" },
-    ];
-    //console.log("check state:", this.state);
     return (
       <Modal
         isOpen={this.props.isOpen}
@@ -142,6 +138,24 @@ class ModalProduct extends Component {
                 value={this.state.color}
                 onChange={this.handleOnchangeSelect}
                 name={"color"}
+              />
+            </div>
+            <div className="form-group mt-2 col-6">
+              <label>Ram</label>
+              <Select
+                options={optionsRam}
+                value={this.state.ram}
+                onChange={this.handleOnchangeSelect}
+                name={"ram"}
+              />
+            </div>
+            <div className="form-group mt-2 col-6">
+              <label>Rom</label>
+              <Select
+                options={optionsRom}
+                value={this.state.rom}
+                onChange={this.handleOnchangeSelect}
+                name={"rom"}
               />
             </div>
             <div className="form-group mt-2 col-6">

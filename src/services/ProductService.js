@@ -21,7 +21,7 @@ const getTopProduct = () => {
 const getProductByFilter = (data) => {
   //console.log(data);
   return axios.get(
-    `/api/product/get-product-filter?category=${data.category}&filterCondition=${data.filterCondition}`
+    `/api/product/get-product-filter?category=${data.category}&filterPrice=${data.filterPrice}&filterRam=${data.filterRam}&filterRom=${data.filterRom}`
   );
 };
 export {

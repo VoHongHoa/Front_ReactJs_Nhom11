@@ -12,6 +12,11 @@ class Products extends Component {
     this.state = {
       allProduct: [],
       filterPrice: [],
+      filterRam: [],
+      filterRom: [],
+      selectedPrice: "",
+      selectedRam: "",
+      selectedRom: "",
     };
   }
   componentDidMount() {
@@ -33,13 +38,47 @@ class Products extends Component {
       let objectPrice = {};
       if (i === 0) {
         objectPrice.label = Price[i];
+        objectPrice.value = "";
       } else {
         objectPrice.label = `Từ ${Price[i]}`;
+        objectPrice.value = Price[i];
       }
-      objectPrice.value = Price[i];
+
       arrPrice.push(objectPrice);
     }
     return arrPrice;
+  };
+  setSelectedRam = () => {
+    let ram = ["Tất cả", " 2GB", "4GB", "8GB", "16GB", "32GB", "64GB"];
+    let arrRam = [];
+    for (let i = 0; i < ram.length; i++) {
+      let objectRam = {};
+      if (i === 0) {
+        objectRam.value = "";
+      } else {
+        objectRam.value = ram[i];
+      }
+      objectRam.label = ram[i];
+
+      arrRam.push(objectRam);
+    }
+    return arrRam;
+  };
+  setSelectedRom = () => {
+    let rom = ["Tất cả", " 16GB", "32GB", "64GB", "128GB", "256GB", "512GB"];
+    let arrRom = [];
+    for (let i = 0; i < rom.length; i++) {
+      let objectRom = {};
+      if (i === 0) {
+        objectRom.value = "";
+      } else {
+        objectRom.value = rom[i];
+      }
+      objectRom.label = rom[i];
+
+      arrRom.push(objectRom);
+    }
+    return arrRom;
   };
   getAllProductByCategory = async () => {
     let res = await findProduct("SamSum");
@@ -47,33 +86,57 @@ class Products extends Component {
       this.setState({
         allProduct: res.product,
         filterPrice: this.setSelectedPrice(),
-        selectedFilter: "",
+        filterRam: this.setSelectedRam(),
+        filterRom: this.setSelectedRom(),
       });
     }
   };
   handleAddToCart = (item) => {
     this.props.addToCart(item);
   };
-  handelOnchangeSelect = async (event) => {
-    let filterCondition = event.target.value;
-    if (filterCondition === "Tất cả") {
-      this.getAllProductByCategory();
-    } else {
-      let data = {
-        category: "SamSum",
-        filterCondition: filterCondition,
-      };
-      let res = await getProductByFilter(data);
-      if (res && res.errCode === 1) {
-        this.setState({
-          allProduct: res.products,
-        });
-      }
+  handleOnchangeSelect = (event, id) => {
+    let name = id;
+    let copyState = { ...this.state };
+    copyState[name] = event.target.value;
+    this.setState({
+      ...copyState,
+    });
+  };
+  // handelOnchangeSelectPrice = async (event) => {
+  //   let filterCondition = event.target.value;
+  //   if (filterCondition === "Tất cả") {
+  //     this.getAllProductByCategory();
+  //   } else {
+  //     let data = {
+  //       category: "SamSum",
+  //       filterCondition: filterCondition,
+  //     };
+  //     let res = await getProductByFilter(data);
+  //     if (res && res.errCode === 1) {
+  //       this.setState({
+  //         allProduct: res.products,
+  //       });
+  //     }
+  //   }
+  // };
+  handleFilterProduct = async () => {
+    let data = {
+      category: "SamSum",
+      filterPrice: this.state.selectedPrice,
+      filterRam: this.state.selectedRam,
+      filterRom: this.state.selectedRom,
+    };
+    let res = await getProductByFilter(data);
+    console.log(res);
+    if (res && res.errCode === 1) {
+      this.setState({
+        allProduct: res.products,
+      });
     }
   };
   render() {
-    let { allProduct, filterPrice } = this.state;
-    //console.log(this.state);
+    let { allProduct, filterPrice, filterRam, filterRom } = this.state;
+    console.log(this.state);
     return (
       <div className="container-fluid product-page">
         <Homeheader />
@@ -88,7 +151,9 @@ class Products extends Component {
               <div className="title-select">Giá: </div>
               <select
                 className="select-price"
-                onChange={(event) => this.handelOnchangeSelect(event)}
+                onChange={(event) =>
+                  this.handleOnchangeSelect(event, "selectedPrice")
+                }
               >
                 {filterPrice &&
                   filterPrice.length > 0 &&
@@ -100,6 +165,52 @@ class Products extends Component {
                     );
                   })}
               </select>
+            </div>
+            <div className="all-availble-price mb-2">
+              <div className="title-select">Ram: </div>
+              <select
+                className="select-price"
+                onChange={(event) =>
+                  this.handleOnchangeSelect(event, "selectedRam")
+                }
+              >
+                {filterRam &&
+                  filterRam.length > 0 &&
+                  filterRam.map((item, index) => {
+                    return (
+                      <option value={item.value} key={index}>
+                        {item.label}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
+            <div className="all-availble-price mb-2">
+              <div className="title-select">Rom: </div>
+              <select
+                className="select-price"
+                onChange={(event) =>
+                  this.handleOnchangeSelect(event, "selectedRom")
+                }
+              >
+                {filterRom &&
+                  filterRom.length > 0 &&
+                  filterRom.map((item, index) => {
+                    return (
+                      <option value={item.value} key={index}>
+                        {item.label}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
+            <div>
+              <span
+                style={{ cursor: "pointer" }}
+                onClick={() => this.handleFilterProduct()}
+              >
+                Lọc
+              </span>
             </div>
           </div>
           <div className="filter-product-content">

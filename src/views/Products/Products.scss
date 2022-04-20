@@ -7,13 +7,16 @@
 
 
         .filter {
+            display: flex;
+            flex-direction: row;
+            gap: 50px;
+            align-items: center;
+
             .all-availble-price {
                 display: flex;
                 flex-direction: row;
                 gap: 5px;
                 align-items: center;
-
-
 
                 .select-price {
                     border: none;

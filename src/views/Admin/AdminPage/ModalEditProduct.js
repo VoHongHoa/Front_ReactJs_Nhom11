@@ -3,6 +3,12 @@ import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Select from "react-select";
 import CommonUtils from "../../../utils/CommonUtils";
+import {
+  optionsColor,
+  optionsRam,
+  optionsRom,
+  optionsCategories,
+} from "../../../utils/constants";
 import "./ModalEditProduct.scss";
 class ModalEditProduct extends Component {
   constructor(props) {
@@ -14,6 +20,8 @@ class ModalEditProduct extends Component {
       categories: "",
       color: "",
       price: "",
+      ram: "",
+      rom: "",
     };
   }
   componentDidMount() {}
@@ -33,6 +41,14 @@ class ModalEditProduct extends Component {
           label: this.props.currentProduct.color,
         },
         price: this.props.currentProduct.price,
+        ram: {
+          value: this.props.currentProduct.ram,
+          label: this.props.currentProduct.ram,
+        },
+        rom: {
+          value: this.props.currentProduct.rom,
+          label: this.props.currentProduct.rom,
+        },
       });
     }
   }
@@ -76,25 +92,12 @@ class ModalEditProduct extends Component {
       categories: this.state.categories.value,
       color: this.state.color.value,
       price: this.state.price,
+      ram: this.state.ram.value,
+      rom: this.state.rom.value,
     });
   };
 
   render() {
-    const optionsColor = [
-      { value: "Đen", label: "Đen" },
-      { value: "Đỏ", label: "Đỏ" },
-      { value: "vàng", label: "Vàng" },
-      { value: "Bạch kim ", label: "Bạch kim" },
-      { value: "Xanh ngọc", label: "Xanh ngọc" },
-      { value: "Tím", label: "Tím" },
-    ];
-
-    const optionsCategories = [
-      { value: "SamSum", label: "SamSum" },
-      { value: "Iphone", label: "Iphone" },
-      { value: "Oppo", label: "Oppo" },
-      { value: "Sony", label: "Sony" },
-    ];
     return (
       <Modal
         isOpen={this.props.isOpen}
@@ -154,6 +157,24 @@ class ModalEditProduct extends Component {
                 value={this.state.color}
                 onChange={this.handleOnchangeSelect}
                 name={"color"}
+              />
+            </div>
+            <div className="form-group mt-2 col-6">
+              <label>Ram</label>
+              <Select
+                options={optionsRam}
+                value={this.state.ram}
+                onChange={this.handleOnchangeSelect}
+                name={"ram"}
+              />
+            </div>
+            <div className="form-group mt-2 col-6">
+              <label>Rom</label>
+              <Select
+                options={optionsRom}
+                value={this.state.rom}
+                onChange={this.handleOnchangeSelect}
+                name={"rom"}
               />
             </div>
             <div className="form-group mt-2 col-6">

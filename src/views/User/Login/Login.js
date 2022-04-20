@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 import ModalRegister from "../Register/ModalRegister";
 // import { handlegetUserInfor } from "../../../services/UserService";
 import { handleLogin } from "../../../store/actions/AppAction";
+import { logOutSuccess } from "../../../store/actions/AppAction";
 import "./Login.scss";
 //import { toast } from "react-toastify";
 class Login extends Component {
@@ -17,6 +18,7 @@ class Login extends Component {
       // isLogin: false,
     };
   }
+
   componentDidMount() {}
   componentDidUpdate(preProps) {}
   handleOnChangeUsername = (event) => {
@@ -45,7 +47,11 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password,
     });
+    setTimeout(() => this.props.logOutSuccess(), 24 * 60 * 60 * 1000);
   };
+  // reLogin = ()=>{
+
+  // }
   handleOpenModal = () => {
     this.setState({
       isOpenModal: true,
@@ -155,6 +161,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleLogin: (data) => dispatch(handleLogin(data)),
+    logOutSuccess: () => dispatch(logOutSuccess()),
   };
 };
 
