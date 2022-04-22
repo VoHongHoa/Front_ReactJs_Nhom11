@@ -24,6 +24,9 @@ const getProductByFilter = (data) => {
     `/api/product/get-product-filter?category=${data.category}&filterPrice=${data.filterPrice}&filterRam=${data.filterRam}&filterRom=${data.filterRom}`
   );
 };
+const getProductRecom = () => {
+  return axios.get("/api/product/get-product-recommend");
+};
 export {
   addNewProduct,
   getAllProduct,
@@ -32,4 +35,5 @@ export {
   findProduct,
   getTopProduct,
   getProductByFilter,
+  getProductRecom,
 };

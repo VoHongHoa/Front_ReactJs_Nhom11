@@ -32,6 +32,9 @@ const forgotPassword = (data) => {
 const changePassword = (data) => {
   return axios.post("/api/user/changepassword", data);
 };
+const loginWithGoogle = () => {
+  return axios.get("/api/auth/login/success");
+};
 export {
   handleRegisterUser,
   handleLoginService,
@@ -44,4 +47,5 @@ export {
   countUserByMonth,
   forgotPassword,
   changePassword,
+  loginWithGoogle,
 };

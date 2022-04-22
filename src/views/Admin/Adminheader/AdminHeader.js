@@ -15,13 +15,13 @@ class AdminHeader extends Component {
               Thống kê
             </NavLink>
             <NavLink to="/admin/user" activeClassName="active" exact={true}>
-              User
+              Người dùng
             </NavLink>
             <NavLink to="/admin/product" activeClassName="active" exact={true}>
-              Product
+              Sản phẩm
             </NavLink>
             <NavLink to="/admin/order" activeClassName="active" exact={true}>
-              Oder
+              Đơn hàng
             </NavLink>
           </div>
           <div className="admin-name col-3">

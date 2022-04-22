@@ -6,6 +6,7 @@ import Homeheader from "./Homeheader/Homeheader";
 import HomeFooter from "./HomeFooter/HomeFooter";
 import SectionProducts from "./SectionProducts/SectionProducts";
 import "./Homepage.scss";
+// import RecomProduct from "./RecomProduct/RecomProduct";
 class HomePage extends Component {
   componentDidMount() {}
   render() {
@@ -42,6 +43,10 @@ class HomePage extends Component {
           <div className="section-product mt-2 mb-2">
             <SectionProducts />
           </div>
+          {/* 
+          <div className="section-product mt-2 mb-2">
+            <RecomProduct />
+          </div> */}
 
           <div className="product-collection mb-2">
             <div className="product-collection-wrapper">

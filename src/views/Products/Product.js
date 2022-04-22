@@ -6,6 +6,7 @@ import { addToCart } from "../../store/actions/AppAction";
 import HomeFooter from "../Homepage/HomeFooter/HomeFooter";
 import { findProduct, getProductByFilter } from "../../services/ProductService";
 import "./Products.scss";
+import { toast } from "react-toastify";
 class Products extends Component {
   constructor(props) {
     super(props);
@@ -127,8 +128,9 @@ class Products extends Component {
       filterRom: this.state.selectedRom,
     };
     let res = await getProductByFilter(data);
-    console.log(res);
+    // console.log(res);
     if (res && res.errCode === 1) {
+      toast.success(`Có ${res.products.length} sản phẩm`);
       this.setState({
         allProduct: res.products,
       });

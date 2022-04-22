@@ -65,6 +65,9 @@ class Login extends Component {
   handleForgotPassword = () => {
     this.props.history.push("/forgotpassword");
   };
+  handleLoginGoogle = () => {
+    window.open("http://localhost:5000/api/auth/google", "_self");
+  };
   render() {
     return (
       <>
@@ -136,6 +139,16 @@ class Login extends Component {
                     >
                       {" "}
                       Đăng kí
+                    </span>{" "}
+                  </p>
+                  <p>
+                    Bạn chưa có tài khoản?
+                    <span
+                      className="text"
+                      onClick={() => this.handleLoginGoogle()}
+                    >
+                      {" "}
+                      google
                     </span>{" "}
                   </p>
                 </div>
