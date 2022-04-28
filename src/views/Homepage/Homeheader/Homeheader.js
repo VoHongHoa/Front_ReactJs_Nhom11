@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 import ModalCart from "./ModalCart/ModalCart";
 import { logOutSuccess } from "../../../store/actions/AppAction";
-import { loginWithGoogle } from "../../../services/UserService";
 class Homeheader extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +29,6 @@ class Homeheader extends Component {
   //   });
   // };
   componentDidMount() {
-    this.handleLoginWithGoogle();
     this.setState({
       userInfor: this.props.userInfor,
       isLogin: this.props.isLogin,
@@ -45,21 +43,7 @@ class Homeheader extends Component {
       });
     }
   }
-  handleLoginWithGoogle = async () => {
-    let res = await loginWithGoogle();
-    console.log(res);
-  };
-  // getUser = ()=>{
-  //   fetch("http://localhost:5000/api/auth/login/success", {
-  //     method:"GET",
-  //     credentials:"include",
-  //     headers:{
-  //       Accept:"application/json",
-  //       "Content-Type":"application/json",
-  //       "Access-Control-Allow-Credentials": true
-  //     }
-  //   })
-  // }
+
   handleIsOpenCart = () => {
     this.setState({
       isOpenCart: true,

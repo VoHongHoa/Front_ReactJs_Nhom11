@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import ModalRegister from "../Register/ModalRegister";
-// import { handlegetUserInfor } from "../../../services/UserService";
+import {
+  findUserByEmail,
+  handleRegisterUser,
+} from "../../../services/UserService";
 import { handleLogin } from "../../../store/actions/AppAction";
 import { logOutSuccess } from "../../../store/actions/AppAction";
+import GoogleLogin from "react-google-login";
 import "./Login.scss";
-//import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -65,9 +69,38 @@ class Login extends Component {
   handleForgotPassword = () => {
     this.props.history.push("/forgotpassword");
   };
-  handleLoginGoogle = () => {
-    window.open("http://localhost:5000/api/auth/google", "_self");
+
+  responseGoogle = async (response) => {
+    let userInfor = response.profileObj;
+    if (response) {
+      let res = await findUserByEmail(userInfor.email);
+      if (res.errCode === 1) {
+        let data = {
+          email: userInfor.email,
+          password: "1",
+          username: userInfor.email,
+          address: "",
+          phoneNumber: "",
+          fullname: userInfor.name,
+          img: userInfor.imageUrl,
+        };
+        await handleRegisterUser(data);
+      } else {
+        console.log(res);
+        this.setState({
+          username: res.user.username,
+          password: "1",
+        });
+        this.props.handleLogin({
+          username: this.state.username,
+          password: this.state.password,
+        });
+      }
+    } else {
+      toast.error("Đăng nhập không thành công!!");
+    }
   };
+
   render() {
     return (
       <>
@@ -141,16 +174,13 @@ class Login extends Component {
                       Đăng kí
                     </span>{" "}
                   </p>
-                  <p>
-                    Bạn chưa có tài khoản?
-                    <span
-                      className="text"
-                      onClick={() => this.handleLoginGoogle()}
-                    >
-                      {" "}
-                      google
-                    </span>{" "}
-                  </p>
+                  <GoogleLogin
+                    clientId="1000261381053-acnpjvmhm485p7aal87iicf70bvdm04a.apps.googleusercontent.com"
+                    buttonText="LOGIN WITH GOOGLE"
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
+                    //onSuccess={responseGoogle}
+                  />
                 </div>
               </div>
             </div>

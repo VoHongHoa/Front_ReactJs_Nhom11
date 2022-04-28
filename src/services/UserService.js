@@ -32,8 +32,8 @@ const forgotPassword = (data) => {
 const changePassword = (data) => {
   return axios.post("/api/user/changepassword", data);
 };
-const loginWithGoogle = () => {
-  return axios.get("/api/auth/login/success");
+const findUserByEmail = (email) => {
+  return axios.get(`/api/user/find-user-by-email/?email=${email}`);
 };
 export {
   handleRegisterUser,
@@ -47,5 +47,5 @@ export {
   countUserByMonth,
   forgotPassword,
   changePassword,
-  loginWithGoogle,
+  findUserByEmail,
 };
