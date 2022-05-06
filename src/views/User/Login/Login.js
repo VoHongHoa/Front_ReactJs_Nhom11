@@ -9,8 +9,10 @@ import {
 import { handleLogin } from "../../../store/actions/AppAction";
 import { logOutSuccess } from "../../../store/actions/AppAction";
 import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login";
 import "./Login.scss";
 import { toast } from "react-toastify";
+// import { verify } from "argon2";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,6 @@ class Login extends Component {
       // isLogin: false,
     };
   }
-
   componentDidMount() {}
   componentDidUpdate(preProps) {}
   handleOnChangeUsername = (event) => {
@@ -35,7 +36,6 @@ class Login extends Component {
       password: event.target.value,
     });
   };
-
   handleShowHidePassword = () => {
     this.setState({
       isShowpassword: !this.state.isShowpassword,
@@ -51,11 +51,8 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password,
     });
-    setTimeout(() => this.props.logOutSuccess(), 24 * 60 * 60 * 1000);
+    // setTimeout(() => this.props.logOutSuccess(), 24 * 60 * 60 * 1000);
   };
-  // reLogin = ()=>{
-
-  // }
   handleOpenModal = () => {
     this.setState({
       isOpenModal: true,
@@ -71,13 +68,17 @@ class Login extends Component {
   };
 
   responseGoogle = async (response) => {
-    let userInfor = response.profileObj;
     if (response) {
+      let userInfor = response.profileObj;
       let res = await findUserByEmail(userInfor.email);
       if (res.errCode === 1) {
+        this.setState({
+          username: userInfor.email,
+          password: process.env.REACT_APP_DEFAULT_GOOGLE_PASSWORD,
+        });
         let data = {
           email: userInfor.email,
-          password: "1",
+          password: this.state.password,
           username: userInfor.email,
           address: "",
           phoneNumber: "",
@@ -85,22 +86,22 @@ class Login extends Component {
           img: userInfor.imageUrl,
         };
         await handleRegisterUser(data);
+        this.handleLoginSubmit();
       } else {
-        console.log(res);
         this.setState({
           username: res.user.username,
-          password: "1",
+          password: process.env.REACT_APP_DEFAULT_GOOGLE_PASSWORD,
         });
-        this.props.handleLogin({
-          username: this.state.username,
-          password: this.state.password,
-        });
+        console.log(this.state.password);
+        this.handleLoginSubmit();
       }
     } else {
       toast.error("Đăng nhập không thành công!!");
     }
   };
-
+  responseFacebook = (response) => {
+    console.log(response);
+  };
   render() {
     return (
       <>
@@ -170,17 +171,23 @@ class Login extends Component {
                       className="text"
                       onClick={() => this.handleOpenModal()}
                     >
-                      {" "}
                       Đăng kí
-                    </span>{" "}
+                    </span>
                   </p>
+
                   <GoogleLogin
                     clientId="1000261381053-acnpjvmhm485p7aal87iicf70bvdm04a.apps.googleusercontent.com"
                     buttonText="LOGIN WITH GOOGLE"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
-                    //onSuccess={responseGoogle}
                   />
+                  {/* <FacebookLogin
+                      appId="1147433972769036" //APP ID NOT CREATED YET
+                      fields="name,email,picture"
+                      callback={this.responseFacebook}
+                      icon="fa-facebook"
+                      className="col-6"
+                    /> */}
                 </div>
               </div>
             </div>

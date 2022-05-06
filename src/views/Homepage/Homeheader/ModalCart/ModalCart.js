@@ -54,7 +54,6 @@ class ModalCart extends Component {
   };
   handleSubmit = async (total) => {
     let products = this.state.allItems;
-
     if (products && products.length > 0) {
       products.map((item, index) => {
         delete item.base64Img;
@@ -67,6 +66,7 @@ class ModalCart extends Component {
         amount: total,
       };
       let res = await addNewOder(data);
+      console.log(res);
       if (res) {
         this.props.deleteCart();
         this.toggle();

@@ -1,11 +1,9 @@
 .login-background {
   height: 100vh;
   //background: rgb(34, 193, 195);
-  background: linear-gradient(
-    135deg,
-    rgba(34, 193, 195, 1) 0%,
-    rgba(253, 187, 45, 1) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(34, 193, 195, 1) 0%,
+      rgba(253, 187, 45, 1) 100%);
   font-family: "work sans";
   position: relative;
 
@@ -35,6 +33,7 @@
 
     .login-input {
       margin-bottom: 10px;
+
       .custom-password {
         position: relative;
 
@@ -53,6 +52,15 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      .loginGGFB {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+
+      }
+
       .btn-login {
         width: 40%;
         text-align: center;
@@ -64,20 +72,24 @@
         color: white;
         font-size: 20px;
       }
+
       .text {
         cursor: pointer;
+
         &:hover {
           color: gray;
           text-decoration: underline;
         }
       }
     }
+
     .forgot-password {
       font-size: 10px;
     }
 
     .other-login {
       text-align: center;
+
       .google-icon {
         font-size: 30px;
         margin-right: 5px;
