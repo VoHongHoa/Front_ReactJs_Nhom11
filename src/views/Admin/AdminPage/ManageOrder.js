@@ -84,7 +84,7 @@ class ManageOrder extends Component {
                     <>
                       <tr key={item._id}>
                         <td rowSpan={rowSpan}>{index}</td>
-                        <td rowSpan={rowSpan}>{item.user[0].fullname}</td>
+                        <td rowSpan={rowSpan}>{item.user[0]?.fullname}</td>
                         <td>{item.product[0].title}</td>
                         <td>{item.products[0].quantity}</td>
                         <td rowSpan={rowSpan}>{item.address}</td>
@@ -94,12 +94,12 @@ class ManageOrder extends Component {
                           <i className="fas fa-trash fa-2x"></i>
                         </td>
                       </tr>
-                      {item.product.map((item, index) => {
+                      {item.product.map((i, index) => {
                         if (index > 0) {
                           return (
-                            <tr key={item._id}>
-                              <td>{item.title}</td>
-                              <td>{item.quantity}</td>
+                            <tr key={i._id}>
+                              <td>{i.title}</td>
+                              <td>{item.products[index].quantity}</td>
                             </tr>
                           );
                         }

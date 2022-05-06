@@ -71,6 +71,7 @@ class Login extends Component {
     if (response) {
       let userInfor = response.profileObj;
       let res = await findUserByEmail(userInfor.email);
+      console.log(res);
       if (res.errCode === 1) {
         this.setState({
           username: userInfor.email,
