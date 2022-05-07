@@ -85,6 +85,15 @@ class App extends Component {
                 <Redirect to="/login" />
               )}
             </Route>
+
+            <Route path="/order" exact>
+              {isLogin === true &&
+              userInfor ? (
+                <Oder />
+              ) : (
+                <Redirect to="/login" />
+              )}
+            </Route>
           </Switch>
           <ToastContainer
             position="bottom-right"

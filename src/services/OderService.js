@@ -8,4 +8,7 @@ const getAllOrder = () => {
 const countOrderByMonth = () => {
   return axios.get("/api/order/income");
 };
-export { addNewOder, getAllOrder, countOrderByMonth };
+const deleteOrder = (item) => {
+  return axios.delete(`/api/order/${item._id}`);
+};
+export { addNewOder, getAllOrder, deleteOrder, countOrderByMonth };
