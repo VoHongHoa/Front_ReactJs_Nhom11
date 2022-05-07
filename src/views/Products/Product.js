@@ -92,7 +92,7 @@ class Products extends Component {
       });
     }
   };
-  handleAddToCart = (item) => {
+  handleAddToCart = item => {
     this.props.addToCart(item);
   };
   handleOnchangeSelect = (event, id) => {
@@ -136,6 +136,9 @@ class Products extends Component {
       });
     }
   };
+  handleViewDetailProduct = product => {
+    this.props.history.push(`/samsum/${product.title}`);
+  };
   render() {
     let { allProduct, filterPrice, filterRam, filterRom } = this.state;
     console.log(this.state);
@@ -153,7 +156,7 @@ class Products extends Component {
               <div className="title-select">Giá: </div>
               <select
                 className="select-price"
-                onChange={(event) =>
+                onChange={event =>
                   this.handleOnchangeSelect(event, "selectedPrice")
                 }
               >
@@ -172,7 +175,7 @@ class Products extends Component {
               <div className="title-select">Ram: </div>
               <select
                 className="select-price"
-                onChange={(event) =>
+                onChange={event =>
                   this.handleOnchangeSelect(event, "selectedRam")
                 }
               >
@@ -191,7 +194,7 @@ class Products extends Component {
               <div className="title-select">Rom: </div>
               <select
                 className="select-price"
-                onChange={(event) =>
+                onChange={event =>
                   this.handleOnchangeSelect(event, "selectedRom")
                 }
               >
@@ -224,14 +227,18 @@ class Products extends Component {
                       <div className="product-content">
                         <div className="card">
                           <div
-                            className="img-product"
-                            style={{
-                              backgroundImage: `url(${item.base64Img})`,
-                            }}
-                          ></div>
-                          <span>{item.title}</span>
-                          <p className="price">{item.price}</p>
-                          <p>{item.desc}</p>
+                            onClick={() => this.handleViewDetailProduct(item)}
+                          >
+                            <div
+                              className="img-product"
+                              style={{
+                                backgroundImage: `url(${item.base64Img})`,
+                              }}
+                            ></div>
+                            <span>{item.title}</span>
+                            <p className="price">{item.price}</p>
+                            <p>{item.desc}</p>
+                          </div>
                           <p>
                             <button onClick={() => this.handleAddToCart(item)}>
                               Add to Cart
@@ -255,13 +262,13 @@ class Products extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {};
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    addToCart: (item) => dispatch(addToCart(item)),
+    addToCart: item => dispatch(addToCart(item)),
   };
 };
 

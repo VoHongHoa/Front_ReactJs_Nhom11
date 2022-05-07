@@ -36,45 +36,81 @@ class DetailProduct extends Component {
               Home | SamSum | <b>{product.title}</b>
             </p>
           </section>
-          <h2>{product.title}</h2>
           <div className="container-detail">
-            {isEmptyObj === false ? (
-              <>
-                <div>
-                  <img className="img-detail" src={product.base64Img} />
-                </div>
-                <div className="info-detail">
-                  <div>
-                    <b>{product.price}</b> | Giá đã bao gồm 10% VAT
+            <div className="card">
+              <div className="card-body">
+                <h2 className="card-title">{product.title}</h2>
+                <div className="row">
+                  <div className="col-lg-5 col-md-5 col-sm-6">
+                    <div className="white-box text-center">
+                      <img src={product.base64Img} className="img-responsive" />
+                    </div>
                   </div>
-                  <div>Miễn phí vận chuyển toàn quốc</div>
-                  <div>Màu: {product.color}</div>
-                  <div>
-                    <b>Khuyến mãi: </b> <br />
-                    <p>
-                      Tặng sim data HeraPlus ưu đãi 6GB/ngày (Chưa bao gồm tháng
-                      đầu tiên) <br />- Áp dụng khi mua hàng online
-                    </p>
-                  </div>
-                  <div className="detail-body-detail">
-                    <h3>Thông số kỹ thuật</h3>
-                    <p>Tên sản phẩm: {product.title}</p>
-                    <p>Hãng: {product.categories}</p>
-                    <p>Màu sắc: {product.color}</p>
-                    <p>Ram: {product.ram}</p>
-                    <p>Rom: {product.rom}</p>
-                    <p>Nổi bật: {product.desc}</p>
-                  </div>
-                  <p>
-                    <button onClick={() => this.handleAddToCart(product)}>
-                      Add to Cart
+                  <div className="col-lg-7 col-md-7 col-sm-6">
+                    <h2 className="mt-5">{product.price} VNĐ</h2>
+                    <button
+                      className="btn btn-dark btn-rounded mr-1"
+                      data-toggle="tooltip"
+                      title=""
+                      data-original-title="Add to cart"
+                    >
+                      <i className="fa fa-shopping-cart"></i>
                     </button>
-                  </p>
+                    <button className="btn btn-primary btn-rounded">
+                      Buy Now
+                    </button>
+                    <h3 className="box-title mt-5">Khuyến mãi</h3>
+                    <ul className="list-unstyled">
+                      <li>
+                        <i className="fa fa-check text-success"></i>Sản phẩm
+                        đang thuộc chương trình Flash sale (Số lượng có hạn)
+                      </li>
+                      <li>
+                        <i className="fa fa-check text-success"></i>Giảm đến 30%
+                        Gói bảo hành Samsung Care+ chỉ còn 2.780.000đ
+                      </li>
+                      <li>
+                        <i className="fa fa-check text-success"></i>Tặng sim
+                        data Mobifone Hera 5G (2.5GB/ngày)
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="col-lg-12 col-md-12 col-sm-12">
+                    <h3 className="box-title mt-5">Thông tin kỹ thuật</h3>
+                    <div className="table-responsive">
+                      <table className="table table-striped table-product">
+                        <tbody>
+                          <tr>
+                            <td>Product name</td>
+                            <td>{product.title}</td>
+                          </tr>
+                          <tr>
+                            <td width="390">Brand</td>
+                            <td>{product.categories}</td>
+                          </tr>
+                          <tr>
+                            <td>Ram</td>
+                            <td>{product.ram}</td>
+                          </tr>
+                          <tr>
+                            <td>Rom</td>
+                            <td>{product.rom}</td>
+                          </tr>
+                          <tr>
+                            <td>Color</td>
+                            <td>{product.color}</td>
+                          </tr>
+                          <tr>
+                            <td>Outstanding features</td>
+                            <td>{product.desc}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
-              </>
-            ) : (
-              <div>This product is no longer available</div>
-            )}
+              </div>
+            </div>
           </div>
           <HomeFooter />
         </div>
