@@ -1,24 +1,24 @@
 import axios from "../axios";
-const addNewProduct = (data) => {
+const addNewProduct = data => {
   return axios.post("/api/product/", data);
 };
 const getAllProduct = () => {
   return axios.get("/api/product/");
 };
-const deleteProduct = (id) => {
+const deleteProduct = id => {
   return axios.delete(`/api/product/${id}`);
 };
-const editProduct = (data) => {
+const editProduct = data => {
   return axios.put(`/api/product/${data.id}`, data);
 };
-const findProduct = (keyword) => {
+const findProduct = keyword => {
   return axios.get(`/api/product/find?keyword=${keyword}`);
 };
 const getTopProduct = () => {
   return axios.get("/api/product/get-top-product");
 };
 
-const getProductByFilter = (data) => {
+const getProductByFilter = data => {
   //console.log(data);
   return axios.get(
     `/api/product/get-product-filter?category=${data.category}&filterPrice=${data.filterPrice}&filterRam=${data.filterRam}&filterRom=${data.filterRom}`
@@ -26,6 +26,9 @@ const getProductByFilter = (data) => {
 };
 const getProductRecom = () => {
   return axios.get("/api/product/get-product-recommend");
+};
+const getProductById = id => {
+  return axios.get(`/api/product/get-product-by-id?productId=${id}`);
 };
 export {
   addNewProduct,
@@ -36,4 +39,5 @@ export {
   getTopProduct,
   getProductByFilter,
   getProductRecom,
+  getProductById,
 };

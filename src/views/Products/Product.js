@@ -137,7 +137,7 @@ class Products extends Component {
     }
   };
   handleViewDetailProduct = product => {
-    this.props.history.push(`/samsum/${product.title}`);
+    this.props.history.push(`/samsum/${product._id}`);
   };
   render() {
     let { allProduct, filterPrice, filterRam, filterRom } = this.state;
