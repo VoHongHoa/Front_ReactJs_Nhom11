@@ -31,6 +31,9 @@ class App extends Component {
             <Route path="/" exact>
               <Homepage />
             </Route>
+            <Route path="/order" exact>
+              <Oder />
+            </Route>
             <Route path="/samsum" exact>
               <Product />
             </Route>
@@ -87,8 +90,7 @@ class App extends Component {
             </Route>
 
             <Route path="/order" exact>
-              {isLogin === true &&
-              userInfor ? (
+              {isLogin === true && userInfor ? (
                 <Oder />
               ) : (
                 <Redirect to="/login" />

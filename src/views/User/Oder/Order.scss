@@ -1,0 +1,36 @@
+.order-container {
+    .col-8 {
+        margin: 0 auto;
+    }
+
+    .logo {
+        margin: 0 auto;
+        width: 150px;
+        height: 150px;
+    }
+
+    .detail-order {
+        .detail-order-table {
+            margin: 0 auto;
+
+            table {
+
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td,
+            th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        }
+
+    }
+}

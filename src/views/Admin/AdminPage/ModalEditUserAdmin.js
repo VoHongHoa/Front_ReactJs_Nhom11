@@ -7,8 +7,6 @@ class ModalEditUserAdmin extends Component {
     super(props);
     this.state = {
       email: "",
-      password: "",
-      username: "",
       address: "",
       phoneNumber: "",
       fullname: "",
@@ -18,10 +16,10 @@ class ModalEditUserAdmin extends Component {
   componentDidMount() {}
   componentDidUpdate(preProps, preState) {
     if (preProps.userEdit !== this.props.userEdit) {
+      console.log(this.props.userEdit);
       this.setState({
         id: this.props.userEdit._id,
         email: this.props.userEdit.email,
-        username: this.props.userEdit.username,
         address: this.props.userEdit.address,
         phoneNumber: this.props.userEdit.phonenumber,
         fullname: this.props.userEdit.fullname,
@@ -82,19 +80,6 @@ class ModalEditUserAdmin extends Component {
         </ModalHeader>
         <ModalBody>
           <div className="modalBody-user-container row">
-            <div className="form-group mt-2 col-6">
-              <label>Username</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter your username"
-                onChange={(event) => {
-                  this.handleOnchangeInput(event, "username");
-                }}
-                value={this.state.username}
-                readOnly
-              />
-            </div>
             <div className="form-group col-6 mt-2">
               <label>Email </label>
               <input

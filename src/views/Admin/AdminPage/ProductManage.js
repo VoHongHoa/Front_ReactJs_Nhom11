@@ -191,7 +191,7 @@ class ProductManage extends Component {
                           }}
                         ></div>
                       </td>
-                      <td className="action-edit-del">
+                      <td className="action-edit-del-product">
                         <i
                           className="fas fa-edit fa-2x"
                           onClick={() => this.handleEditProduct(item)}

@@ -98,7 +98,7 @@ class ManageOrder extends Component {
                         <td>{item.products[0].quantity}</td>
                         <td rowSpan={rowSpan}>{item.address}</td>
                         <td rowSpan={rowSpan}>{item.status}</td>
-                        <td rowSpan={rowSpan} className="action-edit-del">
+                        <td rowSpan={rowSpan} className="action-edit-del-order">
                           <i className="fas fa-edit fa-2x"></i>
                           <i
                             className="fas fa-trash fa-2x"
