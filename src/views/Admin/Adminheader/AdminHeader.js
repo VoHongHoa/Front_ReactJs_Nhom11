@@ -23,6 +23,9 @@ class AdminHeader extends Component {
             <NavLink to="/admin/order" activeClassName="active" exact={true}>
               Đơn hàng
             </NavLink>
+            <NavLink to="/" activeClassName="active" exact={true}>
+              Trang chủ
+            </NavLink>
           </div>
           <div className="admin-name col-3">
             {userInfor && userInfor.user && userInfor.user.fullname && (

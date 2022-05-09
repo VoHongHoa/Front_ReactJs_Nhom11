@@ -68,6 +68,9 @@ class EditUser extends Component {
   handleLogout = () => {
     this.props.logOutSuccess();
   };
+  handleGoAdmin = () => {
+    this.props.history.push("/admin");
+  };
   render() {
     return (
       <div className="container-fluid">
@@ -176,10 +179,13 @@ class EditUser extends Component {
               <span>Đăng xuất</span>
               <i className="fas fa-sign-out"></i>
             </span>
-            <span className="action" onClick={() => this.handleLogout()}>
-              <span>Go Admin</span>
-              <i className="fas fa-sign-out"></i>
-            </span>
+            {this.props.userInfor &&
+              this.props.userInfor.user &&
+              this.props.userInfor.user.role === "admin" && (
+                <span className="action" onClick={() => this.handleGoAdmin()}>
+                  Go Admin
+                </span>
+              )}
           </div>
         </div>
         <ChangePassword

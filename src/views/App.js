@@ -16,6 +16,7 @@ import ForgotPassword from "./User/ForgotPassword/ForgotPassword";
 import Oder from "./User/Oder/Oder";
 import ManageOrder from "./Admin/AdminPage/ManageOrder";
 import Dashboard from "./Admin/AdminPage/Dashboard";
+import Search from "./Homepage/Search/Search";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -32,10 +33,13 @@ class App extends Component {
             <Route path="/" exact>
               <Homepage />
             </Route>
+            <Route path="/search" exact>
+              <Search />
+            </Route>
             <Route path="/order" exact>
               <Oder />
             </Route>
-            <Route path="/samsum" exact>
+            <Route path="/products/:category" exact>
               <Product />
             </Route>
             <Route path="/samsum/:id">
@@ -118,14 +122,14 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLogin: state.user.isLogin,
     userInfor: state.user.userInfor,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

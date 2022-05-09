@@ -18,10 +18,16 @@ class Products extends Component {
       selectedPrice: "",
       selectedRam: "",
       selectedRom: "",
+      category: "",
     };
   }
   componentDidMount() {
-    this.getAllProductByCategory();
+    this.getAllProductByCategory(this.props.match.params.category);
+  }
+  componentDidUpdate(preProps) {
+    if (preProps.match.params !== this.props.match.params) {
+      this.getAllProductByCategory(this.props.match.params.category);
+    }
   }
   setSelectedPrice = () => {
     let Price = [
@@ -81,8 +87,8 @@ class Products extends Component {
     }
     return arrRom;
   };
-  getAllProductByCategory = async () => {
-    let res = await findProduct("SamSum");
+  getAllProductByCategory = async (category) => {
+    let res = await findProduct(category);
     if (res) {
       this.setState({
         allProduct: res.product,
@@ -92,7 +98,7 @@ class Products extends Component {
       });
     }
   };
-  handleAddToCart = item => {
+  handleAddToCart = (item) => {
     this.props.addToCart(item);
   };
   handleOnchangeSelect = (event, id) => {
@@ -136,18 +142,18 @@ class Products extends Component {
       });
     }
   };
-  handleViewDetailProduct = product => {
+  handleViewDetailProduct = (product) => {
     this.props.history.push(`/samsum/${product._id}`);
   };
   render() {
     let { allProduct, filterPrice, filterRam, filterRom } = this.state;
-    console.log(this.state);
+    //console.log(this.props.match.params.category);
     return (
       <div className="container-fluid product-page">
         <Homeheader />
         <section id="sidebar">
           <p>
-            Home | <b>SamSum</b>
+            Home | <b>{this.props.match.params.category}</b>
           </p>
         </section>
         <div className="filter-container mb-2 mt-2">
@@ -156,7 +162,7 @@ class Products extends Component {
               <div className="title-select">Giá: </div>
               <select
                 className="select-price"
-                onChange={event =>
+                onChange={(event) =>
                   this.handleOnchangeSelect(event, "selectedPrice")
                 }
               >
@@ -175,7 +181,7 @@ class Products extends Component {
               <div className="title-select">Ram: </div>
               <select
                 className="select-price"
-                onChange={event =>
+                onChange={(event) =>
                   this.handleOnchangeSelect(event, "selectedRam")
                 }
               >
@@ -194,7 +200,7 @@ class Products extends Component {
               <div className="title-select">Rom: </div>
               <select
                 className="select-price"
-                onChange={event =>
+                onChange={(event) =>
                   this.handleOnchangeSelect(event, "selectedRom")
                 }
               >
@@ -262,13 +268,13 @@ class Products extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {};
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    addToCart: item => dispatch(addToCart(item)),
+    addToCart: (item) => dispatch(addToCart(item)),
   };
 };
 
