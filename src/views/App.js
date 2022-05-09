@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Homepage from "./Homepage/Homepage";
 import Product from "./Products/Product";
+import DetailProduct from "./DetailProduct/DetailProduct";
 import Login from "./User/Login/Login";
 import EditUser from "./User/EditUser/EditUser";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
@@ -36,6 +37,9 @@ class App extends Component {
             </Route>
             <Route path="/samsum" exact>
               <Product />
+            </Route>
+            <Route path="/samsum/:id">
+              <DetailProduct />
             </Route>
             <Route exact path="/login">
               {isLogin ? <Redirect to="/" /> : <Login />}
@@ -114,14 +118,14 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     isLogin: state.user.isLogin,
     userInfor: state.user.userInfor,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
