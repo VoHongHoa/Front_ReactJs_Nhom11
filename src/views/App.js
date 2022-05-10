@@ -42,7 +42,7 @@ class App extends Component {
             <Route path="/products/:category" exact>
               <Product />
             </Route>
-            <Route path="/samsum/:id">
+            <Route path="/detail-product/:id">
               <DetailProduct />
             </Route>
             <Route exact path="/login">

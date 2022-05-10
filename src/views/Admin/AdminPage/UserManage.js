@@ -43,6 +43,7 @@ class UserManage extends Component {
       if (respone && respone.success === true && respone.users) {
         this.setState({
           alluser: respone.users,
+          currentPage: 0,
         });
       }
     } else {
@@ -61,6 +62,7 @@ class UserManage extends Component {
         if (respone && respone.success === true && respone.users) {
           this.setState({
             alluser: respone.users,
+            currentPage: 0,
           });
         }
       } else {
@@ -115,18 +117,32 @@ class UserManage extends Component {
       });
     }
   };
-  // handleChangeNextPage = async () => {
-  //   this.setState({
-  //     currentPage: this.state.currentPage++,
-  //   });
-  //   let res = await getAlluser(this.state.currentPage);
-  //   console.log(res);
-  //   if (res && res.success === true) {
-  //     this.setState({
-  //       alluser: res.users,
-  //     });
-  //   }
-  // };
+  handleChangeNextPage = async () => {
+    let currentPage = this.state.currentPage + 1;
+    this.setState({
+      currentPage: currentPage,
+    });
+    let res = await getAlluser(currentPage);
+    //console.log(res);
+    if (res && res.success === true) {
+      this.setState({
+        alluser: res.users,
+      });
+    }
+  };
+  handleChangePrePage = async () => {
+    let currentPage = this.state.currentPage - 1;
+    this.setState({
+      currentPage: currentPage,
+    });
+    let res = await getAlluser(currentPage);
+    //console.log(res);
+    if (res && res.success === true) {
+      this.setState({
+        alluser: res.users,
+      });
+    }
+  };
   render() {
     let { alluser, numOfpage, currentPage } = this.state;
     let arr = [];
@@ -197,7 +213,10 @@ class UserManage extends Component {
           <table></table>
           {this.state.action !== "SEARCH_USER" ? (
             <div className="pagination">
-              <span>&laquo;</span>
+              {currentPage > 0 && (
+                <span onClick={() => this.handleChangePrePage()}>&laquo;</span>
+              )}
+
               {arr &&
                 arr.length > 0 &&
                 arr.map((item, index) => {
@@ -212,7 +231,9 @@ class UserManage extends Component {
                   );
                 })}
 
-              <span>&raquo;</span>
+              {currentPage < numOfpage - 1 && (
+                <span onClick={() => this.handleChangeNextPage()}>&raquo;</span>
+              )}
             </div>
           ) : (
             " "

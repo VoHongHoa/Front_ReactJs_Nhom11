@@ -20,6 +20,9 @@ class SectionProducts extends Component {
       });
     }
   }
+  handleViewDetailProduct = (product) => {
+    this.props.history.push(`/detail-product/${product._id}`);
+  };
   componentDidUpdate(preProps) {}
   handleAddToCart = (item) => {
     this.props.addToCart(item);
@@ -45,7 +48,11 @@ class SectionProducts extends Component {
                   return (
                     <div className="product" key={item._id}>
                       <div className="product-content">
-                        <div className="card">
+                        <div
+                          className="card"
+                          onClick={() => this.handleViewDetailProduct(item)}
+                          style={{ cursor: "pointer" }}
+                        >
                           <div
                             className="img-product"
                             style={{

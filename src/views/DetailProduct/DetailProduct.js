@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import Homeheader from "../Homepage/Homeheader/Homeheader";
 import HomeFooter from "../Homepage/HomeFooter/HomeFooter";
 import { getProductById } from "../../services/ProductService";
-import { addToCart } from "../../store/actions/AppAction";
+// import { addToCart } from "../../store/actions/AppAction";
 import "./DetailProduct.scss";
 
 class DetailProduct extends Component {
@@ -16,12 +16,12 @@ class DetailProduct extends Component {
   async componentDidMount() {
     let id = this.props.match.params.id;
     let res = await getProductById(id);
-    console.log("check res: ", res);
+    //console.log("check res: ", res);
     this.setState({
       product: res && res.product ? res.product : {},
     });
   }
-  handleAddToCart = product => {
+  handleAddToCart = (product) => {
     this.props.addToCart(product);
   };
   render() {

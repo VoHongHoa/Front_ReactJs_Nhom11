@@ -143,11 +143,10 @@ class Products extends Component {
     }
   };
   handleViewDetailProduct = (product) => {
-    this.props.history.push(`/samsum/${product._id}`);
+    this.props.history.push(`/detail-product/${product._id}`);
   };
   render() {
     let { allProduct, filterPrice, filterRam, filterRom } = this.state;
-    //console.log(this.props.match.params.category);
     return (
       <div className="container-fluid product-page">
         <Homeheader />
@@ -231,7 +230,7 @@ class Products extends Component {
                   <div className="grid-product" key={item._id}>
                     <div className="product">
                       <div className="product-content">
-                        <div className="card">
+                        <div className="card" style={{ cursor: "pointer" }}>
                           <div
                             onClick={() => this.handleViewDetailProduct(item)}
                           >

@@ -12,6 +12,9 @@ class Search extends Component {
     };
   }
   componentDidMount() {}
+  handleViewDetailProduct = (product) => {
+    this.props.history.push(`/detail-product/${product._id}`);
+  };
   render() {
     return (
       <React.Fragment>
@@ -23,7 +26,7 @@ class Search extends Component {
                 <div className="grid-product" key={item._id}>
                   <div className="product">
                     <div className="product-content">
-                      <div className="card">
+                      <div className="card" style={{ cursor: "pointer" }}>
                         <div onClick={() => this.handleViewDetailProduct(item)}>
                           <div
                             className="img-product"
