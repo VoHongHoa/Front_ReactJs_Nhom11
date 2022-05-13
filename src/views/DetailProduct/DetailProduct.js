@@ -3,30 +3,68 @@ import { withRouter } from "react-router-dom";
 import Homeheader from "../Homepage/Homeheader/Homeheader";
 import HomeFooter from "../Homepage/HomeFooter/HomeFooter";
 import { getProductById } from "../../services/ProductService";
+import { connect } from "react-redux";
 // import { addToCart } from "../../store/actions/AppAction";
 import "./DetailProduct.scss";
+import { toast } from "react-toastify";
+import { addReviews, getAllReviewProduct } from "../../services/ReviewService";
 
 class DetailProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
       product: {},
+      newReview: "",
     };
   }
   async componentDidMount() {
     let id = this.props.match.params.id;
     let res = await getProductById(id);
-    //console.log("check res: ", res);
-    this.setState({
-      product: res && res.product ? res.product : {},
-    });
+    this.getAllReviews(id);
+    console.log("check res: ", res);
+    if (res) {
+      this.setState({
+        product: res && res.product ? res.product : {},
+      });
+    }
   }
   handleAddToCart = (product) => {
     this.props.addToCart(product);
   };
+  getAllReviews = async (productId) => {
+    try {
+      let res = await getAllReviewProduct(productId);
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  handleOnchangeInput = (event) => {
+    this.setState({
+      newReview: event.target.value,
+    });
+  };
+  handleAddNewReview = async () => {
+    try {
+      let data = {
+        review: this.state.newReview,
+        userId: this.props.userInfor.user._id,
+        productId: this.state.product._id,
+      };
+      let res = await addReviews(data);
+      console.log(res);
+      if (res && res.success === true) {
+        toast.success("Thêm bình luận thành công!");
+      }
+    } catch (e) {
+      console.log(e);
+      toast.error("Thêm bình luận không thành công");
+    }
+  };
   render() {
     let product = this.state.product;
     let isEmptyObj = Object.keys(product).length === 0;
+    //console.log(this.state);
     return (
       <React.Fragment>
         <div className="container-fluid">
@@ -37,7 +75,7 @@ class DetailProduct extends Component {
             </p>
           </section>
           <div className="container-detail">
-            <div className="card">
+            <div className="card-product">
               <div className="card-body">
                 <h2 className="card-title">{product.title}</h2>
                 <div className="row">
@@ -112,6 +150,31 @@ class DetailProduct extends Component {
               </div>
             </div>
           </div>
+          <div className="comment">
+            <h2>Bình luận</h2>
+            <div className="form-groud">
+              <label>Thêm bình luận</label>
+              {/* <input  className="form-control"/> */}
+              <textarea
+                className="form-control"
+                onChange={(event) => this.handleOnchangeInput(event)}
+              ></textarea>
+            </div>
+            <button
+              className="btn btn-primary mb-2 mt-2"
+              onClick={() => this.handleAddNewReview()}
+            >
+              Thêm bình luận
+            </button>
+            <div className="detail-comment">
+              <h5>Võ Hồng Hòa</h5>
+              <p>Sản phẩm tốt</p>
+            </div>
+            <div className="detail-comment">
+              <h5>Võ Hồng Hòa</h5>
+              <p>Sản phẩm không tốt</p>
+            </div>
+          </div>
           <HomeFooter />
         </div>
       </React.Fragment>
@@ -119,4 +182,16 @@ class DetailProduct extends Component {
   }
 }
 
-export default withRouter(DetailProduct);
+const mapStateToProps = (state) => {
+  return {
+    userInfor: state.user.userInfor,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(DetailProduct)
+);
