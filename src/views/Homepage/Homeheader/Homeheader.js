@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import "./Homeheader.scss";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
-import ModalCart from "./ModalCart/ModalCart";
 import { logOutSuccess, searchProduct } from "../../../store/actions/AppAction";
+import defaultAvatar from "../../../assets/images/default.png";
+import { Link } from "react-router-dom";
 class Homeheader extends Component {
   constructor(props) {
     super(props);
@@ -16,33 +17,11 @@ class Homeheader extends Component {
       keyword: "",
     };
   }
-
-  // // Things to do before unloading/closing the tab
-  // doSomethingBeforeUnload = () => {
-  //   this.props.logOutSuccess();
-  // };
-
-  // // Setup the `beforeunload` event listener
-  // setupBeforeUnloadListener = () => {
-  //   window.addEventListener("beforeunload", (ev) => {
-  //     ev.preventDefault();
-  //     return this.doSomethingBeforeUnload();
-  //   });
-  // };
   componentDidMount() {
     this.setState({
       userInfor: this.props.userInfor,
       isLogin: this.props.isLogin,
     });
-    // this.setupBeforeUnloadListener();
-  }
-  componentDidUpdate(preProps) {
-    if (this.state.userInfor !== this.props.userInfor) {
-      this.setState({
-        userInfor: this.props.userInfor,
-        isLogin: this.props.isLogin,
-      });
-    }
   }
 
   handleIsOpenCart = () => {
@@ -79,6 +58,8 @@ class Homeheader extends Component {
   };
   render() {
     let { userInfor, isLogin } = this.props;
+    let numOfitem = this.props.numOfItemInCart;
+
     return (
       <div className="header-container">
         <nav className="navbar navbar-expand-xl navbar-light bg-light">
@@ -102,7 +83,7 @@ class Homeheader extends Component {
               <NavLink
                 to="/"
                 className="nav-item nav-link"
-                activeclassName="active"
+                activeClassName="active"
                 exact={true}
               >
                 Home
@@ -122,7 +103,7 @@ class Homeheader extends Component {
                   <NavLink
                     to="/products/samsum"
                     className="dropdown-item"
-                    activeclassName="active"
+                    activeClassName="active"
                     exact={true}
                   >
                     SamSum
@@ -130,7 +111,7 @@ class Homeheader extends Component {
                   <NavLink
                     to="/products/iphone"
                     className="dropdown-item"
-                    activeclassName="active"
+                    activeClassName="active"
                     exact={true}
                   >
                     Iphone
@@ -138,7 +119,7 @@ class Homeheader extends Component {
                   <NavLink
                     to="/products/oppo"
                     className="dropdown-item"
-                    activeclassName="active"
+                    activeClassName="active"
                     exact={true}
                   >
                     Oppo
@@ -177,10 +158,11 @@ class Homeheader extends Component {
                 <i className="fa fa-bell-o"></i>
                 <span className="badge">1</span>
               </a>
-              <a href="#" className="nav-item nav-link messages">
-                <i className="fa fa-envelope-o"></i>
-                <span className="badge">10</span>
-              </a>
+
+              <Link to="/cart" className="nav-item nav-link messages" exact>
+                <i className="fas fa-shopping-cart"></i>
+                <span className="badge">{numOfitem}</span>
+              </Link>
               {isLogin && isLogin === true ? (
                 <div className="nav-item dropdown">
                   <a
@@ -189,7 +171,11 @@ class Homeheader extends Component {
                     className="nav-link dropdown-toggle user-action"
                   >
                     <img
-                      src={userInfor.user.base64Img}
+                      src={
+                        userInfor.user.base64Img
+                          ? userInfor.user.base64Img
+                          : defaultAvatar
+                      }
                       className="avatar"
                       alt="Avatar"
                     />{" "}
@@ -197,20 +183,10 @@ class Homeheader extends Component {
                     <b className="caret"></b>
                   </a>
                   <div className="dropdown-menu">
-                    {/* <a
-                      href="#"
-                      className="dropdown-item"
-                      onClick={() =>
-                        this.handleOpenEditUser(userInfor.user._id)
-                      }
-                    >
-                      <i className="fa fa-user-o"></i> Profile
-                    </a> */}
-
                     <NavLink
                       to={`/user/${userInfor.user._id}`}
                       className="dropdown-item"
-                      activeclassName="active"
+                      activeClassName="active"
                       exact={true}
                     >
                       <i className="fa fa-user-o"></i> Profile
@@ -225,19 +201,19 @@ class Homeheader extends Component {
                     <NavLink
                       to="/admin"
                       className="dropdown-item"
-                      activeclassName="active"
+                      activeClassName="active"
                       exact={true}
                     >
                       <i className="fa fa-user-o"></i> Go Admin
                     </NavLink>
                     <div className="dropdown-divider"></div>
-                    <a
-                      href="#"
+                    <p
                       className="dropdown-item"
                       onClick={() => this.handleLogout()}
+                      style={{ cursor: "pointer" }}
                     >
                       <i className="material-icons">&#xE8AC;</i> Logout
-                    </a>
+                    </p>
                   </div>
                 </div>
               ) : (
@@ -252,124 +228,6 @@ class Homeheader extends Component {
           </div>
         </nav>
       </div>
-
-      // <React.Fragment>
-      //   <div className="header-container container-fluid">
-      //     <div className="top-header row">
-      //       <div
-      //         className="col-3 logo-container"
-      //         onClick={() => this.returnToHome()}
-      //       >
-      //         <i className="fab fa-phoenix-squadron fa-3x"></i>
-      //         <span>UITPHONE</span>
-      //       </div>
-      //       <div className="col-6 search-container">
-      //         <input
-      //           className="form-control"
-      //           placeholder="Search..."
-      //           onChange={(event) => this.handleOnChangeInput(event)}
-      //         />
-      //         <button type="submit" className="btn-submit">
-      //           <i
-      //             className="fa fa-search fa-2x"
-      //             onClick={() => this.getProductSearch(this.state.keyword)}
-      //           ></i>
-      //         </button>
-      //       </div>
-      //       <div className="col-3 log-in">
-      //         <div className="btn-log-in">
-      //           {/* <i className="fas fa-sign-in fa-2x"></i> */}
-      //           {isLogin && isLogin === true ? (
-      //             <>
-      //               {userInfor && userInfor.user && (
-      //                 <div
-      //                   className="user-infor"
-      //                   onClick={() =>
-      //                     this.handleOpenEditUser(userInfor.user._id)
-      //                   }
-      //                 >
-      //                   {!userInfor.user.base64Img ? (
-      //                     <div className="user-avatar">
-      //                       <i className="fa-solid fa-user"></i>
-      //                     </div>
-      //                   ) : (
-      //                     <div
-      //                       className="user-avatar"
-      //                       style={{
-      //                         backgroundImage: `url(${userInfor.user.base64Img})`,
-      //                         backgroundRepeat: "none",
-      //                         backgroundSize: "cover",
-      //                         backgroundPosition: "center",
-      //                       }}
-      //                     ></div>
-      //                   )}
-
-      //                   <span>{userInfor.user.fullname}</span>
-      //                   <div className="user-action">
-      //                     <div className="more-action">
-      //                       <i className="fas fa-angle-down"></i>
-      //                     </div>
-      //                   </div>
-      //                 </div>
-      //               )}
-
-      //               <i
-      //                 className="fas fa-sign-out"
-      //                 onClick={() => this.handleLogout()}
-      //               ></i>
-      //             </>
-      //           ) : (
-      //             <button
-      //               className="btn btn-light"
-      //               onClick={() => this.handleOpenLogin()}
-      //             >
-      //               Đăng nhập
-      //             </button>
-      //           )}
-      //         </div>
-      //       </div>
-      //     </div>
-      //     <div className="bottom-header ">
-      //       <div className="navbar">
-      //         <NavLink to="/" activeclassName="active" exact={true}>
-      //           Home
-      //         </NavLink>
-      //         <NavLink
-      //           to="/products/samsum"
-      //           activeclassName="active"
-      //           exact={true}
-      //         >
-      //           SamSum
-      //         </NavLink>
-      //         <NavLink
-      //           to="/products/iphone"
-      //           activeclassName="active"
-      //           exact={true}
-      //         >
-      //           Iphone
-      //         </NavLink>
-      //         <NavLink
-      //           to="/products/oppo"
-      //           activeclassName="active"
-      //           exact={true}
-      //         >
-      //           Oppo
-      //         </NavLink>
-      //         <button
-      //           type="button"
-      //           className="btn-cart"
-      //           onClick={() => this.handleIsOpenCart()}
-      //         >
-      //           <i className="fas fa-cart-plus fa-2x"></i>
-      //         </button>
-      //       </div>
-      //     </div>
-      //     <ModalCart
-      //       isOpen={this.state.isOpenCart}
-      //       toggleFromParent={this.handleCloseCart}
-      //     />
-      //   </div>
-      // </React.Fragment>
     );
   }
 }
@@ -377,6 +235,7 @@ const mapStateToProps = (state) => {
   return {
     isLogin: state.user.isLogin,
     userInfor: state.user.userInfor,
+    numOfItemInCart: state.cart.cart.length,
   };
 };
 const mapDispatchToProps = (dispatch) => {

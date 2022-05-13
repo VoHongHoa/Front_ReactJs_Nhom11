@@ -148,7 +148,7 @@ class Products extends Component {
   render() {
     let { allProduct, filterPrice, filterRam, filterRom } = this.state;
     return (
-      <div className="container-fluid product-page">
+      <div className="container product-page">
         <Homeheader />
         <section id="sidebar">
           <p>
@@ -223,43 +223,74 @@ class Products extends Component {
               </span>
             </div>
           </div>
-          <div className="filter-product-content">
-            {allProduct && allProduct.length > 0 ? (
-              allProduct.map((item, index) => {
-                return (
-                  <div className="grid-product" key={item._id}>
-                    <div className="product">
-                      <div className="product-content">
-                        <div className="card" style={{ cursor: "pointer" }}>
-                          <div
-                            onClick={() => this.handleViewDetailProduct(item)}
-                          >
-                            <div
-                              className="img-product"
-                              style={{
-                                backgroundImage: `url(${item.base64Img})`,
-                              }}
-                            ></div>
-                            <span>{item.title}</span>
-                            <p className="price">{item.price}</p>
-                            <p>{item.desc}</p>
+          <div className="container d-flex justify-content-center mt-50 mb-50 product-slide">
+            <div className="row">
+              {allProduct && allProduct.length > 0 ? (
+                allProduct.map((item, index) => {
+                  return (
+                    <div className="col-md-4 mt-2">
+                      <div className="card">
+                        <div className="card-body">
+                          <div className="card-img-actions">
+                            <img
+                              src={item.base64Img}
+                              className="card-img img-fluid"
+                              width="96"
+                              height="350"
+                              alt={item.title}
+                              onClick={() => this.handleViewDetailProduct(item)}
+                              style={{ cursor: "pointer" }}
+                            />
                           </div>
-                          <p>
-                            <button onClick={() => this.handleAddToCart(item)}>
-                              Add to Cart
-                            </button>
-                          </p>
+                        </div>
+
+                        <div className="card-body bg-light text-center">
+                          <div className="mb-2">
+                            <h6 className="font-weight-semibold mb-2">
+                              <a
+                                href="#"
+                                className="text-default mb-2"
+                                data-abc="true"
+                              >
+                                {item.desc}
+                              </a>
+                            </h6>
+
+                            <a href="#" className="text-muted" data-abc="true">
+                              {item.title}
+                            </a>
+                          </div>
+
+                          <h3 className="mb-0 font-weight-semibold">
+                            {item.price}
+                          </h3>
+
+                          <div>
+                            <i className="fa fa-star star"></i>
+                            <i className="fa fa-star star"></i>
+                            <i className="fa fa-star star"></i>
+                            <i className="fa fa-star star"></i>
+                          </div>
+
+                          <div className="text-muted mb-3">34 reviews</div>
+
+                          <button
+                            type="button"
+                            className="btn bg-cart"
+                            onClick={() => this.handleAddToCart(item)}
+                          >
+                            <i className="fa fa-cart-plus mr-2"></i> Add to cart
+                          </button>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })
-            ) : (
-              <div className="title">Không có sản phẩm nào</div>
-            )}
+                  );
+                })
+              ) : (
+                <div className="title">Không có sản phẩm nào</div>
+              )}
+            </div>
           </div>
-          <div className="filter-content"></div>
         </div>
         <HomeFooter />
       </div>

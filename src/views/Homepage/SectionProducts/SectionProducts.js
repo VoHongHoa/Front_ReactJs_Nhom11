@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./SectionProduct.scss";
 import { withRouter } from "react-router";
-import Slider from "react-slick";
 import { getTopProduct } from "../../../services/ProductService";
 import { addToCart } from "../../../store/actions/AppAction";
 class SectionProducts extends Component {
@@ -23,7 +22,6 @@ class SectionProducts extends Component {
   handleViewDetailProduct = (product) => {
     this.props.history.push(`/detail-product/${product._id}`);
   };
-  componentDidUpdate(preProps) {}
   handleAddToCart = (item) => {
     this.props.addToCart(item);
   };
@@ -40,13 +38,91 @@ class SectionProducts extends Component {
       <>
         <div className="section-product-container">
           <span className="text-product">Danh sách sản phẩm nổi bậc</span>
-          <div className="product-slide">
-            <Slider {...settings}>
+          <div className="container d-flex justify-content-center mt-50 mb-50 product-slide">
+            <div className="row">
               {topProduct &&
                 topProduct.length > 0 &&
                 topProduct.map((item, index) => {
                   return (
-                    <div className="product" key={item._id}>
+                    <div className="col-md-4 mt-2">
+                      <div className="card">
+                        <div className="card-body">
+                          <div className="card-img-actions">
+                            <img
+                              src={item.base64Img}
+                              className="card-img img-fluid"
+                              width="96"
+                              height="350"
+                              alt={item.title}
+                              onClick={() => this.handleViewDetailProduct(item)}
+                              style={{ cursor: "pointer" }}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="card-body bg-light text-center">
+                          <div className="mb-2">
+                            <h6 className="font-weight-semibold mb-2">
+                              <a
+                                href="#"
+                                className="text-default mb-2"
+                                data-abc="true"
+                              >
+                                {item.desc}
+                              </a>
+                            </h6>
+
+                            <a href="#" className="text-muted" data-abc="true">
+                              {item.title}
+                            </a>
+                          </div>
+
+                          <h3 className="mb-0 font-weight-semibold">
+                            {item.price}
+                          </h3>
+
+                          <div>
+                            <i className="fa fa-star star"></i>
+                            <i className="fa fa-star star"></i>
+                            <i className="fa fa-star star"></i>
+                            <i className="fa fa-star star"></i>
+                          </div>
+
+                          <div className="text-muted mb-3">34 reviews</div>
+
+                          <button
+                            type="button"
+                            className="btn bg-cart"
+                            onClick={() => this.handleAddToCart(item)}
+                          >
+                            <i className="fa fa-cart-plus mr-2"></i> Add to cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+}
+const mapStateToProps = (state) => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (item) => dispatch(addToCart(item)),
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SectionProducts)
+);
+{
+  /* <div  key={item._id}>
                       <div className="product-content">
                         <div
                           className="card"
@@ -68,26 +144,7 @@ class SectionProducts extends Component {
                             </button>
                           </p>
                         </div>
-                      </div>
-                    </div>
-                  );
-                })}
-            </Slider>
-          </div>
-        </div>
-      </>
-    );
-  }
+                      </div> 
+                      
+                    </div> */
 }
-const mapStateToProps = (state) => {
-  return {};
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addToCart: (item) => dispatch(addToCart(item)),
-  };
-};
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(SectionProducts)
-);

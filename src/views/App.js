@@ -17,6 +17,7 @@ import Oder from "./User/Oder/Oder";
 import ManageOrder from "./Admin/AdminPage/ManageOrder";
 import Dashboard from "./Admin/AdminPage/Dashboard";
 import Search from "./Homepage/Search/Search";
+import ModalCart from "./Homepage/Homeheader/ModalCart/ModalCart";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -35,6 +36,9 @@ class App extends Component {
             </Route>
             <Route path="/search" exact>
               <Search />
+            </Route>
+            <Route path="/cart" exact>
+              <ModalCart />
             </Route>
             <Route path="/order" exact>
               <Oder />

@@ -5,6 +5,9 @@ import Slider from "react-slick";
 import Homeheader from "./Homeheader/Homeheader";
 import HomeFooter from "./HomeFooter/HomeFooter";
 import SectionProducts from "./SectionProducts/SectionProducts";
+import banner1 from "../../assets/images/banner-1.png";
+import banner3 from "../../assets/images/banner-3.png";
+import banner4 from "../../assets/images/banner-4.png";
 import "./Homepage.scss";
 // import RecomProduct from "./RecomProduct/RecomProduct";
 class HomePage extends Component {
@@ -21,23 +24,67 @@ class HomePage extends Component {
     };
     return (
       <React.Fragment>
-        <div className="container-fluid">
+        <div className="container">
           <section className="homepage-header-container">
             <Homeheader />
           </section>
 
-          <div className="slide-container mt-2 mb-4">
-            <Slider {...settings} className="col-8">
-              <div className="banner-1"></div>
-              <div className="banner-2"></div>
-              <div className="banner-3"></div>
-              <div className="banner-4"></div>
-            </Slider>
-            <div className="detail-banner col-4">
-              <div className="logo">
-                <i className="fab fa-phoenix-squadron fa-8x"></i>
+          <div className="mt-2 mb-4">
+            <div
+              id="carouselExampleIndicators"
+              class="carousel slide"
+              data-ride="carousel"
+            >
+              <ol class="carousel-indicators">
+                <li
+                  data-target="#carouselExampleIndicators"
+                  data-slide-to="0"
+                  class="active"
+                ></li>
+                <li
+                  data-target="#carouselExampleIndicators"
+                  data-slide-to="1"
+                ></li>
+                <li
+                  data-target="#carouselExampleIndicators"
+                  data-slide-to="2"
+                ></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img class="d-block w-100" src={banner1} alt="First slide" />
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src={banner3} alt="Second slide" />
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src={banner4} alt="Third slide" />
+                </div>
               </div>
-              <div className="slogan">UITPHONE</div>
+              <a
+                class="carousel-control-prev"
+                href="#carouselExampleIndicators"
+                role="button"
+                data-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a
+                class="carousel-control-next"
+                href="#carouselExampleIndicators"
+                role="button"
+                data-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Next</span>
+              </a>
             </div>
           </div>
           <div className="section-product mt-2 mb-2">
@@ -47,84 +94,6 @@ class HomePage extends Component {
           <div className="section-product mt-2 mb-2">
             <RecomProduct />
           </div> */}
-
-          <div className="product-collection mb-2">
-            <div className="product-collection-wrapper">
-              {/* <!-- product col left --> */}
-              <div className="product-col-left">
-                <div className="product-col-content">
-                  <h2 className="sm-title">MEN'S SHOES </h2>
-                  <h2 className="md-title">Men's Collection </h2>
-                  <p className="text-light">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Molestiae consequatur facilis eligendi quibusdam
-                    voluptatibus exercitationem autem voluptatum, beatae
-                    architecto odit, quisquam repellat. Deleniti, architecto ab.
-                  </p>
-                  <button type="button" className="btn-dark">
-                    Shop now
-                  </button>
-                </div>
-              </div>
-
-              {/* <!-- product col right --> */}
-              <div className="product-col-right">
-                <div className="product-col-r-top">
-                  <div className="product-col-content">
-                    <h2 className="sm-title">women's dresses </h2>
-                    <h2 className="md-title">women's collection </h2>
-                    <p className="text-light">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Molestiae consequatur facilis eligendi quibusdam
-                      voluptatibus exercitationem autem voluptatum, beatae
-                      architecto odit, quisquam repellat. Deleniti, architecto
-                      ab.
-                    </p>
-                    <button type="button" className="btn-dark">
-                      Shop now
-                    </button>
-                  </div>
-                </div>
-
-                <div className="product-col-r-bottom">
-                  {/* <!-- left --> */}
-                  <div className="flex">
-                    <div className="product-col-content">
-                      <h2 className="sm-title">summer sale </h2>
-                      <h2 className="md-title">Extra 50% Off </h2>
-                      <p className="text-light">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Molestiae consequatur facilis eligendi quibusdam
-                        voluptatibus exercitationem autem voluptatum, beatae
-                        architecto odit, quisquam repellat. Deleniti, architecto
-                        ab.
-                      </p>
-                      <button type="button" className="btn-dark">
-                        Shop now
-                      </button>
-                    </div>
-                  </div>
-                  {/* <!-- right --> */}
-                  <div className="flex">
-                    <div className="product-col-content">
-                      <h2 className="sm-title">shoes </h2>
-                      <h2 className="md-title">best sellers </h2>
-                      <p className="text-light">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Molestiae consequatur facilis eligendi quibusdam
-                        voluptatibus exercitationem autem voluptatum, beatae
-                        architecto odit, quisquam repellat. Deleniti, architecto
-                        ab.
-                      </p>
-                      <button type="button" className="btn-dark">
-                        Shop now
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <HomeFooter />
         </div>
       </React.Fragment>
