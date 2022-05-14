@@ -9,10 +9,8 @@ import {
 import { handleLogin } from "../../../store/actions/AppAction";
 import { logOutSuccess } from "../../../store/actions/AppAction";
 import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login";
 import "./Login.scss";
 import { toast } from "react-toastify";
-// import { verify } from "argon2";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -21,11 +19,10 @@ class Login extends Component {
       password: "",
       isShowpassword: true,
       isOpenModal: false,
-      // isLogin: false,
     };
   }
   componentDidMount() {}
-  componentDidUpdate(preProps) {}
+
   handleOnChangeUsername = (event) => {
     this.setState({
       username: event.target.value,
@@ -105,89 +102,100 @@ class Login extends Component {
   render() {
     return (
       <>
-        <div className="login-background">
-          <div className="login-container">
-            <div className="login-content row">
-              <div className="col-12 text-center textLogin">Đăng nhập</div>
-              <div className="col-12 form-group login-input">
-                <label>Username:</label>
-                <input
-                  type="text"
-                  value={this.state.username}
-                  onChange={(event) => this.handleOnChangeUsername(event)}
-                  placeholder="Enter your username"
-                  className="form-control"
-                  autoFocus
-                />
-              </div>
-              <div className="col-12 form-group login-input">
-                <label>Password:</label>
+        <div className="container login-container 100-vh">
+          <div className="row">
+            <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+              <div className="card border-0 shadow rounded-3 my-5">
+                <div className="card-body p-4 p-sm-5">
+                  <h5 className="card-title text-center mb-5 fw-light fs-5">
+                    Sign In
+                  </h5>
 
-                <div className="custom-password">
-                  <input
-                    type={this.state.isShowpassword ? "password" : "text"}
-                    value={this.state.password}
-                    onChange={(event) => this.handleOnChangePassword(event)}
-                    placeholder="Enter your password"
-                    className="form-control"
-                    onKeyPress={(event) => this.handelKeyPressLogin(event)}
-                  />
-                  <span onClick={() => this.handleShowHidePassword()}>
-                    <i
-                      className={
-                        this.state.isShowpassword
-                          ? "fas fa-eye"
-                          : "far fa-eye-slash"
-                      }
-                    ></i>
-                  </span>
-                </div>
-              </div>
-              {/* <div className="col-12" style={{ color: "red" }}>
-                {this.state.errMessage}
-              </div> */}
-              <div className="btn-div">
-                <button
-                  className="btn-login"
-                  onClick={() => this.handleLoginSubmit()}
-                >
-                  Đăng nhập
-                </button>
-                <div className="mt-2">
-                  <p
-                    className="text"
-                    onClick={() => this.handleForgotPassword()}
-                  >
-                    Quên mật khẩu?
-                  </p>
-                </div>
-              </div>
+                  <div className="form-floating mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="floatingInput"
+                      placeholder="username"
+                      value={this.state.username}
+                      onChange={(event) => this.handleOnChangeUsername(event)}
+                    />
+                    <label htmlFor="floatingInput">Username</label>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="floatingPassword"
+                      placeholder="Password"
+                      value={this.state.password}
+                      onChange={(event) => this.handleOnChangePassword(event)}
+                    />
+                    <label htmlFor="floatingPassword">Password</label>
+                  </div>
 
-              <div className="btn-div">
-                <div className="mt-1">
-                  <p>
-                    Bạn chưa có tài khoản?
-                    <span
-                      className="text"
-                      onClick={() => this.handleOpenModal()}
+                  <div className="form-check mb-3">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="rememberPasswordCheck"
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="rememberPasswordCheck"
                     >
-                      Đăng kí
-                    </span>
-                  </p>
+                      Remember password
+                    </label>
+                  </div>
 
-                  <GoogleLogin
-                    clientId="1000261381053-acnpjvmhm485p7aal87iicf70bvdm04a.apps.googleusercontent.com"
-                    buttonText="LOGIN WITH GOOGLE"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
-                  />
-                  {/* <FacebookLogin
-                      appId="1147433972769036" //APP ID NOT CREATED YET
-                      fields="name,email,picture"
-                      callback={this.responseFacebook}
-                      icon="fa-facebook"
-                      className="col-6"
-                    /> */}
+                  <div className="d-grid">
+                    <button
+                      className="btn btn-primary btn-login text-uppercase fw-bold"
+                      onClick={() => this.handleLoginSubmit()}
+                    >
+                      Sign in
+                    </button>
+                  </div>
+                  <div
+                    className="d-grid mt-2 d-flex "
+                    style={{ justifyContent: "space-between" }}
+                  >
+                    <p>
+                      Bạn chưa có tài khoản?{" "}
+                      <span
+                        style={{
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => this.handleOpenModal()}
+                      >
+                        {" "}
+                        Đăng kí
+                      </span>
+                    </p>
+                    <span
+                      style={{
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => this.handleForgotPassword()}
+                    >
+                      Quên mật khẩu?
+                    </span>
+                  </div>
+                  <hr className="my-4" />
+
+                  <div className="d-grid mt-2">
+                    <GoogleLogin
+                      clientId="1000261381053-acnpjvmhm485p7aal87iicf70bvdm04a.apps.googleusercontent.com"
+                      buttonText="LOGIN WITH GOOGLE"
+                      onSuccess={this.responseGoogle}
+                      onFailure={this.responseGoogle}
+                      classNameName=" btn btn-google"
+                      style={{ justifyContent: "center" }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

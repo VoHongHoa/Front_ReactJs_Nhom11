@@ -15,7 +15,6 @@ class ChangePassword extends Component {
     };
   }
   componentDidMount() {}
-  componentDidUpdate(preProps, preState) {}
 
   toggle = () => {
     this.props.toggleFromParent();

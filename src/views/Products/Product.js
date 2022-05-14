@@ -149,7 +149,9 @@ class Products extends Component {
     let { allProduct, filterPrice, filterRam, filterRom } = this.state;
     return (
       <div className="container product-page">
-        <Homeheader />
+        <section className="homepage-header-container">
+          <Homeheader />
+        </section>
         <section id="sidebar">
           <p>
             Home | <b>{this.props.match.params.category}</b>

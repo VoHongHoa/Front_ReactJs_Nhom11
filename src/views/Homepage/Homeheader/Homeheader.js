@@ -4,17 +4,17 @@ import "./Homeheader.scss";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 import { logOutSuccess, searchProduct } from "../../../store/actions/AppAction";
-import defaultAvatar from "../../../assets/images/default.png";
+import defaultAvatar from "../../../assets/images/defaultAvatar.jpg";
 import { Link } from "react-router-dom";
+import ChangePassword from "../../User/ChangePassword/ChangePassword";
 class Homeheader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpenCart: false,
-      isOpenModal: false,
       userInfor: "",
       isLogin: "",
       keyword: "",
+      isOpenModal: false,
     };
   }
   componentDidMount() {
@@ -23,15 +23,12 @@ class Homeheader extends Component {
       isLogin: this.props.isLogin,
     });
   }
-
-  handleIsOpenCart = () => {
-    this.setState({
-      isOpenCart: true,
-    });
+  handleEditPassworduser = () => {
+    this.setState({ isOpenModal: true });
   };
-  handleCloseCart = () => {
+  toggleFromParent = () => {
     this.setState({
-      isOpenCart: false,
+      isOpenModal: false,
     });
   };
   handleOpenLogin = () => {
@@ -159,7 +156,11 @@ class Homeheader extends Component {
                 <span className="badge">1</span>
               </a>
 
-              <Link to="/cart" className="nav-item nav-link messages" exact>
+              <Link
+                to="/cart"
+                className="nav-item nav-link messages"
+                exact={true}
+              >
                 <i className="fas fa-shopping-cart"></i>
                 <span className="badge">{numOfitem}</span>
               </Link>
@@ -192,20 +193,35 @@ class Homeheader extends Component {
                       <i className="fa fa-user-o"></i> Profile
                     </NavLink>
 
-                    <a href="#" className="dropdown-item">
-                      <i className="fa fa-calendar-o"></i> Calendar
-                    </a>
-                    <a href="#" className="dropdown-item">
-                      <i className="fa fa-sliders"></i> Settings
+                    <a
+                      href="#"
+                      className="dropdown-item"
+                      onClick={() => this.handleEditPassworduser()}
+                    >
+                      <i className="fa-solid fa-key"></i> Đổi mật khẩu
                     </a>
                     <NavLink
-                      to="/admin"
+                      to="/cart"
                       className="dropdown-item"
                       activeClassName="active"
                       exact={true}
                     >
-                      <i className="fa fa-user-o"></i> Go Admin
+                      <i className="fas fa-shopping-cart"></i> Cart
                     </NavLink>
+
+                    {this.props.userInfor &&
+                      this.props.userInfor.user &&
+                      this.props.userInfor.user.role &&
+                      this.props.userInfor.user.role === "admin" && (
+                        <NavLink
+                          to="/admin"
+                          className="dropdown-item"
+                          activeClassName="active"
+                          exact={true}
+                        >
+                          <i className="fas fa-tools"></i>Go Admin
+                        </NavLink>
+                      )}
                     <div className="dropdown-divider"></div>
                     <p
                       className="dropdown-item"
@@ -227,6 +243,13 @@ class Homeheader extends Component {
             </div>
           </div>
         </nav>
+        {this.props.userInfor.user && this.props.userInfor.user._id && (
+          <ChangePassword
+            isOpen={this.state.isOpenModal}
+            toggleFromParent={this.toggleFromParent}
+            userId={this.props.userInfor.user._id}
+          />
+        )}
       </div>
     );
   }

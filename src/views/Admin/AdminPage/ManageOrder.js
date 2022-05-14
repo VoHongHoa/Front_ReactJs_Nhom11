@@ -52,6 +52,7 @@ class ManageOrder extends Component {
   };
   render() {
     let { allOrder } = this.state;
+    console.log(allOrder);
     return (
       <div className="container-fluid">
         <AdminHeader />

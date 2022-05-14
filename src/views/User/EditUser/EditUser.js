@@ -5,28 +5,25 @@ import HomeFooter from "../../Homepage/HomeFooter/HomeFooter";
 import { editUser } from "../../../store/actions/AppAction";
 import { withRouter } from "react-router-dom";
 import { logOutSuccess } from "../../../store/actions/AppAction";
-import ChangePassword from "../ChangePassword/ChangePassword";
+import avatar from "../../../assets/images/defaultAvatar.jpg";
 import "./EditUser.scss";
 class EditUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
-      // password: "",
       username: "",
       address: "",
       phoneNumber: "",
       fullname: "",
       accessToken: "",
       id: "",
-      isOpenModal: false,
       img: " ",
     };
   }
   componentDidMount() {
     this.setState({
       email: this.props.userInfor.user.email,
-      // password: this.props.userInfor.user.password,
       username: this.props.userInfor.user.username,
       address: this.props.userInfor.user.address,
       phoneNumber: this.props.userInfor.user.phonenumber,
@@ -52,147 +49,145 @@ class EditUser extends Component {
       address: this.state.address,
       phonenumber: this.state.phoneNumber,
       fullname: this.state.fullname,
-      // accessToken: this.state.accessToken,
     };
     this.props.editUser(data);
     this.props.history.push("/");
   };
-  handleEditPassworduser = () => {
-    this.setState({ isOpenModal: true });
-  };
-  toggleFromParent = () => {
-    this.setState({
-      isOpenModal: false,
-    });
-  };
-  handleLogout = () => {
-    this.props.logOutSuccess();
-  };
-  handleGoAdmin = () => {
-    this.props.history.push("/admin");
-  };
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container">
         <section className="homepage-header-container">
           <Homeheader />
         </section>
         <div className="edituser-container row mt-3">
-          <div className="user-avt">
-            {this.state.img === " " ? (
-              <div className="user-avt-img"></div>
-            ) : (
-              <div
-                className="user-avt-img"
-                style={{
-                  backgroundImage: `url(${this.state.img})`,
-                  backgroundRepeat: "none",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
-            )}
+          <div className="container rounded bg-white mt-5 mb-5">
+            <div className="row">
+              <div className="col-md-3 border-right">
+                <div className="d-flex flex-column align-items-center text-center p-3 py-5">
+                  <img
+                    className="rounded-circle mt-5"
+                    width="150px"
+                    src={this.state.img === " " ? avatar : this.state.img}
+                  />
+                  <span className="font-weight-bold">
+                    {this.state.fullname}
+                  </span>
+                  <span className="text-black-50">{this.state.email}</span>
+                  <span> </span>
+                </div>
+              </div>
+              <div className="col-md-5 border-right">
+                <div className="p-3 py-5">
+                  <div className="d-flex justify-content-between align-items-center mb-3">
+                    <h4 className="text-right">Profile Settings</h4>
+                  </div>
+                  <div className="row mt-2">
+                    <div className="col-md-12">
+                      <label className="labels">FullName</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="first name"
+                        value={this.state.fullname}
+                        onChange={(event) => {
+                          this.handleOnchangeInput(event, "fullname");
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row mt-3">
+                    <div className="col-md-12">
+                      <label className="labels">Mobile Number</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="enter phone number"
+                        value={this.state.phoneNumber}
+                        onChange={(event) => {
+                          this.handleOnchangeInput(event, "phoneNumber");
+                        }}
+                      />
+                    </div>
+                    <div className="col-md-12">
+                      <label className="labels">Address</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="enter address line 1"
+                        value={this.state.address}
+                        onChange={(event) => {
+                          this.handleOnchangeInput(event, "address");
+                        }}
+                      />
+                    </div>
 
-            <span className="user-name">{this.state.fullname}</span>
-            <span className="user-email">{this.state.email}</span>
-          </div>
+                    <div className="col-md-12">
+                      <label className="labels">Area</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="enter address line 2"
+                        defaultValue={"Việt Nam"}
+                      />
+                    </div>
+                    <div className="col-md-12">
+                      <label className="labels">Email</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="enter email id"
+                        value={this.state.email}
+                        onChange={(event) => {
+                          this.handleOnchangeInput(event, "email");
+                        }}
+                      />
+                    </div>
+                  </div>
 
-          <div className="edituser-content">
-            <div className="form-group col-12">
-              <label>Username</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter your username"
-                onChange={(event) => {
-                  this.handleOnchangeInput(event, "username");
-                }}
-                value={this.state.username}
-                readOnly
-              />
+                  <div className="mt-5 text-center">
+                    <button
+                      className="btn btn-primary profile-button"
+                      type="button"
+                      onClick={() => this.handleEdituser()}
+                    >
+                      Lưu thay đổi
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="p-3 py-5">
+                  <div className="d-flex justify-content-between align-items-center experience">
+                    <span>Edit Experience</span>
+                    <span className="border px-3 p-1 add-experience">
+                      <i className="fa fa-plus"></i>&nbsp;Thông tin thêm
+                    </span>
+                  </div>
+                  <br />
+                  <div className="col-md-12">
+                    <label className="labels">Loại khách hàng</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="experience"
+                      defaultValue={"Khách hàng VIP"}
+                    />
+                  </div>{" "}
+                  <br />
+                  <div className="col-md-12">
+                    <label className="labels">Chi tiết</label>
+                    <textarea
+                      type="text"
+                      className="form-control"
+                      placeholder="additional details"
+                      defaultValue={"Là khách hàng"}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="form-group col-12 mt-2">
-              <label>Email </label>
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Enter email"
-                onChange={(event) => {
-                  this.handleOnchangeInput(event, "email");
-                }}
-                value={this.state.email}
-              />
-            </div>
-            <div className="form-group mt-2 col-12">
-              <label>Fullname</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter your fullname"
-                onChange={(event) => {
-                  this.handleOnchangeInput(event, "fullname");
-                }}
-                value={this.state.fullname}
-              />
-            </div>
-            <div className="form-group mt-2 col-12">
-              <label>Địa chỉ</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter your address"
-                onChange={(event) => {
-                  this.handleOnchangeInput(event, "address");
-                }}
-                value={this.state.address}
-              />
-            </div>
-            <div className="form-group col-12 mt-2">
-              <label>Số điện thoại</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter your Phone Number"
-                onChange={(event) => {
-                  this.handleOnchangeInput(event, "phoneNumber");
-                }}
-                value={this.state.phoneNumber}
-              />
-            </div>
-            <button
-              className="btn btn-primary mt-2 mb-2"
-              onClick={() => this.handleEdituser()}
-            >
-              Lưu thay đổi
-            </button>
-          </div>
-
-          <div className="edituser-action">
-            <span
-              onClick={() => this.handleEditPassworduser()}
-              className="action"
-            >
-              <span>Đổi mật khẩu</span>
-              <i className="fas fa-key"></i>
-            </span>
-            <span className="action" onClick={() => this.handleLogout()}>
-              <span>Đăng xuất</span>
-              <i className="fas fa-sign-out"></i>
-            </span>
-            {this.props.userInfor &&
-              this.props.userInfor.user &&
-              this.props.userInfor.user.role === "admin" && (
-                <span className="action" onClick={() => this.handleGoAdmin()}>
-                  Go Admin
-                </span>
-              )}
           </div>
         </div>
-        <ChangePassword
-          isOpen={this.state.isOpenModal}
-          toggleFromParent={this.toggleFromParent}
-          userId={this.state.id}
-        />
         <HomeFooter />
       </div>
     );
@@ -207,7 +202,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     editUser: (data) => dispatch(editUser(data)),
     logOutSuccess: () => dispatch(logOutSuccess()),
-    // getUserInfor: () => dispatch(getUserInfor()),
   };
 };
 
