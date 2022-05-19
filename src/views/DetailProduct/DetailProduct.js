@@ -161,7 +161,7 @@ class DetailProduct extends Component {
                 <div className="row">
                   <div className="col-lg-5 col-md-5 col-sm-6">
                     <div className="white-box text-center">
-                      <img src={product.base64Img} className="img-responsive" />
+                      <img src={product.img} className="img-responsive" />
                     </div>
                   </div>
                   <div className="col-lg-7 col-md-7 col-sm-6">

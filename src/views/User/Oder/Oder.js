@@ -130,9 +130,9 @@ class Oder extends Component {
                             <div
                               className="img-product"
                               style={{
-                                backgroundImage: `url(${item.base64Img})`,
+                                backgroundImage: `url(${item.img})`,
                                 height: "80px",
-                                width: "50px",
+                                width: "60px",
                                 backgroundPosition: "center",
                                 backgroundRepeat: "none",
                                 backgroundSize: "cover",

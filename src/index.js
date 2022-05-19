@@ -6,7 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { PersistGate } from "redux-persist/integration/react";
-
 import { store, persistor } from "./redux";
 ReactDOM.render(
   // <React.StrictMode>

@@ -83,7 +83,7 @@ class ModalCart extends Component {
                                   data-mdb-ripple-color="light"
                                 >
                                   <img
-                                    src={item.base64Img}
+                                    src={item.img}
                                     className="w-100"
                                     alt={item.title}
                                   />

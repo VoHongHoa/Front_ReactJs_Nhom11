@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Select from "react-select";
-import CommonUtils from "../../../utils/CommonUtils";
+// import CommonUtils from "../../../utils/CommonUtils";
+import { storage } from "../../../firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import {
   optionsColor,
   optionsRam,
@@ -45,14 +47,25 @@ class ModalProduct extends Component {
   handleOnchangeImage = async (event) => {
     let filedata = event.target.files;
     let file = filedata[0];
+    //console.log(file);
     if (file) {
-      let base64 = await CommonUtils.getBase64(file);
-      //console.log(base64);
-      //let objectUrl = URL.createObjectURL(file);
-      this.setState({
-        //priviewImgURL: objectUrl,
-        img: base64,
-      });
+      const storageRef = ref(storage, `/products/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {},
+        (err) => {
+          console.log(err);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+            console.log("check url", url);
+            this.setState({
+              img: url,
+            });
+          });
+        }
+      );
     }
   };
   handleSubmitAdd = () => {

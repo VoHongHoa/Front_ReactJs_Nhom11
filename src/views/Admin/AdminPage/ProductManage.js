@@ -182,7 +182,7 @@ class ProductManage extends Component {
                         <div
                           className="img-product"
                           style={{
-                            backgroundImage: `url(${item.base64Img})`,
+                            backgroundImage: `url(${item.img})`,
                             backgroundRepeat: "none",
                             backgroundSize: "cover",
                             width: "50px",

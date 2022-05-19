@@ -176,9 +176,7 @@ class Homeheader extends Component {
                   >
                     <img
                       src={
-                        userInfor.user.base64Img
-                          ? userInfor.user.base64Img
-                          : defaultAvatar
+                        userInfor.user.img ? userInfor.user.img : defaultAvatar
                       }
                       className="avatar"
                       alt="Avatar"

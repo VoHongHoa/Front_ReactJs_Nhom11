@@ -235,7 +235,7 @@ class Products extends Component {
                         <div className="card-body">
                           <div className="card-img-actions">
                             <img
-                              src={item.base64Img}
+                              src={item.img}
                               className="card-img img-fluid"
                               width="96"
                               height="350"

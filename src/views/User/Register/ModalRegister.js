@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { handleRegisterUser } from "../../../services/UserService";
 import { toast } from "react-toastify";
-import CommonUtils from "../../../utils/CommonUtils";
+//import CommonUtils from "../../../utils/CommonUtils";
 //import Select from "react-select";
-
+import { storage } from "../../../firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 class ModalRegister extends Component {
   constructor(props) {
     super(props);
@@ -60,11 +61,25 @@ class ModalRegister extends Component {
   handleOnchangeImage = async (event) => {
     let filedata = event.target.files;
     let file = filedata[0];
+    //console.log(file);
     if (file) {
-      let base64 = await CommonUtils.getBase64(file);
-      this.setState({
-        img: base64,
-      });
+      const storageRef = ref(storage, `/user/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {},
+        (err) => {
+          console.log(err);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+            console.log("check url", url);
+            this.setState({
+              img: url,
+            });
+          });
+        }
+      );
     }
   };
   handleRegisterUser = async () => {

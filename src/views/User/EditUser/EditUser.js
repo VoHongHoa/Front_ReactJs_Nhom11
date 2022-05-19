@@ -29,9 +29,7 @@ class EditUser extends Component {
       phoneNumber: this.props.userInfor.user.phonenumber,
       fullname: this.props.userInfor.user.fullname,
       id: this.props.userInfor.user._id,
-      img: this.props.userInfor.user.base64Img
-        ? this.props.userInfor.user.base64Img
-        : " ",
+      img: this.props.userInfor.user.img ? this.props.userInfor.user.img : " ",
     });
   }
   componentDidUpdate(preProps, preState) {}
