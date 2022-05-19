@@ -101,7 +101,7 @@ class Homeheader extends Component {
                 </a>
                 <div className="dropdown-menu">
                   <NavLink
-                    to="/products/samsum"
+                    to="/products/SamSum"
                     className="dropdown-item"
                     activeClassName="active"
                     exact
@@ -109,7 +109,7 @@ class Homeheader extends Component {
                     SamSum
                   </NavLink>
                   <NavLink
-                    to="/products/iphone"
+                    to="/products/Iphone"
                     className="dropdown-item"
                     activeClassName="active"
                     exact
@@ -117,7 +117,7 @@ class Homeheader extends Component {
                     Iphone
                   </NavLink>
                   <NavLink
-                    to="/products/oppo"
+                    to="/products/Oppo"
                     className="dropdown-item"
                     activeClassName="active"
                     exact

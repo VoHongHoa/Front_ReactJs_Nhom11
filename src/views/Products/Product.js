@@ -7,6 +7,7 @@ import HomeFooter from "../Homepage/HomeFooter/HomeFooter";
 import { findProduct, getProductByFilter } from "../../services/ProductService";
 import "./Products.scss";
 import { toast } from "react-toastify";
+import { formatPrice } from "../../constants/format";
 class Products extends Component {
   constructor(props) {
     super(props);
@@ -47,7 +48,7 @@ class Products extends Component {
         objectPrice.label = Price[i];
         objectPrice.value = "";
       } else {
-        objectPrice.label = `Từ ${Price[i]}`;
+        objectPrice.label = `Từ ${formatPrice(Price[i])}`;
         objectPrice.value = Price[i];
       }
 
@@ -128,7 +129,7 @@ class Products extends Component {
   // };
   handleFilterProduct = async () => {
     let data = {
-      category: "SamSum",
+      category: this.props.match.params.category,
       filterPrice: this.state.selectedPrice,
       filterRam: this.state.selectedRam,
       filterRom: this.state.selectedRom,
@@ -264,7 +265,7 @@ class Products extends Component {
                           </div>
 
                           <h3 className="mb-0 font-weight-semibold">
-                            {item.price}
+                            {formatPrice(item.price)}
                           </h3>
 
                           <div>

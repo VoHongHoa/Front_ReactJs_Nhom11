@@ -66,6 +66,7 @@ class EditUser extends Component {
                     className="rounded-circle mt-5"
                     width="150px"
                     src={this.state.img === " " ? avatar : this.state.img}
+                    alt="Avatar"
                   />
                   <span className="font-weight-bold">
                     {this.state.fullname}

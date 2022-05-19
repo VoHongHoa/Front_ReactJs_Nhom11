@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { formatPrice } from "../../../constants/format";
 import HomeFooter from "../HomeFooter/HomeFooter";
 import Homeheader from "../Homeheader/Homeheader";
 import "./Search.scss";
@@ -58,7 +59,7 @@ class Search extends Component {
                         </div>
 
                         <h3 className="mb-0 font-weight-semibold">
-                          {item.price}
+                          {formatPrice(item.price)}
                         </h3>
 
                         <div>

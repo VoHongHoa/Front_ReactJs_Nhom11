@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { formatPrice } from "../../../../constants/format";
 import {
   deleteItem,
   deleteCart,
@@ -52,6 +53,38 @@ class ModalCart extends Component {
   };
   handleSubmit = () => {
     this.props.history.push("/order");
+  };
+  handleIncreaseQuantity = (item) => {
+    let copyState = { ...this.state };
+    for (let index = 0; index < copyState.allItems.length; index++) {
+      if (copyState.allItems[index]._id === item._id) {
+        copyState.allItems[index].quantity =
+          parseInt(copyState.allItems[index].quantity) + 1;
+        break;
+      }
+    }
+    this.setState({
+      ...copyState,
+    });
+    this.props.changeInputItem(this.state.allItems);
+  };
+  handleDeleteBook = (item) => {
+    this.props.deleteItem(item);
+  };
+
+  handleDecreaseQuantity = (item) => {
+    let copyState = { ...this.state };
+    for (let index = 0; index < copyState.allItems.length; index++) {
+      if (copyState.allItems[index]._id === item._id && item.quantity > 1) {
+        copyState.allItems[index].quantity =
+          parseInt(copyState.allItems[index].quantity) - 1;
+        break;
+      }
+    }
+    this.setState({
+      ...copyState,
+    });
+    this.props.changeInputItem(this.state.allItems);
   };
   render() {
     let { allItems } = this.state;
@@ -130,7 +163,12 @@ class ModalCart extends Component {
                                   className="d-flex mb-4"
                                   style={{ maxWidth: "300px" }}
                                 >
-                                  <button className="btn btn-primary px-3 me-2">
+                                  <button
+                                    className="btn btn-primary px-3 me-2"
+                                    onClick={() =>
+                                      this.handleDecreaseQuantity(item)
+                                    }
+                                  >
                                     <i className="fas fa-minus"></i>
                                   </button>
 
@@ -147,13 +185,18 @@ class ModalCart extends Component {
                                     />
                                   </div>
 
-                                  <button className="btn btn-primary px-3 ms-2">
+                                  <button
+                                    className="btn btn-primary px-3 ms-2"
+                                    onClick={() =>
+                                      this.handleIncreaseQuantity(item)
+                                    }
+                                  >
                                     <i className="fas fa-plus"></i>
                                   </button>
                                 </div>
 
                                 <p className="text-start text-md-center">
-                                  <strong>{item.price}</strong>
+                                  <strong>{formatPrice(item.price)}</strong>
                                 </p>
                               </div>
                             </div>
@@ -206,7 +249,7 @@ class ModalCart extends Component {
                     <ul className="list-group list-group-flush">
                       <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                         Products
-                        <span>{total}</span>
+                        <span>{formatPrice(total)}</span>
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center px-0">
                         Shipping
@@ -220,7 +263,7 @@ class ModalCart extends Component {
                           </strong>
                         </div>
                         <span>
-                          <strong>{total}</strong>
+                          <strong>{formatPrice(total)}</strong>
                         </span>
                       </li>
                     </ul>

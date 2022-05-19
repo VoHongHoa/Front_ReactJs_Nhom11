@@ -4,6 +4,7 @@ import "./SectionProduct.scss";
 import { withRouter } from "react-router";
 import { getTopProduct } from "../../../services/ProductService";
 import { addToCart } from "../../../store/actions/AppAction";
+import { formatPrice } from "../../../constants/format";
 class SectionProducts extends Component {
   constructor(props) {
     super(props);
@@ -25,15 +26,10 @@ class SectionProducts extends Component {
   handleAddToCart = (item) => {
     this.props.addToCart(item);
   };
+
   render() {
-    const settings = {
-      dots: false,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 1,
-    };
     let { topProduct } = this.state;
+
     return (
       <>
         <div className="section-product-container">
@@ -78,7 +74,7 @@ class SectionProducts extends Component {
                           </div>
 
                           <h3 className="mb-0 font-weight-semibold">
-                            {item.price}
+                            {formatPrice(item.price)}
                           </h3>
 
                           <div>
