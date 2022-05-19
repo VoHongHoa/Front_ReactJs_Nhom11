@@ -60,9 +60,12 @@ class Homeheader extends Component {
     return (
       <div className="header-container">
         <nav className="navbar navbar-expand-xl navbar-light bg-light">
-          <a href="#" className="navbar-brand">
+          {/* <a href="#" className="navbar-brand">
+            
+          </a> */}
+          <Link to={"/"} className="navbar-brand" exact="true">
             <i className="fa fa-cube"></i>UIT<b>Phone</b>
-          </a>
+          </Link>
           <button
             type="button"
             className="navbar-toggler"
@@ -81,7 +84,7 @@ class Homeheader extends Component {
                 to="/"
                 className="nav-item nav-link"
                 activeClassName="active"
-                exact={true}
+                exact
               >
                 Home
               </NavLink>
@@ -101,7 +104,7 @@ class Homeheader extends Component {
                     to="/products/samsum"
                     className="dropdown-item"
                     activeClassName="active"
-                    exact={true}
+                    exact
                   >
                     SamSum
                   </NavLink>
@@ -109,7 +112,7 @@ class Homeheader extends Component {
                     to="/products/iphone"
                     className="dropdown-item"
                     activeClassName="active"
-                    exact={true}
+                    exact
                   >
                     Iphone
                   </NavLink>
@@ -117,7 +120,7 @@ class Homeheader extends Component {
                     to="/products/oppo"
                     className="dropdown-item"
                     activeClassName="active"
-                    exact={true}
+                    exact
                   >
                     Oppo
                   </NavLink>
@@ -159,7 +162,7 @@ class Homeheader extends Component {
               <Link
                 to="/cart"
                 className="nav-item nav-link messages"
-                exact={true}
+                exact="true"
               >
                 <i className="fas fa-shopping-cart"></i>
                 <span className="badge">{numOfitem}</span>
@@ -188,7 +191,7 @@ class Homeheader extends Component {
                       to={`/user/${userInfor.user._id}`}
                       className="dropdown-item"
                       activeClassName="active"
-                      exact={true}
+                      exact
                     >
                       <i className="fa fa-user-o"></i> Profile
                     </NavLink>
@@ -204,7 +207,7 @@ class Homeheader extends Component {
                       to="/cart"
                       className="dropdown-item"
                       activeClassName="active"
-                      exact={true}
+                      exact
                     >
                       <i className="fas fa-shopping-cart"></i> Cart
                     </NavLink>
@@ -217,7 +220,7 @@ class Homeheader extends Component {
                           to="/admin"
                           className="dropdown-item"
                           activeClassName="active"
-                          exact={true}
+                          exact
                         >
                           <i className="fas fa-tools"></i>Go Admin
                         </NavLink>

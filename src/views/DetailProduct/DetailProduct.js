@@ -8,20 +8,22 @@ import { connect } from "react-redux";
 import "./DetailProduct.scss";
 import { toast } from "react-toastify";
 import { addReviews, getAllReviewProduct } from "../../services/ReviewService";
-
+import defaultAvatar from "../../assets/images/defaultAvatar.jpg";
 class DetailProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
       product: {},
       newReview: "",
+      allReview: [],
+      isShowComment: true,
     };
   }
   async componentDidMount() {
     let id = this.props.match.params.id;
     let res = await getProductById(id);
     this.getAllReviews(id);
-    console.log("check res: ", res);
+    //console.log("check res: ", res);
     if (res) {
       this.setState({
         product: res && res.product ? res.product : {},
@@ -34,7 +36,9 @@ class DetailProduct extends Component {
   getAllReviews = async (productId) => {
     try {
       let res = await getAllReviewProduct(productId);
-      console.log(res);
+      this.setState({
+        allReview: res,
+      });
     } catch (e) {
       console.log(e);
     }
@@ -52,22 +56,28 @@ class DetailProduct extends Component {
         productId: this.state.product._id,
       };
       let res = await addReviews(data);
-      console.log(res);
+      //console.log(res);
       if (res && res.success === true) {
         toast.success("Thêm bình luận thành công!");
+        this.getAllReviews(this.props.match.params.id);
       }
     } catch (e) {
       console.log(e);
       toast.error("Thêm bình luận không thành công");
     }
   };
+  handleShowComment = () => {
+    this.setState({
+      isShowComment: !this.state.isShowComment,
+    });
+  };
   render() {
-    let product = this.state.product;
+    let { product, allReview, isShowComment } = this.state;
     let isEmptyObj = Object.keys(product).length === 0;
-    //console.log(this.state);
+    console.log(allReview);
     return (
       <React.Fragment>
-        <div className="container-fluid">
+        <div className="container">
           <Homeheader />
           <section id="sidebar">
             <p>
@@ -154,7 +164,7 @@ class DetailProduct extends Component {
             <h2>Bình luận</h2>
             <div className="form-groud">
               <label>Thêm bình luận</label>
-              {/* <input  className="form-control"/> */}
+
               <textarea
                 className="form-control"
                 onChange={(event) => this.handleOnchangeInput(event)}
@@ -166,13 +176,81 @@ class DetailProduct extends Component {
             >
               Thêm bình luận
             </button>
-            <div className="detail-comment">
-              <h5>Võ Hồng Hòa</h5>
-              <p>Sản phẩm tốt</p>
-            </div>
-            <div className="detail-comment">
-              <h5>Võ Hồng Hòa</h5>
-              <p>Sản phẩm không tốt</p>
+          </div>
+
+          <div className="container mt-5">
+            <div className="row  d-flex justify-content-center">
+              <div className="col-md-8">
+                <div className="headings d-flex justify-content-between align-items-center mb-3">
+                  <h5> {allReview.length} Comments</h5>
+
+                  <div className="buttons">
+                    <span className="badge bg-white d-flex flex-row align-items-center">
+                      <span className="text-primary">
+                        Comments {isShowComment === true ? "ON" : "OFF"}
+                      </span>
+                      <div className="form-check form-switch">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          id="flexSwitchCheckChecked"
+                          checked={this.state.isShowComment}
+                          onChange={() => this.handleShowComment()}
+                        />
+                      </div>
+                    </span>
+                  </div>
+                </div>
+                {isShowComment === true && (
+                  <div className="comments-view mb-3">
+                    {allReview &&
+                      allReview.length > 0 &&
+                      allReview.map((item, index) => {
+                        return (
+                          <div className="card p-3 mt-2" key={item._id}>
+                            <div className="d-flex justify-content-between align-items-center">
+                              <div className="user d-flex flex-row align-items-center">
+                                <img
+                                  src={
+                                    item.user[0].img
+                                      ? item.user[0].img
+                                      : defaultAvatar
+                                  }
+                                  width="30"
+                                  className="user-img rounded-circle mr-2"
+                                />
+                                <span>
+                                  <small className="font-weight-bold text-primary">
+                                    {item.user[0].fullname}
+                                  </small>{" "}
+                                  <small className="font-weight-bold">
+                                    {item.review}
+                                  </small>
+                                </span>
+                              </div>
+
+                              <small>{item.updatedAt}</small>
+                            </div>
+
+                            {this.props.userInfor.user &&
+                              this.props.userInfor.user._id === item.userId && (
+                                <div className="action d-flex justify-content-between mt-2 align-items-center">
+                                  <div className="reply px-4">
+                                    <small>Remove</small>
+                                    <span className="dots"></span>
+                                    <small>Edit</small>
+                                  </div>
+                                  <div className="icons align-items-center">
+                                    <i className="fa fa-check-circle-o check-icon text-primary"></i>
+                                  </div>
+                                </div>
+                              )}
+                          </div>
+                        );
+                      })}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <HomeFooter />

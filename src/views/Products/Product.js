@@ -230,7 +230,7 @@ class Products extends Component {
               {allProduct && allProduct.length > 0 ? (
                 allProduct.map((item, index) => {
                   return (
-                    <div className="col-md-4 mt-2">
+                    <div className="col-md-4 mt-2" key={index}>
                       <div className="card">
                         <div className="card-body">
                           <div className="card-img-actions">
