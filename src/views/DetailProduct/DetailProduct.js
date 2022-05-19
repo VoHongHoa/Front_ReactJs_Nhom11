@@ -7,8 +7,14 @@ import { connect } from "react-redux";
 // import { addToCart } from "../../store/actions/AppAction";
 import "./DetailProduct.scss";
 import { toast } from "react-toastify";
-import { addReviews, getAllReviewProduct } from "../../services/ReviewService";
+import {
+  addReviews,
+  deleteReview,
+  editReview,
+  getAllReviewProduct,
+} from "../../services/ReviewService";
 import defaultAvatar from "../../assets/images/defaultAvatar.jpg";
+import ModalEditReview from "./ModalEditReview";
 class DetailProduct extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +23,8 @@ class DetailProduct extends Component {
       newReview: "",
       allReview: [],
       isShowComment: true,
+      curentReview: {},
+      isOpenModal: false,
     };
   }
   async componentDidMount() {
@@ -48,18 +56,36 @@ class DetailProduct extends Component {
       newReview: event.target.value,
     });
   };
+  checkAddNewComment = () => {
+    let isValid = true;
+    if (this.props.isLogin === false) {
+      toast.error("Vui lòng đăng nhập");
+      isValid = false;
+      return;
+    }
+    if (this.state.newReview === "") {
+      toast.error("Vui lòng thêm nội dung bình luận!");
+      isValid = false;
+      return;
+    }
+    return isValid;
+  };
   handleAddNewReview = async () => {
     try {
-      let data = {
-        review: this.state.newReview,
-        userId: this.props.userInfor.user._id,
-        productId: this.state.product._id,
-      };
-      let res = await addReviews(data);
-      //console.log(res);
-      if (res && res.success === true) {
-        toast.success("Thêm bình luận thành công!");
-        this.getAllReviews(this.props.match.params.id);
+      if (this.checkAddNewComment()) {
+        let data = {
+          review: this.state.newReview,
+          productId: this.state.product._id,
+        };
+        let res = await addReviews(data);
+        //console.log(res);
+        if (res && res.success === true) {
+          this.setState({
+            newReview: "",
+          });
+          toast.success("Thêm bình luận thành công!");
+          this.getAllReviews(this.props.match.params.id);
+        }
       }
     } catch (e) {
       console.log(e);
@@ -71,14 +97,58 @@ class DetailProduct extends Component {
       isShowComment: !this.state.isShowComment,
     });
   };
+  handleDeleteReview = async (reviewId) => {
+    try {
+      let res = await deleteReview(reviewId);
+      //console.log(res);
+      if (res && res.success === true) {
+        toast.success("Xóa bình luận thành công!");
+        this.getAllReviews(this.props.match.params.id);
+      }
+    } catch (e) {
+      console.log(e);
+      toast.error("Lỗi server");
+    }
+  };
+  handleOpenModalEditReview = async (item) => {
+    this.setState({
+      curentReview: item,
+      isOpenModal: true,
+    });
+  };
+  toggleFromParent = () => {
+    this.setState({
+      isOpenModal: false,
+    });
+  };
+  doEditReview = async (data) => {
+    try {
+      let res = await editReview(data);
+      //console.log(res);
+      if (res && res.success === true) {
+        toast.success("Chỉnh sửa thành công");
+        this.getAllReviews(this.props.match.params.id);
+        this.setState({
+          isOpenModal: false,
+        });
+      } else {
+        toast.error("Chỉnh sửa thất bại");
+      }
+    } catch (e) {
+      console.log(e);
+      toast.error("Lỗi server");
+    }
+  };
   render() {
     let { product, allReview, isShowComment } = this.state;
     let isEmptyObj = Object.keys(product).length === 0;
-    console.log(allReview);
+    // console.log(allReview);
     return (
       <React.Fragment>
         <div className="container">
-          <Homeheader />
+          <section className="homepage-header-container">
+            <Homeheader />
+          </section>
           <section id="sidebar">
             <p>
               Home | SamSum | <b>{product.title}</b>
@@ -168,6 +238,7 @@ class DetailProduct extends Component {
               <textarea
                 className="form-control"
                 onChange={(event) => this.handleOnchangeInput(event)}
+                value={this.state.newReview}
               ></textarea>
             </div>
             <button
@@ -212,7 +283,7 @@ class DetailProduct extends Component {
                               <div className="user d-flex flex-row align-items-center">
                                 <img
                                   src={
-                                    item.user[0].img
+                                    item.user[0] && item.user[0].img
                                       ? item.user[0].img
                                       : defaultAvatar
                                   }
@@ -221,7 +292,9 @@ class DetailProduct extends Component {
                                 />
                                 <span>
                                   <small className="font-weight-bold text-primary">
-                                    {item.user[0].fullname}
+                                    {item.user[0] && item.user[0].fullname
+                                      ? item.user[0].fullname
+                                      : "Người dùng"}
                                   </small>{" "}
                                   <small className="font-weight-bold">
                                     {item.review}
@@ -236,9 +309,21 @@ class DetailProduct extends Component {
                               this.props.userInfor.user._id === item.userId && (
                                 <div className="action d-flex justify-content-between mt-2 align-items-center">
                                   <div className="reply px-4">
-                                    <small>Remove</small>
+                                    <small
+                                      onClick={() =>
+                                        this.handleDeleteReview(item._id)
+                                      }
+                                    >
+                                      Remove
+                                    </small>
                                     <span className="dots"></span>
-                                    <small>Edit</small>
+                                    <small
+                                      onClick={() =>
+                                        this.handleOpenModalEditReview(item)
+                                      }
+                                    >
+                                      Edit
+                                    </small>
                                   </div>
                                   <div className="icons align-items-center">
                                     <i className="fa fa-check-circle-o check-icon text-primary"></i>
@@ -253,6 +338,12 @@ class DetailProduct extends Component {
               </div>
             </div>
           </div>
+          <ModalEditReview
+            isOpen={this.state.isOpenModal}
+            toggleFromParent={this.toggleFromParent}
+            review={this.state.curentReview}
+            doEditReview={this.doEditReview}
+          />
           <HomeFooter />
         </div>
       </React.Fragment>
@@ -263,6 +354,7 @@ class DetailProduct extends Component {
 const mapStateToProps = (state) => {
   return {
     userInfor: state.user.userInfor,
+    isLogin: state.user.isLogin,
   };
 };
 

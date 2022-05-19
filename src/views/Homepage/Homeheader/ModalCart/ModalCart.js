@@ -6,6 +6,7 @@ import {
   deleteCart,
   changeInputItem,
 } from "../../../../store/actions/AppAction";
+import Homeheader from "../Homeheader";
 import "./ModalCart.scss";
 class ModalCart extends Component {
   constructor(props) {
@@ -56,7 +57,10 @@ class ModalCart extends Component {
     let { allItems } = this.state;
     let total = 0;
     return (
-      <div className=" container my-5 cart-container ">
+      <div className=" container cart-container ">
+        <section className="homepage-header-container">
+          <Homeheader />
+        </section>
         <section className="h-100 gradient-custom">
           <div className="container py-5">
             <div className="row d-flex justify-content-center my-4">

@@ -5,4 +5,10 @@ const addReviews = (data) => {
 const getAllReviewProduct = (productId) => {
   return axios.get(`/api/review/${productId}`);
 };
-export { addReviews, getAllReviewProduct };
+const deleteReview = (reviewId) => {
+  return axios.delete(`/api/review/${reviewId}`);
+};
+const editReview = (data) => {
+  return axios.put(`/api/review/${data.reviewId}`, data);
+};
+export { addReviews, getAllReviewProduct, deleteReview, editReview };
