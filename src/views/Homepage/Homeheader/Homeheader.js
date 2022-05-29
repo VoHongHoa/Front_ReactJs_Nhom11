@@ -3,10 +3,16 @@ import { connect } from "react-redux";
 import "./Homeheader.scss";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
-import { logOutSuccess, searchProduct } from "../../../store/actions/AppAction";
+import {
+  getAllProducts,
+  logOutSuccess,
+  searchProduct,
+} from "../../../store/actions/AppAction";
 import defaultAvatar from "../../../assets/images/defaultAvatar.jpg";
 import { Link } from "react-router-dom";
 import ChangePassword from "../../User/ChangePassword/ChangePassword";
+import Select from "react-select";
+import { optionsCategories } from "../../../utils/constants";
 class Homeheader extends Component {
   constructor(props) {
     super(props);
@@ -15,14 +21,57 @@ class Homeheader extends Component {
       isLogin: "",
       keyword: "",
       isOpenModal: false,
+      allProduct: [],
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
+    await this.props.getAllProduct();
     this.setState({
       userInfor: this.props.userInfor,
       isLogin: this.props.isLogin,
+      // allProduct: this.props.allProduct,
     });
   }
+  componentDidUpdate() {
+    this.getDataSelect(this.props.allProduct);
+  }
+  getDataSelect = (data) => {
+    //console.log("ceheck", this.props.allProduct);
+    let optionSearch = [];
+    if (optionsCategories.length > 0) {
+      for (let i = 0; i < optionsCategories.length; i++) {
+        let obj = {};
+        obj.value = optionsCategories[i].value;
+        obj.label = optionsCategories[i].label;
+        optionSearch.push(obj);
+      }
+    }
+    if (data.length > 0) {
+      for (let i = 0; i < data.length; i++) {
+        let obj = {};
+        obj.value = data[i].title;
+        obj.label = data[i].title;
+        optionSearch.push(obj);
+      }
+    }
+
+    return optionSearch;
+  };
+  handleOnchangeSelect = (selectedOption, id) => {
+    let name = id.name;
+    let copyState = { ...this.state };
+    copyState[name] = selectedOption;
+    this.setState({
+      ...copyState,
+    });
+  };
+  handleOnchangeSelect = (selectedOption) => {
+    console.log(selectedOption);
+    this.setState({
+      keyword: selectedOption ? selectedOption.value : " ",
+    });
+    this.getProductSearch(selectedOption.value);
+  };
   handleEditPassworduser = () => {
     this.setState({ isOpenModal: true });
   };
@@ -54,8 +103,9 @@ class Homeheader extends Component {
     this.props.history.push("/search");
   };
   render() {
-    let { userInfor, isLogin } = this.props;
+    let { userInfor, isLogin, allProduct } = this.props;
     let numOfitem = this.props.numOfItemInCart;
+    let Option = this.getDataSelect(allProduct);
 
     return (
       <div className="header-container">
@@ -135,14 +185,24 @@ class Homeheader extends Component {
             </div>
             <form className="navbar-form form-inline">
               <div className="input-group search-box">
-                <input
+                {/* <input
                   type="text"
                   id="search"
                   className="form-control"
                   placeholder="Search by Name"
                   onChange={(event) => this.handleOnChangeInput(event)}
+                /> */}
+
+                <Select
+                  options={Option}
+                  value={this.state.keyword}
+                  onChange={this.handleOnchangeSelect}
+                  name={"categories"}
+                  placeholder="Tìm kiếm sản phẩm..."
+                  width="100%"
                 />
-                <span className="input-group-addon">
+
+                {/* <span className="input-group-addon">
                   <i
                     className="material-icons"
                     onClick={() => this.getProductSearch(this.state.keyword)}
@@ -150,7 +210,7 @@ class Homeheader extends Component {
                   >
                     &#xE8B6;
                   </i>
-                </span>
+                </span> */}
               </div>
             </form>
             <div className="navbar-nav ml-auto">
@@ -176,7 +236,9 @@ class Homeheader extends Component {
                   >
                     <img
                       src={
-                        userInfor.user.img ? userInfor.user.img : defaultAvatar
+                        userInfor.user && userInfor.user.img
+                          ? userInfor.user.img
+                          : defaultAvatar
                       }
                       className="avatar"
                       alt="Avatar"
@@ -208,6 +270,15 @@ class Homeheader extends Component {
                       exact
                     >
                       <i className="fas fa-shopping-cart"></i> Cart
+                    </NavLink>
+
+                    <NavLink
+                      to="/user-orders"
+                      className="dropdown-item"
+                      activeClassName="active"
+                      exact
+                    >
+                      <i className="fas fa-shopping-bag"></i> Đơn hàng
                     </NavLink>
 
                     {this.props.userInfor &&
@@ -260,12 +331,14 @@ const mapStateToProps = (state) => {
     isLogin: state.user.isLogin,
     userInfor: state.user.userInfor,
     numOfItemInCart: state.cart.cart.length,
+    allProduct: state.products.allProduct,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     logOutSuccess: () => dispatch(logOutSuccess()),
     searchProduct: (keyword) => dispatch(searchProduct(keyword)),
+    getAllProduct: () => dispatch(getAllProducts()),
   };
 };
 

@@ -8,6 +8,7 @@ import {
   changeInputItem,
 } from "../../../../store/actions/AppAction";
 import Homeheader from "../Homeheader";
+import HomeFooter from "../../HomeFooter/HomeFooter";
 import "./ModalCart.scss";
 class ModalCart extends Component {
   constructor(props) {
@@ -281,6 +282,7 @@ class ModalCart extends Component {
             </div>
           </div>
         </section>
+        <HomeFooter></HomeFooter>
       </div>
     );
   }

@@ -32,6 +32,9 @@ const forgotPassword = (data) => {
 const changePassword = (data) => {
   return axios.post("/api/user/changepassword", data);
 };
+const doResetPassword = (data) => {
+  return axios.post("/api/user/do-reset-password", data);
+};
 const findUserByEmail = (email) => {
   return axios.get(`/api/user/find-user-by-email/?email=${email}`);
 };
@@ -48,4 +51,5 @@ export {
   forgotPassword,
   changePassword,
   findUserByEmail,
+  doResetPassword,
 };

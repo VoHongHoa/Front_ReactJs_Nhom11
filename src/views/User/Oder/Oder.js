@@ -7,6 +7,8 @@ import "./Order.scss";
 import { addNewOder } from "../../../services/OderService";
 import { deleteCart } from "../../../store/actions/AppAction";
 import { toast } from "react-toastify";
+import PayPalCheckoutButton from "../../../components/PayPalCheckoutButton";
+import _ from "lodash";
 class Oder extends Component {
   constructor(props) {
     super(props);
@@ -14,21 +16,18 @@ class Oder extends Component {
       fullName: "",
       address: "",
       phonenumber: "",
+      payMent: "Chưa thanh toán",
     };
   }
   componentDidMount() {
-    if (this.props.userInfor) {
+    //console.log(_.isEmpty(this.props.userInfor.user));
+    if (_.isEmpty(this.props.userInfor.user) === false) {
       this.setState({
         fullName: this.props.userInfor.user.fullname,
         address: this.props.userInfor.user.address,
         phonenumber: this.props.userInfor.user.phonenumber,
       });
     }
-    // if (this.props.itemInCart) {
-    //   this.setState({
-    //     allItems: this.props.itemInCart,
-    //   });
-    // }
   }
   componentDidUpdate(preProps) {}
   handleOnchangeInput = (event, id) => {
@@ -38,11 +37,24 @@ class Oder extends Component {
       ...copyState,
     });
   };
+  checkInput = () => {
+    let isValid = true;
+    let arr = ["fullName", "address", "phonenumber"];
+    let copyState = { ...this.state };
+    for (let i = 0; i < arr.length; i++) {
+      if (copyState[arr[i]] === "") {
+        toast.error(`Vui lòng điền thông tin ${arr[i]}`);
+        isValid = false;
+        break;
+      }
+    }
+    return isValid;
+  };
   handleSubmit = async (total) => {
     let products = this.props.itemInCart;
     if (products && products.length > 0) {
       products.map((item, index) => {
-        delete item.base64Img;
+        delete item.img;
         return item;
       });
       let data = {
@@ -50,14 +62,22 @@ class Oder extends Component {
         products: this.props.itemInCart,
         address: this.state.address,
         amount: total,
+        payStatus: this.state.payMent,
       };
-      let res = await addNewOder(data);
-      if (res) {
-        toast.success("Xác nhận mua hàng thành công");
-        this.props.deleteCart();
-        this.props.history.push("/");
+      if (this.checkInput()) {
+        let res = await addNewOder(data);
+        if (res) {
+          toast.success("Xác nhận mua hàng thành công");
+          this.props.deleteCart();
+          this.props.history.push("/");
+        }
       }
     }
+  };
+  changePayment = () => {
+    this.setState({
+      payMent: "Đã Thanh toán",
+    });
   };
   render() {
     let { fullName, address, phonenumber } = this.state;
@@ -140,7 +160,7 @@ class Oder extends Component {
                             ></div>
                           </td>
                           <td>
-                            <input defaultValue={item.quantity} />
+                            <p>{item.quantity}</p>
                           </td>
                         </tr>
                       );
@@ -152,8 +172,14 @@ class Oder extends Component {
               className="btn btn-primary col-12 mt-3"
               onClick={() => this.handleSubmit(total)}
             >
-              Xác nhận mua hàng
+              Thanh toán khi nhận hàng
             </button>
+            <PayPalCheckoutButton
+              total={total}
+              handleSubmit={this.handleSubmit}
+              checkInput={this.checkInput}
+              changePayment={this.changePayment}
+            />
           </div>
         </div>
         <HomeFooter />

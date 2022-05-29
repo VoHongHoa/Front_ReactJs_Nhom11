@@ -5,6 +5,7 @@ import HomeFooter from "../Homepage/HomeFooter/HomeFooter";
 import { getProductById } from "../../services/ProductService";
 import { connect } from "react-redux";
 // import { addToCart } from "../../store/actions/AppAction";
+import moment from "moment";
 import "./DetailProduct.scss";
 import { toast } from "react-toastify";
 import {
@@ -302,7 +303,9 @@ class DetailProduct extends Component {
                                 </span>
                               </div>
 
-                              <small>{item.updatedAt}</small>
+                              <small>
+                                {moment(item.updatedAt).format("Do MMMM YYYY")}
+                              </small>
                             </div>
 
                             {this.props.userInfor.user &&

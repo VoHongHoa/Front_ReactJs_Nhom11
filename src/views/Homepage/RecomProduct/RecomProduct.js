@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./RecomProduct.scss";
 import { withRouter } from "react-router";
-import Slider from "react-slick";
 import { getProductRecom } from "../../../services/ProductService";
 import { addToCart } from "../../../store/actions/AppAction";
 class RecomProduct extends Component {

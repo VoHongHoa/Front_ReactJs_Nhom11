@@ -226,7 +226,7 @@ class Products extends Component {
               </span>
             </div>
           </div>
-          <div className="container d-flex justify-content-center mt-50 mb-50 product-slide">
+          <div className="container sectionProduct d-flex justify-content-center mt-50 mb-50 product-slide">
             <div className="row">
               {allProduct && allProduct.length > 0 ? (
                 allProduct.map((item, index) => {

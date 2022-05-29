@@ -4,7 +4,7 @@ import {
   handleEditUser,
 } from "../../services/UserService";
 import { toast } from "react-toastify";
-import { findProduct } from "../../services/ProductService";
+import { findProduct, getTopProduct } from "../../services/ProductService";
 //------------------cart action------------------------------
 export const addToCart = (item) => {
   //console.log("check user:", user);
@@ -119,9 +119,8 @@ export const editUserFailed = () => ({
 export const searchProduct = (keyword) => {
   return async (dispatch, getState) => {
     try {
-      console.log(keyword);
       let respone = await findProduct(keyword);
-      console.log(respone);
+
       if (respone && respone.errCode === 1) {
         toast.success(respone.message);
         dispatch(searchProductSuccess(respone.product));
@@ -140,5 +139,29 @@ export const searchProductSuccess = (data) => ({
 });
 export const searchProductFailed = () => ({
   type: "SEARCH_PRODUCTS_FAILED",
-  userData: {},
+  products: {},
+});
+
+export const getAllProducts = () => {
+  return async (dispatch, getState) => {
+    try {
+      let respone = await getTopProduct();
+      if (respone && respone.errCode === 1) {
+        dispatch(getAllProductsSuccess(respone.products));
+      } else {
+        dispatch(getAllProductsFailed());
+      }
+    } catch (e) {
+      console.error(e);
+      dispatch(getAllProductsFailed());
+    }
+  };
+};
+export const getAllProductsSuccess = (data) => ({
+  type: "GET_ALL_PRODUCTS_SUCCESS",
+  products: data,
+});
+export const getAllProductsFailed = () => ({
+  type: "GET_ALL_PRODUCTS_FAILED",
+  products: {},
 });

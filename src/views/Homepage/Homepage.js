@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import Slider from "react-slick";
 import Homeheader from "./Homeheader/Homeheader";
 import HomeFooter from "./HomeFooter/HomeFooter";
 import SectionProducts from "./SectionProducts/SectionProducts";
@@ -13,15 +12,6 @@ import "./Homepage.scss";
 class HomePage extends Component {
   componentDidMount() {}
   render() {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 2000,
-    };
     return (
       <React.Fragment>
         <div className="container">

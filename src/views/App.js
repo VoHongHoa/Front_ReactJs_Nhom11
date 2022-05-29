@@ -18,6 +18,9 @@ import ManageOrder from "./Admin/AdminPage/ManageOrder";
 import Dashboard from "./Admin/AdminPage/Dashboard";
 import Search from "./Homepage/Search/Search";
 import ModalCart from "./Homepage/Homeheader/ModalCart/ModalCart";
+import UserOrder from "./Homepage/Homeheader/UserOrder";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import ResetPasswordStatus from "../components/ResetPasswordStatus";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -29,99 +32,106 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div className="App">
-          <Switch>
-            <Route path="/" exact>
-              <Homepage />
-            </Route>
-            <Route path="/search" exact>
-              <Search />
-            </Route>
-            <Route path="/cart" exact>
-              <ModalCart />
-            </Route>
-            <Route path="/order" exact>
-              <Oder />
-            </Route>
-            <Route path="/products/:category" exact>
-              <Product />
-            </Route>
-            <Route path="/detail-product/:id">
-              <DetailProduct />
-            </Route>
-            <Route exact path="/login">
-              {isLogin ? <Redirect to="/" /> : <Login />}
-            </Route>
-            <Route exact path="/user/:id">
-              {isLogin === false ? <Redirect to="/login" /> : <EditUser />}
-            </Route>
-            <Route path="/forgotpassword" exact>
-              <ForgotPassword />
-            </Route>
-            <Route exact path="/admin">
-              {isLogin === true &&
-              userInfor &&
-              userInfor.user &&
-              userInfor.user.role === "admin" ? (
-                <Dashboard />
-              ) : (
-                <Redirect to="/login" />
-              )}
-            </Route>
-            <Route exact path="/admin/user">
-              {isLogin === true &&
-              userInfor &&
-              userInfor.user &&
-              userInfor.user.role === "admin" ? (
-                <UserManage />
-              ) : (
-                <Redirect to="/login" />
-              )}
-            </Route>
-
-            <Route path="/admin/product" exact>
-              {isLogin === true &&
-              userInfor &&
-              userInfor.user &&
-              userInfor.user.role === "admin" ? (
-                <ProductManage />
-              ) : (
-                <Redirect to="/login" />
-              )}
-            </Route>
-
-            <Route path="/admin/order" exact>
-              {isLogin === true &&
-              userInfor &&
-              userInfor.user &&
-              userInfor.user.role === "admin" ? (
-                <ManageOrder />
-              ) : (
-                <Redirect to="/login" />
-              )}
-            </Route>
-
-            <Route path="/order" exact>
-              {isLogin === true && userInfor ? (
+        <PayPalScriptProvider
+          options={{ "client-id": process.env.REACT_APP_CLIENT_ID_PAYPAL }}
+        >
+          <div className="App">
+            <Switch>
+              <Route path="/" exact>
+                <Homepage />
+              </Route>
+              <Route path="/search" exact>
+                <Search />
+              </Route>
+              <Route path="/cart" exact>
+                <ModalCart />
+              </Route>
+              <Route path="/order" exact>
                 <Oder />
-              ) : (
-                <Redirect to="/login" />
-              )}
-            </Route>
-          </Switch>
-          <ToastContainer
-            position="bottom-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-          />
-        </div>
+              </Route>
+              <Route path="/products/:category" exact>
+                <Product />
+              </Route>
+              <Route path="/detail-product/:id">
+                <DetailProduct />
+              </Route>
+              <Route exact path="/login">
+                {isLogin ? <Redirect to="/" /> : <Login />}
+              </Route>
+              <Route exact path="/user/:id">
+                {isLogin === false ? <Redirect to="/login" /> : <EditUser />}
+              </Route>
+              <Route path="/forgotpassword" exact>
+                <ForgotPassword />
+              </Route>
+              <Route exact path="/admin">
+                {isLogin === true &&
+                userInfor &&
+                userInfor.user &&
+                userInfor.user.role === "admin" ? (
+                  <Dashboard />
+                ) : (
+                  <Redirect to="/login" />
+                )}
+              </Route>
+              <Route exact path="/admin/user">
+                {isLogin === true &&
+                userInfor &&
+                userInfor.user &&
+                userInfor.user.role === "admin" ? (
+                  <UserManage />
+                ) : (
+                  <Redirect to="/login" />
+                )}
+              </Route>
+
+              <Route path="/admin/product" exact>
+                {isLogin === true &&
+                userInfor &&
+                userInfor.user &&
+                userInfor.user.role === "admin" ? (
+                  <ProductManage />
+                ) : (
+                  <Redirect to="/login" />
+                )}
+              </Route>
+
+              <Route path="/admin/order" exact>
+                {isLogin === true &&
+                userInfor &&
+                userInfor.user &&
+                userInfor.user.role === "admin" ? (
+                  <ManageOrder />
+                ) : (
+                  <Redirect to="/login" />
+                )}
+              </Route>
+
+              <Route path="/order" exact>
+                {isLogin === true ? <Oder /> : <Redirect to="/login" />}
+              </Route>
+              <Route path="/user-orders" exact>
+                {isLogin === true ? <UserOrder /> : <Redirect to="/login" />}
+              </Route>
+
+              <Route path="/do-reset-password/:email/:newPassword" exact>
+                <ResetPasswordStatus />
+              </Route>
+            </Switch>
+            <ToastContainer
+              position="bottom-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
+          </div>
+        </PayPalScriptProvider>
       </BrowserRouter>
     );
   }

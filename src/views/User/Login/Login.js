@@ -78,7 +78,7 @@ class Login extends Component {
           password: this.state.password,
           username: userInfor.email,
           address: "",
-          phoneNumber: "",
+          phonenumber: "",
           fullname: userInfor.name,
           img: userInfor.imageUrl,
         };
@@ -89,7 +89,6 @@ class Login extends Component {
           username: res.user.username,
           password: process.env.REACT_APP_DEFAULT_GOOGLE_PASSWORD,
         });
-        console.log(this.state.password);
         this.handleLoginSubmit();
       }
     } else {
@@ -158,7 +157,7 @@ class Login extends Component {
                     </button>
                   </div>
                   <div
-                    className="d-grid mt-2 d-flex "
+                    className="d-grid mt-2 d-flex more-action "
                     style={{ justifyContent: "space-between" }}
                   >
                     <p>

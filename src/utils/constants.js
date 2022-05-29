@@ -7,10 +7,10 @@ export const optionsColor = [
   { value: "Tím", label: "Tím" },
 ];
 export const optionsCategories = [
-  { value: "SamSum", label: "SamSum" },
-  { value: "Iphone", label: "Iphone" },
-  { value: "Oppo", label: "Oppo" },
-  { value: "Sony", label: "Sony" },
+  { value: "samSum", label: "SamSum" },
+  { value: "iphone", label: "Iphone" },
+  { value: "oppo", label: "Oppo" },
+  { value: "sony", label: "Sony" },
 ];
 
 export const optionsRam = [
