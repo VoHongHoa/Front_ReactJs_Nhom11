@@ -8,7 +8,7 @@ class AdminHeader extends Component {
   render() {
     let { userInfor } = this.props;
     return (
-      <div className="admin-header-container container-fluid">
+      <div className="admin-header-container container">
         <div className="topnav">
           <div className="item-manage col-5">
             <NavLink to="/admin" activeClassName="active" exact={true}>
