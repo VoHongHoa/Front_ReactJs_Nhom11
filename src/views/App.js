@@ -35,7 +35,7 @@ class App extends Component {
         <PayPalScriptProvider
           options={{ "client-id": process.env.REACT_APP_CLIENT_ID_PAYPAL }}
         >
-          <div className="App">
+          <div className="App container">
             <Switch>
               <Route path="/" exact>
                 <Homepage />
