@@ -1,56 +1,68 @@
-.filter-product-content {
-    width: 100%;
-    display: grid;
-    row-gap: 50px;
-    column-gap: 50px;
-    grid-template-columns: auto auto auto auto;
-    padding: 10px;
+.product-slide {
+    .mt-50 {
 
-    .grid-product {
-        padding: 5px;
+        margin-top: 50px;
+    }
+
+    .mb-50 {
+
+        margin-bottom: 50px;
+    }
+
+
+
+    .card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, .125);
+        border-radius: .1875rem;
+    }
+
+    .card-img-actions {
+        position: relative;
+    }
+
+    .card-body {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.25rem;
         text-align: center;
-        width: 100%;
+    }
 
-        .product {
-            .product-content {
-                .card {
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                    width: 300px;
-                    margin: auto;
+    .card-img {
 
-                    .img-product {
-                        height: 300px;
-                        width: 90%;
-                        background-repeat: no-repeat;
-                        background-size: contain;
-                        border-radius: 5px;
-                        background-position: center;
-                    }
+        width: 350px;
+    }
 
-                    .price {
-                        color: grey;
-                        font-size: 22px;
-                    }
+    .star {
+        color: red;
+    }
 
-                    button {
-                        border: none;
-                        outline: 0;
-                        padding: 12px;
-                        color: white;
-                        background-color: #000;
-                        text-align: center;
-                        cursor: pointer;
-                        font-size: 18px;
+    .bg-cart {
+        background-color: orange;
+        color: #fff;
+    }
 
-                        &:hover {
-                            opacity: 0.7;
-                        }
-                    }
-                }
-            }
-        }
+    .bg-cart:hover {
+
+        color: #fff;
+    }
+
+    .bg-buy {
+        background-color: green;
+        color: #fff;
+        padding-right: 29px;
+    }
+
+    .bg-buy:hover {
+
+        color: #fff;
     }
 }
