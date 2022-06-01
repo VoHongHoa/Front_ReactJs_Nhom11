@@ -65,6 +65,7 @@ class Login extends Component {
   };
 
   responseGoogle = async (response) => {
+    console.log(response);
     if (response) {
       let userInfor = response.profileObj;
       let res = await findUserByEmail(userInfor.email);
@@ -187,11 +188,12 @@ class Login extends Component {
 
                   <div className="d-grid mt-2">
                     <GoogleLogin
-                      clientId="1000261381053-acnpjvmhm485p7aal87iicf70bvdm04a.apps.googleusercontent.com"
+                      clientId={process.env.REACT_APP_CLIENT_ID_LOGIN_GOOGLE}
                       buttonText="LOGIN WITH GOOGLE"
                       onSuccess={this.responseGoogle}
                       onFailure={this.responseGoogle}
-                      classNameName=" btn btn-google"
+                      cookiePolicy={"single_host_origin"}
+                      className=" btn btn-google"
                       style={{ justifyContent: "center" }}
                     />
                   </div>
