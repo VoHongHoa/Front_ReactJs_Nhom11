@@ -14,7 +14,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div className="container-fluid chartContainer">
+      <div className="container chartContainer">
         <AdminHeader />
         <div className="chart-content">
           <div className="col-5 chart-detail">

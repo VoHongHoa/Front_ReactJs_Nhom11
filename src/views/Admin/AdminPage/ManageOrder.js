@@ -54,7 +54,7 @@ class ManageOrder extends Component {
     let { allOrder } = this.state;
     console.log(allOrder);
     return (
-      <div className="container-fluid">
+      <div className="container">
         <AdminHeader />
         <div className="top-user-manage row mt-3">
           <span className="text-manage col-6">Quản lý hóa đơn</span>

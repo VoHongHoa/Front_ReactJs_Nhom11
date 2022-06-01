@@ -84,7 +84,7 @@ class Oder extends Component {
     let allItems = this.props.itemInCart;
     let total = 0;
     return (
-      <div className="container-fluid order-container">
+      <div className="container order-container">
         <Homeheader />
         <div className="col-12 mt-3 ">
           <div className="mb-3 col-8">

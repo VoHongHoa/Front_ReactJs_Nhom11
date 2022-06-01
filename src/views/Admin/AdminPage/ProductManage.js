@@ -125,7 +125,7 @@ class ProductManage extends Component {
   render() {
     let { allProducts } = this.state;
     return (
-      <div className="container-fluid">
+      <div className="container">
         <AdminHeader />
         <div className="top-product-manage row mt-3">
           <span className="text-manage col-6">Quản lý sản phẩm</span>
