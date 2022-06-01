@@ -33,7 +33,7 @@ class SectionProducts extends Component {
     return (
       <>
         <div className="section-product-container">
-          <span className="text-product">Danh sách sản phẩm nổi bậc</span>
+          <span className="text-product">Danh sách sản phẩm nổi bật</span>
           <div className="container d-flex justify-content-center mt-50 mb-50 product-slide">
             <div className="row">
               {topProduct &&
