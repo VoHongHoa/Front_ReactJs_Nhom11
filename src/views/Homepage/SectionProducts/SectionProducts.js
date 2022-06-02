@@ -33,14 +33,16 @@ class SectionProducts extends Component {
     return (
       <>
         <div className="section-product-container">
-          <span className="text-product">Danh sách sản phẩm nổi bật</span>
+          <span className="text-product">
+            <p className="title">Danh sách sản phẩm nổi bật</p>
+          </span>
           <div className="container d-flex justify-content-center mt-50 mb-50 product-slide">
             <div className="row">
               {topProduct &&
                 topProduct.length > 0 &&
                 topProduct.map((item, index) => {
                   return (
-                    <div className="col-md-4 mt-2" key={index}>
+                    <div className="col-md-3 mt-2" key={index}>
                       <div className="card">
                         <div className="card-body">
                           <div className="card-img-actions">

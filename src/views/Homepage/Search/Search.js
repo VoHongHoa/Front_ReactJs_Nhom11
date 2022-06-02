@@ -19,13 +19,15 @@ class Search extends Component {
   render() {
     return (
       <React.Fragment>
-        <Homeheader />
-        <div className="container d-flex justify-content-center mt-50 mb-50 product-slide">
+        <section className="homepage-header-container">
+          <Homeheader />
+        </section>
+        <div className="container d-flex justify-content-center mt-50 mb-50 product-slide mb-3">
           <div className="row">
             {this.props.allProduct && this.props.allProduct.length > 0 ? (
               this.props.allProduct.map((item, index) => {
                 return (
-                  <div className="col-md-4 mt-2">
+                  <div className="col-md-3 mt-2">
                     <div className="card">
                       <div className="card-body">
                         <div className="card-img-actions">

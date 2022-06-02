@@ -19,6 +19,7 @@ class Login extends Component {
       password: "",
       isShowpassword: true,
       isOpenModal: false,
+      isShowPassword: false,
     };
   }
   componentDidMount() {}
@@ -99,7 +100,14 @@ class Login extends Component {
   responseFacebook = (response) => {
     console.log(response);
   };
+  handleShowHidePassword = () => {
+    let isShowPassword = !this.state.isShowPassword;
+    this.setState({
+      isShowPassword: isShowPassword,
+    });
+  };
   render() {
+    let { isShowPassword } = this.state;
     return (
       <>
         <div className="container login-container 100-vh">
@@ -124,7 +132,7 @@ class Login extends Component {
                   </div>
                   <div className="form-floating mb-3">
                     <input
-                      type="password"
+                      type={isShowPassword === true ? "text" : "password"}
                       className="form-control"
                       id="floatingPassword"
                       placeholder="Password"
@@ -138,14 +146,15 @@ class Login extends Component {
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      value=""
+                      value={this.state.isShowPassword}
                       id="rememberPasswordCheck"
+                      onChange={() => this.handleShowHidePassword()}
                     />
                     <label
                       className="form-check-label"
                       htmlFor="rememberPasswordCheck"
                     >
-                      Ghi nhớ mật khẩu
+                      Hiển thị mật khẩu
                     </label>
                   </div>
 

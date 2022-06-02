@@ -149,8 +149,13 @@ class Products extends Component {
         </section>
         <section id="sidebar">
           <p>
-            <span onClick={() => this.handleReturnHome()}>Trang chủ</span> |{" "}
-            <b>{this.props.match.params.category}</b>
+            <span
+              onClick={() => this.handleReturnHome()}
+              style={{ cursor: "pointer" }}
+            >
+              Trang chủ
+            </span>{" "}
+            |<b>{this.props.match.params.category}</b>
           </p>
         </section>
         <div className="filter-container mb-2 mt-2">
@@ -226,7 +231,7 @@ class Products extends Component {
               {allProduct && allProduct.length > 0 ? (
                 allProduct.map((item, index) => {
                   return (
-                    <div className="col-md-4 mt-2" key={index}>
+                    <div className="col-md-3 mt-2" key={index}>
                       <div className="card">
                         <div className="card-body">
                           <div className="card-img-actions">

@@ -138,9 +138,6 @@ class Homeheader extends Component {
               >
                 Trang chủ
               </NavLink>
-              <a href="#" className="nav-item nav-link">
-                Về chúng tôi
-              </a>
               <div className="nav-item dropdown">
                 <a
                   href="#"
@@ -176,6 +173,10 @@ class Homeheader extends Component {
                   </NavLink>
                 </div>
               </div>
+              <a href="#" className="nav-item nav-link">
+                Về chúng tôi
+              </a>
+
               <a href="#" className="nav-item nav-link">
                 Blog
               </a>
