@@ -5,12 +5,16 @@ export const optionsColor = [
   { value: "Bạch kim ", label: "Bạch kim" },
   { value: "Xanh ngọc", label: "Xanh ngọc" },
   { value: "Tím", label: "Tím" },
+  { value: "Xanh nước biển", label: "Xanh nước biển" },
+  { value: "Xám", label: "Xám" },
 ];
 export const optionsCategories = [
   { value: "samSum", label: "SamSum" },
   { value: "iphone", label: "Iphone" },
   { value: "oppo", label: "Oppo" },
-  { value: "sony", label: "Sony" },
+  { value: "vivo", label: "Vivo" },
+  { value: "xiaomi", label: "Xiaomi" },
+  { value: "realme", label: "Realme" },
 ];
 
 export const optionsRam = [

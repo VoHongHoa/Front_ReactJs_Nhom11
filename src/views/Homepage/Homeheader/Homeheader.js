@@ -147,7 +147,21 @@ class Homeheader extends Component {
                   Điện thoại
                 </a>
                 <div className="dropdown-menu">
-                  <NavLink
+                  {optionsCategories &&
+                    optionsCategories.length > 0 &&
+                    optionsCategories.map((item, index) => {
+                      return (
+                        <NavLink
+                          to={`/products/${item.label}`}
+                          className="dropdown-item"
+                          activeClassName="active"
+                          exact
+                        >
+                          {item.label}
+                        </NavLink>
+                      );
+                    })}
+                  {/* <NavLink
                     to="/products/SamSum"
                     className="dropdown-item"
                     activeClassName="active"
@@ -170,7 +184,7 @@ class Homeheader extends Component {
                     exact
                   >
                     Oppo
-                  </NavLink>
+                  </NavLink> */}
                 </div>
               </div>
               <a href="#" className="nav-item nav-link">
