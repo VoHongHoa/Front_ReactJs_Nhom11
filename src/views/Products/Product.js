@@ -31,16 +31,7 @@ class Products extends Component {
     }
   }
   setSelectedPrice = () => {
-    let Price = [
-      "Tất cả",
-      300000,
-      1000000,
-      3000000,
-      5000000,
-      10000000,
-      20000000,
-      30000000,
-    ];
+    let Price = ["Tất cả", 30, 100, 300, 1000, 2000, 5000];
     let arrPrice = [];
     for (let i = 0; i < Price.length; i++) {
       let objectPrice = {};
@@ -48,7 +39,7 @@ class Products extends Component {
         objectPrice.label = Price[i];
         objectPrice.value = "";
       } else {
-        objectPrice.label = `Từ ${formatPrice(Price[i])}`;
+        objectPrice.label = `Từ ${Price[i]} $`;
         objectPrice.value = Price[i];
       }
 

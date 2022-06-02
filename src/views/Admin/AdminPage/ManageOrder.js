@@ -75,14 +75,14 @@ class ManageOrder extends Component {
               <tr>
                 <th rowSpan={2}>STT</th>
                 <th rowSpan={2}>Họ và tên</th>
-                <th colSpan={2}>Products</th>
-                <th rowSpan={2}>Address</th>
-                <th rowSpan={2}>Status</th>
-                <th rowSpan={2}>Action</th>
+                <th colSpan={2}>Sản phẩm</th>
+                <th rowSpan={2}>Địa chỉ</th>
+                <th rowSpan={2}>Trạng thái</th>
+                <th rowSpan={2}>Hành động</th>
               </tr>
               <tr>
-                <th>Title</th>
-                <th>Quantity</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
               </tr>
             </thead>
             <tbody>

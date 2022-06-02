@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Select from "react-select";
-// import CommonUtils from "../../../utils/CommonUtils";
 import { storage } from "../../../firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import {

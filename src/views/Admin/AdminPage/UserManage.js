@@ -151,7 +151,7 @@ class UserManage extends Component {
     }
     //console.log(arr);
     return (
-      <div className="container-fluid">
+      <div className="container">
         <AdminHeader />
         <div className="top-user-manage row mt-3">
           <span className="text-manage col-6">Quản lý người dùng</span>
@@ -179,9 +179,9 @@ class UserManage extends Component {
                 <th>STT</th>
                 <th>Họ và tên</th>
                 <th>Email</th>
-                <th>Address</th>
-                <th>Role</th>
-                <th>Action</th>
+                <th>Địa chỉ</th>
+                <th>Vai trò</th>
+                <th>Hành động</th>
               </tr>
             </thead>
             <tbody>

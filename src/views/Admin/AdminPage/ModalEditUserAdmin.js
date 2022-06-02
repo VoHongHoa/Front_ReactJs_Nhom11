@@ -93,7 +93,7 @@ class ModalEditUserAdmin extends Component {
               />
             </div>
             <div className="form-group mt-2 col-6">
-              <label>Fullname</label>
+              <label>Họ và tên</label>
               <input
                 type="text"
                 className="form-control"
@@ -129,7 +129,7 @@ class ModalEditUserAdmin extends Component {
               />
             </div>
             <div className="form-group col-6 mt-2">
-              <label>Role</label>
+              <label>Vai trò</label>
               <Select
                 onChange={this.handleOnchangeSelect}
                 options={options}

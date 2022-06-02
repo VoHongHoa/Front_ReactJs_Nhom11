@@ -136,10 +136,10 @@ class Homeheader extends Component {
                 activeClassName="active"
                 exact
               >
-                Home
+                Trang chủ
               </NavLink>
               <a href="#" className="nav-item nav-link">
-                About
+                Về chúng tôi
               </a>
               <div className="nav-item dropdown">
                 <a
@@ -147,7 +147,7 @@ class Homeheader extends Component {
                   className="nav-link dropdown-toggle"
                   data-toggle="dropdown"
                 >
-                  Smartphone
+                  Điện thoại
                 </a>
                 <div className="dropdown-menu">
                   <NavLink
@@ -180,7 +180,7 @@ class Homeheader extends Component {
                 Blog
               </a>
               <a href="#" className="nav-item nav-link">
-                Contact
+                Liên hệ
               </a>
             </div>
             <form className="navbar-form form-inline">
@@ -253,7 +253,7 @@ class Homeheader extends Component {
                       activeClassName="active"
                       exact
                     >
-                      <i className="fa fa-user-o"></i> Profile
+                      <i className="fa fa-user-o"></i> Hồ sơ người dùng
                     </NavLink>
 
                     <a
@@ -269,7 +269,7 @@ class Homeheader extends Component {
                       activeClassName="active"
                       exact
                     >
-                      <i className="fas fa-shopping-cart"></i> Cart
+                      <i className="fas fa-shopping-cart"></i> Giỏ hàng
                     </NavLink>
 
                     <NavLink
@@ -291,7 +291,7 @@ class Homeheader extends Component {
                           activeClassName="active"
                           exact
                         >
-                          <i className="fas fa-tools"></i>Go Admin
+                          <i className="fas fa-tools"></i>Chuyển đến Admin
                         </NavLink>
                       )}
                     <div className="dropdown-divider"></div>
@@ -300,7 +300,7 @@ class Homeheader extends Component {
                       onClick={() => this.handleLogout()}
                       style={{ cursor: "pointer" }}
                     >
-                      <i className="material-icons">&#xE8AC;</i> Logout
+                      <i className="material-icons">&#xE8AC;</i> Đăng xuất
                     </p>
                   </div>
                 </div>

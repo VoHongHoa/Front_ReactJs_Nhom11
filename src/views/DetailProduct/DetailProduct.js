@@ -152,7 +152,7 @@ class DetailProduct extends Component {
           </section>
           <section id="sidebar">
             <p>
-              Home | SamSum | <b>{product.title}</b>
+              Home | <b>{product.title}</b>
             </p>
           </section>
           <div className="container-detail">
@@ -254,12 +254,12 @@ class DetailProduct extends Component {
             <div className="row  d-flex justify-content-center">
               <div className="col-md-8">
                 <div className="headings d-flex justify-content-between align-items-center mb-3">
-                  <h5> {allReview.length} Comments</h5>
+                  <h5> {allReview.length} Bình luận</h5>
 
                   <div className="buttons">
                     <span className="badge bg-white d-flex flex-row align-items-center">
                       <span className="text-primary">
-                        Comments {isShowComment === true ? "ON" : "OFF"}
+                        Hiện bình luận {isShowComment === true ? "ON" : "OFF"}
                       </span>
                       <div className="form-check form-switch">
                         <input
@@ -317,7 +317,7 @@ class DetailProduct extends Component {
                                         this.handleDeleteReview(item._id)
                                       }
                                     >
-                                      Remove
+                                      Xóa
                                     </small>
                                     <span className="dots"></span>
                                     <small
@@ -325,7 +325,7 @@ class DetailProduct extends Component {
                                         this.handleOpenModalEditReview(item)
                                       }
                                     >
-                                      Edit
+                                      Sửa
                                     </small>
                                   </div>
                                   <div className="icons align-items-center">
