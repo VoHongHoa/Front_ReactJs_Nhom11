@@ -95,8 +95,8 @@ class ManageOrder extends Component {
                       <tr key={item._id}>
                         <td rowSpan={rowSpan}>{index}</td>
                         <td rowSpan={rowSpan}>{item.user[0]?.fullname}</td>
-                        <td>{item.product[0].title}</td>
-                        <td>{item.products[0].quantity}</td>
+                        <td>{item.product[0]?.title}</td>
+                        <td>{item.products[0]?.quantity}</td>
                         <td rowSpan={rowSpan}>{item.address}</td>
                         <td rowSpan={rowSpan}>{item.status}</td>
                         <td rowSpan={rowSpan} className="action-edit-del-order">
@@ -112,7 +112,7 @@ class ManageOrder extends Component {
                           return (
                             <tr key={i._id}>
                               <td>{i.title}</td>
-                              <td>{item.products[index].quantity}</td>
+                              <td>{item.products[index]?.quantity}</td>
                             </tr>
                           );
                         }

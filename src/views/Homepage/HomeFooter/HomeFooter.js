@@ -8,9 +8,7 @@ class HomeFooter extends Component {
         <footer className="text-center text-lg-start bg-dark text-muted section-footer">
           <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
             <div className="me-5 d-none d-lg-block text">
-              <span className="text">
-                Get connected with us on social networks:
-              </span>
+              <span className="text">Liên hệ với chúng tôi:</span>
             </div>
             <div className="text">
               <a
@@ -41,7 +39,7 @@ class HomeFooter extends Component {
                 </div>
 
                 <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                  <h6 className="text-uppercase fw-bold mb-4">TECHNOLOGY</h6>
+                  <h6 className="text-uppercase fw-bold mb-4">Công nghệ</h6>
                   <p>
                     <a href="https://www.mongodb.com/" className="text-reset">
                       MongoDB

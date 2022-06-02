@@ -78,11 +78,11 @@ class EditUser extends Component {
               <div className="col-md-5 border-right">
                 <div className="p-3 py-5">
                   <div className="d-flex justify-content-between align-items-center mb-3">
-                    <h4 className="text-right">Profile Settings</h4>
+                    <h4 className="text-right">Hồ sơ người dùng</h4>
                   </div>
                   <div className="row mt-2">
                     <div className="col-md-12">
-                      <label className="labels">FullName</label>
+                      <label className="labels">Họ và tên</label>
                       <input
                         type="text"
                         className="form-control"
@@ -96,11 +96,11 @@ class EditUser extends Component {
                   </div>
                   <div className="row mt-3">
                     <div className="col-md-12">
-                      <label className="labels">Mobile Number</label>
+                      <label className="labels">Số điện thoại</label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="enter phone number"
+                        placeholder="Nhập số điện thoại"
                         value={this.state.phoneNumber}
                         onChange={(event) => {
                           this.handleOnchangeInput(event, "phoneNumber");
@@ -108,11 +108,11 @@ class EditUser extends Component {
                       />
                     </div>
                     <div className="col-md-12">
-                      <label className="labels">Address</label>
+                      <label className="labels">Địa chỉ</label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="enter address line 1"
+                        placeholder="Nhập địa chỉ"
                         value={this.state.address}
                         onChange={(event) => {
                           this.handleOnchangeInput(event, "address");
@@ -121,11 +121,11 @@ class EditUser extends Component {
                     </div>
 
                     <div className="col-md-12">
-                      <label className="labels">Area</label>
+                      <label className="labels">Khu vực</label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="enter address line 2"
+                        placeholder="Nhập khu vực"
                         defaultValue={"Việt Nam"}
                       />
                     </div>
@@ -134,7 +134,7 @@ class EditUser extends Component {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="enter email id"
+                        placeholder="Nhập email"
                         value={this.state.email}
                         onChange={(event) => {
                           this.handleOnchangeInput(event, "email");
@@ -157,7 +157,7 @@ class EditUser extends Component {
               <div className="col-md-4">
                 <div className="p-3 py-5">
                   <div className="d-flex justify-content-between align-items-center experience">
-                    <span>Edit Experience</span>
+                    <span>Thông tin thêm</span>
                     <span className="border px-3 p-1 add-experience">
                       <i className="fa fa-plus"></i>&nbsp;Thông tin thêm
                     </span>
@@ -170,6 +170,7 @@ class EditUser extends Component {
                       className="form-control"
                       placeholder="experience"
                       defaultValue={"Khách hàng VIP"}
+                      readOnly
                     />
                   </div>{" "}
                   <br />
@@ -180,6 +181,7 @@ class EditUser extends Component {
                       className="form-control"
                       placeholder="additional details"
                       defaultValue={"Là khách hàng"}
+                      readOnly
                     />
                   </div>
                 </div>
