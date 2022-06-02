@@ -21,6 +21,7 @@ import ModalCart from "./Homepage/Homeheader/ModalCart/ModalCart";
 import UserOrder from "./Homepage/Homeheader/UserOrder";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import ResetPasswordStatus from "../components/ResetPasswordStatus";
+import Blog from "./Blog/Blog";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -39,6 +40,9 @@ class App extends Component {
             <Switch>
               <Route path="/" exact>
                 <Homepage />
+              </Route>
+              <Route path="/blog" exact>
+                <Blog />
               </Route>
               <Route path="/search" exact>
                 <Search />
@@ -136,14 +140,14 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     isLogin: state.user.isLogin,
     userInfor: state.user.userInfor,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

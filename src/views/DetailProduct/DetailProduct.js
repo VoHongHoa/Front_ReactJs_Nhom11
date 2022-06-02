@@ -16,6 +16,14 @@ import {
 } from "../../services/ReviewService";
 import defaultAvatar from "../../assets/images/defaultAvatar.jpg";
 import ModalEditReview from "./ModalEditReview";
+
+import detail1 from "../../assets/images/detail1.jpg";
+import detail2 from "../../assets/images/detail2.jpg";
+import detail3 from "../../assets/images/detail3.jpg";
+import detail4 from "../../assets/images/detail4.jpg";
+
+import { AiOutlineCaretDown } from "react-icons/ai";
+import { AiFillCaretUp } from "react-icons/ai";
 class DetailProduct extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +34,7 @@ class DetailProduct extends Component {
       isShowComment: true,
       curentReview: {},
       isOpenModal: false,
+      showHide: false,
     };
   }
   async componentDidMount() {
@@ -39,10 +48,17 @@ class DetailProduct extends Component {
       });
     }
   }
-  handleAddToCart = (product) => {
+  handleAddToCart = product => {
     this.props.addToCart(product);
   };
-  getAllReviews = async (productId) => {
+
+  handleShowHideButton = () => {
+    this.setState({
+      showHide: !this.state.showHide,
+    });
+  };
+
+  getAllReviews = async productId => {
     try {
       let res = await getAllReviewProduct(productId);
       this.setState({
@@ -52,7 +68,7 @@ class DetailProduct extends Component {
       console.log(e);
     }
   };
-  handleOnchangeInput = (event) => {
+  handleOnchangeInput = event => {
     this.setState({
       newReview: event.target.value,
     });
@@ -98,7 +114,7 @@ class DetailProduct extends Component {
       isShowComment: !this.state.isShowComment,
     });
   };
-  handleDeleteReview = async (reviewId) => {
+  handleDeleteReview = async reviewId => {
     try {
       let res = await deleteReview(reviewId);
       //console.log(res);
@@ -111,7 +127,7 @@ class DetailProduct extends Component {
       toast.error("Lỗi server");
     }
   };
-  handleOpenModalEditReview = async (item) => {
+  handleOpenModalEditReview = async item => {
     this.setState({
       curentReview: item,
       isOpenModal: true,
@@ -122,7 +138,7 @@ class DetailProduct extends Component {
       isOpenModal: false,
     });
   };
-  doEditReview = async (data) => {
+  doEditReview = async data => {
     try {
       let res = await editReview(data);
       //console.log(res);
@@ -143,6 +159,7 @@ class DetailProduct extends Component {
   render() {
     let { product, allReview, isShowComment } = this.state;
     let isEmptyObj = Object.keys(product).length === 0;
+    let showHide = this.state.showHide;
     // console.log(allReview);
     return (
       <React.Fragment>
@@ -172,6 +189,7 @@ class DetailProduct extends Component {
                       data-toggle="tooltip"
                       title=""
                       data-original-title="Add to cart"
+                      onClick={() => this.handleAddToCart(product)}
                     >
                       <i className="fa fa-shopping-cart"></i>
                     </button>
@@ -231,6 +249,82 @@ class DetailProduct extends Component {
               </div>
             </div>
           </div>
+          <div className="moreInformation">
+            <div className="information-product">
+              <h5 className="title-information">
+                Siêu phẩm được mong chờ nhất ở nửa cuối năm 2021 đến từ Apple.
+              </h5>
+              <h6>Thiết kế đẳng cấp hàng đầu</h6>
+              <h7>
+                iPhone mới kế thừa thiết kế đặc trưng từ iPhone 12 Pro Max khi
+                sở hữu khung viền vuông vức, mặt lưng kính cùng màn hình tai thỏ
+                tràn viền nằm ở phía trước.
+              </h7>
+              <div className="more-detail-img">
+                <img className="detail1" src={detail1} alt="detail-img" />
+              </div>
+              <h7>
+                Với iPhone 13 Pro Max phần tai thỏ đã được thu gọn lại 20% so
+                với thế hệ trước, không chỉ giải phóng nhiều không gian hiển thị
+                hơn mà còn giúp mặt trước chiếc điện thoại trở nên hấp dẫn hơn
+                mà vẫn đảm bảo được hoạt động của các cảm biến.
+              </h7>
+            </div>
+            {showHide === false && (
+              <div>
+                <div>
+                  <h7 className="dot">........</h7>
+                </div>
+                <button
+                  className="show-button"
+                  onClick={() => this.handleShowHideButton()}
+                >
+                  <AiOutlineCaretDown /> Hiển thị thêm
+                </button>
+              </div>
+            )}
+            {showHide && (
+              <div>
+                <div className="information-product">
+                  <div className="more-detail-img">
+                    <img className="detail1" src={detail2} alt="detail-img" />
+                  </div>
+                  <h7>
+                    Điểm thay đổi dễ dàng nhận biết trên iPhone 13 Pro Max chính
+                    là kích thước của cảm biến camera sau được làm to hơn và để
+                    tăng độ nhận diện cho sản phẩm mới thì Apple cũng đã bổ sung
+                    một tùy chọn màu sắc Sierra Blue (màu xanh dương nhạt hơn so
+                    với Pacific Blue của iPhone 12 Pro Max).
+                  </h7>
+                  <div className="more-detail-img">
+                    <img className="detail1" src={detail3} alt="detail-img" />
+                  </div>
+                  <h7>
+                    Máy vẫn tiếp tục sử dụng khung viền thép cao cấp cho khả
+                    năng chống trầy xước và va đập một cách vượt trội, kết hợp
+                    với khả năng kháng bụi, nước chuẩn IP68.
+                  </h7>
+                  <h6>Màn hình giải trí siêu mượt cùng tần số quét 120 Hz</h6>
+                  <h7>
+                    iPhone 13 Pro Max được trang bị màn hình kích thước 6.7 inch
+                    cùng độ phân giải 1284 x 2778 Pixels, sử dụng tấm nền OLED
+                    cùng công nghệ Super Retina XDR cho khả năng tiết kiệm năng
+                    lượng vượt trội nhưng vẫn đảm bảo hiển thị sắc nét sống động
+                    chân thực.
+                  </h7>
+                  <div className="more-detail-img">
+                    <img className="detail1" src={detail4} alt="detail-img" />
+                  </div>
+                </div>
+                <button
+                  className="hide-button"
+                  onClick={() => this.handleShowHideButton()}
+                >
+                  <AiFillCaretUp /> Ẩn bớt
+                </button>
+              </div>
+            )}
+          </div>
           <div className="comment">
             <h2>Bình luận</h2>
             <div className="form-groud">
@@ -238,7 +332,7 @@ class DetailProduct extends Component {
 
               <textarea
                 className="form-control"
-                onChange={(event) => this.handleOnchangeInput(event)}
+                onChange={event => this.handleOnchangeInput(event)}
                 value={this.state.newReview}
               ></textarea>
             </div>
@@ -354,14 +448,14 @@ class DetailProduct extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     userInfor: state.user.userInfor,
     isLogin: state.user.isLogin,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {};
 };
 
