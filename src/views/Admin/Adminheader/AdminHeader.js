@@ -6,43 +6,53 @@ import "./AdminHeader.scss";
 class AdminHeader extends Component {
   componentDidMount() {}
   render() {
-    let { userInfor } = this.props;
     return (
-      <div className="admin-header-container container">
+      <div className="admin-header-container">
         <div className="topnav">
-          <div className="item-manage col-5">
+          <div className="item-manage ">
             <NavLink to="/admin" activeClassName="active" exact={true}>
+              <i
+                className="fa-solid fa-table"
+                style={{ marginRight: "15px" }}
+              ></i>
               Thống kê
             </NavLink>
             <NavLink to="/admin/user" activeClassName="active" exact={true}>
+              <i
+                className="fa-solid fa-users"
+                style={{ marginRight: "15px" }}
+              ></i>
               Người dùng
             </NavLink>
             <NavLink to="/admin/product" activeClassName="active" exact={true}>
+              <i
+                className="fa-solid fa-calculator"
+                style={{ marginRight: "15px" }}
+              ></i>
               Sản phẩm
             </NavLink>
             <NavLink to="/admin/order" activeClassName="active" exact={true}>
+              <i
+                className="fa-solid fa-money-bill"
+                style={{ marginRight: "15px" }}
+              ></i>
               Đơn hàng
             </NavLink>
-            <NavLink to="/" activeClassName="active" exact={true}>
-              Trang chủ
-            </NavLink>
           </div>
-          <div className="admin-name col-3">
+          {/* <div className="admin-name col-3">
             {userInfor && userInfor.user && userInfor.user.fullname && (
               <button className="btn btn-light">
                 Wel,{userInfor.user.fullname}{" "}
               </button>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     );
   }
 }
 const mapStateToProps = (state) => {
-  return {
-    userInfor: state.user.userInfor,
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {

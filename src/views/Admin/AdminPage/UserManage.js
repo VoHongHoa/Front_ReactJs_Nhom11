@@ -11,6 +11,8 @@ import {
 import { toast } from "react-toastify";
 import ModalEditUserAdmin from "./ModalEditUserAdmin";
 import "./UserManage.scss";
+import Homeheader from "../../Homepage/Homeheader/Homeheader";
+import HomeFooter from "../../Homepage/HomeFooter/HomeFooter";
 class UserManage extends Component {
   constructor(props) {
     super(props);
@@ -82,6 +84,7 @@ class UserManage extends Component {
     this.setState({
       keyword: event.target.value,
     });
+    this.handleSearchUser(event.target.value);
   };
   toggleFromParent = () => {
     this.setState({
@@ -93,7 +96,6 @@ class UserManage extends Component {
       let res = await findUser(keyWord);
       //console.log("check res:", res);
       if (res && res.errorCode === 1 && res.result) {
-        toast.success(res.message);
         this.setState({
           alluser: res.result,
           action: "SEARCH_USER",
@@ -152,93 +154,108 @@ class UserManage extends Component {
     //console.log(arr);
     return (
       <div className="container">
-        <AdminHeader />
-        <div className="top-user-manage row mt-3">
-          <span className="text-manage col-6">Quản lý người dùng</span>
-          <div className="col-6 search-container">
-            <input
-              className="form-control"
-              placeholder="Tìm kiếm người dùng theo tên, địa chỉ, quyền, ..."
-              onChange={(event) => this.handleOnchangeInput(event)}
-              //onChange ={()=>  this.handleSearchUser(this.state.name)}
-            />
-            <button
-              type="submit"
-              className="btn-submit"
-              onClick={() => this.handleSearchUser(this.state.keyword)}
-            >
-              <i className="fa fa-search fa-2x"></i>
-            </button>
+        <section className="homepage-header-container">
+          <Homeheader />
+        </section>
+        <div className="row mt-2 mb-2">
+          <div className="left-content col-md-2 mt-2">
+            <AdminHeader></AdminHeader>
           </div>
-        </div>
 
-        <div className="user-container mt-3">
-          <table id="customers">
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>Họ và tên</th>
-                <th>Email</th>
-                <th>Địa chỉ</th>
-                <th>Vai trò</th>
-                <th>Hành động</th>
-              </tr>
-            </thead>
-            <tbody>
-              {alluser &&
-                alluser.length > 0 &&
-                alluser.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{index}</td>
-                      <td>{item.fullname}</td>
-                      <td>{item.email}</td>
-                      <td>{item.address}</td>
-                      <td>{item.role}</td>
-                      <td className="action-edit-del">
-                        <i
-                          className="fas fa-edit fa-2x"
-                          onClick={() => this.handleOpenModalEdit(item)}
-                        ></i>
-                        <i
-                          className="fas fa-trash fa-2x"
-                          onClick={() => this.handleDeleteUser(item._id)}
-                        ></i>
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-          <table></table>
-          {this.state.action !== "SEARCH_USER" ? (
-            <div className="pagination">
-              {currentPage > 0 && (
-                <span onClick={() => this.handleChangePrePage()}>&laquo;</span>
-              )}
-
-              {arr &&
-                arr.length > 0 &&
-                arr.map((item, index) => {
-                  return (
-                    <span
-                      key={index}
-                      onClick={() => this.handleChangePage(item)}
-                      className={currentPage === item ? "active" : " "}
-                    >
-                      {item}
+          <div className="right-content col-md-10">
+            <div className="top-user-manage row mt-3">
+              <span className="text-manage col-6">Quản lý người dùng</span>
+              <div className="col-6 search-container">
+                <input
+                  className="form-control"
+                  placeholder="Tìm kiếm người dùng theo tên, địa chỉ, quyền, ..."
+                  onChange={(event) => this.handleOnchangeInput(event)}
+                />
+                <button
+                  type="submit"
+                  className="btn-submit"
+                  onClick={() => this.handleSearchUser(this.state.keyword)}
+                >
+                  <i className="fa fa-search fa-2x"></i>
+                </button>
+              </div>
+            </div>
+            <div className="user-container mt-3">
+              <table id="customers">
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>Họ và tên</th>
+                    <th>Email</th>
+                    <th>Địa chỉ</th>
+                    <th>Vai trò</th>
+                    <th>Hành động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {alluser && alluser.length > 0 ? (
+                    alluser.map((item, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>{index}</td>
+                          <td>{item.fullname}</td>
+                          <td>{item.email}</td>
+                          <td>{item.address}</td>
+                          <td>{item.role}</td>
+                          <td className="action-edit-del">
+                            <i
+                              className="fas fa-edit fa-2x"
+                              onClick={() => this.handleOpenModalEdit(item)}
+                            ></i>
+                            <i
+                              className="fas fa-trash fa-2x"
+                              onClick={() => this.handleDeleteUser(item._id)}
+                            ></i>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <p className="title">Không có người dùng</p>
+                  )}
+                </tbody>
+              </table>
+              <table></table>
+              {this.state.action !== "SEARCH_USER" ? (
+                <div className="pagination">
+                  {currentPage > 0 && (
+                    <span onClick={() => this.handleChangePrePage()}>
+                      &laquo;
                     </span>
-                  );
-                })}
+                  )}
 
-              {currentPage < numOfpage - 1 && (
-                <span onClick={() => this.handleChangeNextPage()}>&raquo;</span>
+                  {arr &&
+                    arr.length > 0 &&
+                    arr.map((item, index) => {
+                      return (
+                        <span
+                          key={index}
+                          onClick={() => this.handleChangePage(item)}
+                          className={currentPage === item ? "active" : " "}
+                        >
+                          {item}
+                        </span>
+                      );
+                    })}
+
+                  {currentPage < numOfpage - 1 && (
+                    <span onClick={() => this.handleChangeNextPage()}>
+                      &raquo;
+                    </span>
+                  )}
+                </div>
+              ) : (
+                " "
               )}
             </div>
-          ) : (
-            " "
-          )}
+          </div>
         </div>
+        <HomeFooter />
 
         <ModalEditUserAdmin
           isOpen={this.state.isOpenModal}

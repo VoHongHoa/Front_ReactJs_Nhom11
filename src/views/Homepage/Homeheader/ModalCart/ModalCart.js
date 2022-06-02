@@ -199,6 +199,7 @@ class ModalCart extends Component {
                                 </div>
 
                                 <p className="text-start text-md-center">
+                                  Giá:
                                   <strong>{formatPrice(item.price)}</strong>
                                 </p>
                               </div>
