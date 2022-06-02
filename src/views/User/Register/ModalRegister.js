@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { handleRegisterUser } from "../../../services/UserService";
 import { toast } from "react-toastify";
-//import CommonUtils from "../../../utils/CommonUtils";
-//import Select from "react-select";
 import { storage } from "../../../firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 class ModalRegister extends Component {
@@ -136,11 +134,11 @@ class ModalRegister extends Component {
         <ModalBody>
           <div className="modalBody-user-container row">
             <div className="form-group mt-2 col-6">
-              <label>Username</label>
+              <label>Tên Đăng nhập</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your username"
+                placeholder="Nhập tên đăng nhập"
                 onChange={(event) => {
                   this.handleOnchangeInput(event, "username");
                 }}
@@ -148,11 +146,11 @@ class ModalRegister extends Component {
               />
             </div>
             <div className="form-group mt-2 col-6">
-              <label>Password</label>
+              <label>Mật khẩu</label>
               <input
                 type="password"
                 className="form-control"
-                placeholder="Enter password"
+                placeholder="Nhập mật khẩu"
                 onChange={(event) => {
                   this.handleOnchangeInput(event, "password");
                 }}
@@ -165,7 +163,7 @@ class ModalRegister extends Component {
               <input
                 type="email"
                 className="form-control"
-                placeholder="Enter email"
+                placeholder="Nhập email"
                 onChange={(event) => {
                   this.handleOnchangeInput(event, "email");
                 }}
@@ -173,11 +171,11 @@ class ModalRegister extends Component {
               />
             </div>
             <div className="form-group mt-2 col-6">
-              <label>Fullname</label>
+              <label>Họ và tên</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your fullname"
+                placeholder="Nhập họ và tên"
                 onChange={(event) => {
                   this.handleOnchangeInput(event, "fullname");
                 }}
@@ -189,7 +187,7 @@ class ModalRegister extends Component {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your address"
+                placeholder="Nhập địa chỉ"
                 onChange={(event) => {
                   this.handleOnchangeInput(event, "address");
                 }}

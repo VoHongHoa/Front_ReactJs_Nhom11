@@ -33,12 +33,7 @@ class SectionProducts extends Component {
     return (
       <>
         <div className="section-product-container">
-          <span
-            className="text-product"
-            style={{ textAlign: "center", margin: "100px" }}
-          >
-            Danh sách sản phẩm nổi bật
-          </span>
+          <span className="text-product">Danh sách sản phẩm nổi bật</span>
           <div className="container d-flex justify-content-center mt-50 mb-50 product-slide">
             <div className="row">
               {topProduct &&
@@ -89,14 +84,15 @@ class SectionProducts extends Component {
                             <i className="fa fa-star star"></i>
                           </div>
 
-                          <div className="text-muted mb-3">34 reviews</div>
+                          <div className="text-muted mb-3">34 đánh giá</div>
 
                           <button
                             type="button"
                             className="btn bg-cart"
                             onClick={() => this.handleAddToCart(item)}
                           >
-                            <i className="fa fa-cart-plus mr-2"></i> Add to cart
+                            <i className="fa fa-cart-plus mr-2"></i> Thêm vào
+                            giỏ hàng
                           </button>
                         </div>
                       </div>

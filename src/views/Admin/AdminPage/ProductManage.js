@@ -157,13 +157,13 @@ class ProductManage extends Component {
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Title</th>
+                <th>Tên sản phẩm</th>
                 <th>Màu</th>
                 <th>Ram</th>
                 <th>Rom</th>
                 <th>Giá</th>
                 <th>Ảnh</th>
-                <th>Action</th>
+                <th>Hành động</th>
               </tr>
             </thead>
             <tbody>
