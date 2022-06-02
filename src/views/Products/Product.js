@@ -137,6 +137,9 @@ class Products extends Component {
   handleViewDetailProduct = (product) => {
     this.props.history.push(`/detail-product/${product._id}`);
   };
+  handleReturnHome = () => {
+    this.props.history.push("/");
+  };
   render() {
     let { allProduct, filterPrice, filterRam, filterRom } = this.state;
     return (
@@ -146,7 +149,8 @@ class Products extends Component {
         </section>
         <section id="sidebar">
           <p>
-            Home | <b>{this.props.match.params.category}</b>
+            <span onClick={() => this.handleReturnHome()}>Trang chủ</span> |{" "}
+            <b>{this.props.match.params.category}</b>
           </p>
         </section>
         <div className="filter-container mb-2 mt-2">
