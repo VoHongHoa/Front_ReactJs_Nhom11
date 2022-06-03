@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 import { formatPrice } from "../../../constants/format";
 import HomeFooter from "../HomeFooter/HomeFooter";
 import Homeheader from "../Homeheader/Homeheader";
+import { addToCart } from "../../../store/actions/AppAction";
 import "./Search.scss";
 class Search extends Component {
   constructor(props) {
@@ -16,6 +17,10 @@ class Search extends Component {
   handleViewDetailProduct = (product) => {
     this.props.history.push(`/detail-product/${product._id}`);
   };
+  handleAddToCart = (item) => {
+    this.props.addToCart(item);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -105,7 +110,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return { addToCart: (item) => dispatch(addToCart(item)) };
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
