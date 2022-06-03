@@ -27,7 +27,7 @@ class Search extends Component {
             {this.props.allProduct && this.props.allProduct.length > 0 ? (
               this.props.allProduct.map((item, index) => {
                 return (
-                  <div className="col-md-3 mt-2">
+                  <div className="col-md-3 mt-2" key={item._id}>
                     <div className="card">
                       <div className="card-body">
                         <div className="card-img-actions">

@@ -30,6 +30,7 @@ class App extends Component {
   componentDidMount() {}
   render() {
     let { isLogin, userInfor } = this.props;
+    console.log(isLogin, userInfor);
 
     return (
       <BrowserRouter>
@@ -50,9 +51,7 @@ class App extends Component {
               <Route path="/cart" exact>
                 <ModalCart />
               </Route>
-              <Route path="/order" exact>
-                <Oder />
-              </Route>
+
               <Route path="/products/:category" exact>
                 <Product />
               </Route>
@@ -112,7 +111,7 @@ class App extends Component {
               </Route>
 
               <Route path="/order" exact>
-                {isLogin === true ? <Oder /> : <Redirect to="/login" />}
+                {isLogin === false ? <Redirect to="/login" /> : <Oder />}
               </Route>
               <Route path="/user-orders" exact>
                 {isLogin === true ? <UserOrder /> : <Redirect to="/login" />}
@@ -132,7 +131,7 @@ class App extends Component {
               pauseOnFocusLoss
               draggable
               pauseOnHover
-              theme="dark"
+              theme="light"
             />
           </div>
         </PayPalScriptProvider>
@@ -140,14 +139,14 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLogin: state.user.isLogin,
     userInfor: state.user.userInfor,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
