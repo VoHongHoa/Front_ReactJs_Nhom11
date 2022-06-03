@@ -1,0 +1,20 @@
+.container-blog1{
+    border-radius: 3px;
+    border: solid gray 0.1px;
+    border-radius: 15px;
+    max-width: 80%;
+    margin: 0 auto;
+    .h5{
+        margin: 10px 40px ;
+    }
+    .content-blog1{
+        margin: 10px 40px ;
+        .title-blog1{
+            color: rgb(76, 76, 76);
+        }
+        .img-blog1{
+            max-width: 100%;
+            margin-bottom: 15px;
+        }
+    }
+}

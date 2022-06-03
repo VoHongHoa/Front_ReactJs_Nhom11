@@ -22,6 +22,10 @@ import UserOrder from "./Homepage/Homeheader/UserOrder";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import ResetPasswordStatus from "../components/ResetPasswordStatus";
 import Blog from "./Blog/Blog";
+import Blog1 from "./Blog/Blog1";
+import Blog2 from "./Blog/Blog2";
+import Blog3 from "./Blog/Blog3";
+import Blog4 from "./Blog/Blog4";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -41,8 +45,20 @@ class App extends Component {
               <Route path="/" exact>
                 <Homepage />
               </Route>
-              <Route path="/blog" exact>
+              <Route exact path="/blog">
                 <Blog />
+              </Route>
+              <Route exact path="/blog/blog1">
+                <Blog1 />
+              </Route>
+              <Route path="/blog/blog2" exact>
+                <Blog2 />
+              </Route>
+              <Route path="/blog/blog3" exact>
+                <Blog3 />
+              </Route>
+              <Route path="/blog/blog4" exact>
+                <Blog4 />
               </Route>
               <Route path="/search" exact>
                 <Search />
