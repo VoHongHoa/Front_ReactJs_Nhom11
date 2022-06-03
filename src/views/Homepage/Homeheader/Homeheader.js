@@ -156,6 +156,7 @@ class Homeheader extends Component {
                           className="dropdown-item"
                           activeClassName="active"
                           exact
+                          key={index}
                         >
                           {item.label}
                         </NavLink>
@@ -191,9 +192,12 @@ class Homeheader extends Component {
                 Về chúng tôi
               </a>
 
-              <a href="#" className="nav-item nav-link">
+              {/* <a href="#" className="nav-item nav-link">
                 Blog
-              </a>
+              </a> */}
+              <Link to={"/blog"} className="nav-item nav-link" exact="true">
+                Blog
+              </Link>
               <a href="#" className="nav-item nav-link">
                 Liên hệ
               </a>
@@ -229,10 +233,10 @@ class Homeheader extends Component {
               </div>
             </form>
             <div className="navbar-nav ml-auto">
-              <a href="#" className="nav-item nav-link notifications">
+              {/* <a href="#" className="nav-item nav-link notifications">
                 <i className="fa fa-bell-o"></i>
                 <span className="badge">1</span>
-              </a>
+              </a> */}
 
               <Link
                 to="/cart"

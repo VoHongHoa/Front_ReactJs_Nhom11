@@ -63,6 +63,43 @@
     }
 }
 
+.moreInformation{
+    .dot{
+        display: block;
+        text-align: center;
+    }
+    .information-product{
+        max-width: 70%;
+        margin: 0 auto;
+        .title-information{
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .more-detail-img{
+            .detail1{
+                display: block;
+                width: 60%;
+                margin: 10px auto;
+            }
+        }
+    }
+    .show-button{
+        display: block;
+        margin: 0 auto;
+        border: none;
+        width: 70%;
+        background: linear-gradient(rgb(210, 210, 210), white);
+    }
+    .hide-button{
+        display: block;
+        margin: 0 auto;
+        border: none;
+        width: 70%;
+        background: linear-gradient(white,rgb(210, 210, 210));
+    }
+}
+
 .comments-view {
     .card {
 

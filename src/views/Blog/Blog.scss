@@ -1,0 +1,15 @@
+.title-blog{
+    text-align: center;
+    margin: 30px;
+}
+.blog-card{
+    border-radius: 8px;
+    background: grey;
+    column-count: 4;
+    .blog-img{
+        // width: 25%;
+    }
+    .card-body{
+        column-span: 3;
+    }
+}

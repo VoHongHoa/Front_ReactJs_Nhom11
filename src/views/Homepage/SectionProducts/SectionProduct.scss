@@ -36,6 +36,10 @@
       border: 1px solid rgba(0, 0, 0, .125);
       border-radius: .1875rem;
     }
+    .card:hover{
+      border-width: 3px;
+      border-color: rgba(81, 81, 81, 0.507);
+    }
 
     .card-img-actions {
       position: relative;
