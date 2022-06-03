@@ -122,6 +122,9 @@ class DetailProduct extends Component {
       isOpenModal: false,
     });
   };
+  handleReturnHome = () => {
+    this.props.history.push("/");
+  };
   doEditReview = async (data) => {
     try {
       let res = await editReview(data);
@@ -140,6 +143,9 @@ class DetailProduct extends Component {
       toast.error("Lỗi server");
     }
   };
+  handleAddToCart = (item) => {
+    this.props.addToCart(item);
+  };
   render() {
     let { product, allReview, isShowComment } = this.state;
     let isEmptyObj = Object.keys(product).length === 0;
@@ -152,7 +158,13 @@ class DetailProduct extends Component {
           </section>
           <section id="sidebar">
             <p>
-              Home | <b>{product.title}</b>
+              <span
+                onClick={() => this.handleReturnHome()}
+                style={{ cursor: "pointer" }}
+              >
+                Trang chủ
+              </span>{" "}
+              | <b>{product.title}</b>
             </p>
           </section>
           <div className="container-detail">
@@ -172,6 +184,7 @@ class DetailProduct extends Component {
                       data-toggle="tooltip"
                       title=""
                       data-original-title="Add to cart"
+                      onClick={() => this.handleAddToCart()}
                     >
                       <i className="fa fa-shopping-cart"></i>
                     </button>
@@ -362,7 +375,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return { addToCart: (item) => dispatch(addToCart(item)) };
 };
 
 export default withRouter(

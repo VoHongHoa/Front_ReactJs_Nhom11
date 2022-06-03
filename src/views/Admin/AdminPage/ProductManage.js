@@ -25,18 +25,42 @@ class ProductManage extends Component {
       currentProduct: {},
       isOpenModalEdit: false,
       keywordFind: "",
+      currentPage: 0,
+      numOfpage: 0,
+      action: "",
     };
   }
-  getAllProduct = async () => {
-    let res = await getAllProduct();
+  getAllProduct = async (currentPage) => {
+    let res = await getAllProduct(currentPage);
     if (res && res.errCode === 1) {
       this.setState({
         allProducts: res.products,
+        numOfpage: res.sumOfPage,
       });
     }
   };
+  handleChangePage = async (currentPage) => {
+    this.setState({
+      currentPage: currentPage,
+    });
+    this.getAllProduct(currentPage);
+  };
+  handleChangeNextPage = async () => {
+    let currentPage = this.state.currentPage + 1;
+    this.setState({
+      currentPage: currentPage,
+    });
+    this.getAllProduct(currentPage);
+  };
+  handleChangePrePage = async () => {
+    let currentPage = this.state.currentPage - 1;
+    this.setState({
+      currentPage: currentPage,
+    });
+    this.getAllProduct(currentPage);
+  };
   async componentDidMount() {
-    this.getAllProduct();
+    this.getAllProduct(this.state.currentPage);
   }
   handleAddNewProduct = () => {
     this.setState({
@@ -118,6 +142,7 @@ class ProductManage extends Component {
       if (res && res.errCode === 1) {
         this.setState({
           allProducts: res.product,
+          action: "SEARCH_USER",
         });
       }
     } catch (e) {
@@ -125,7 +150,11 @@ class ProductManage extends Component {
     }
   };
   render() {
-    let { allProducts } = this.state;
+    let { allProducts, numOfpage, currentPage } = this.state;
+    let arr = [];
+    for (var i = 0; i < numOfpage; i++) {
+      arr.push(i);
+    }
     return (
       <div className="container">
         <section className="homepage-header-container">
@@ -218,6 +247,37 @@ class ProductManage extends Component {
                     })}
                 </tbody>
               </table>
+              {this.state.action !== "SEARCH_USER" ? (
+                <div className="pagination">
+                  {currentPage > 0 && (
+                    <span onClick={() => this.handleChangePrePage()}>
+                      &laquo;
+                    </span>
+                  )}
+
+                  {arr &&
+                    arr.length > 0 &&
+                    arr.map((item, index) => {
+                      return (
+                        <span
+                          key={index}
+                          onClick={() => this.handleChangePage(item)}
+                          className={currentPage === item ? "active" : " "}
+                        >
+                          {item}
+                        </span>
+                      );
+                    })}
+
+                  {currentPage < numOfpage - 1 && (
+                    <span onClick={() => this.handleChangeNextPage()}>
+                      &raquo;
+                    </span>
+                  )}
+                </div>
+              ) : (
+                " "
+              )}
             </div>
           </div>
         </div>

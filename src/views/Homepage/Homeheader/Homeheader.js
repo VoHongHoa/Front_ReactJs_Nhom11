@@ -152,7 +152,7 @@ class Homeheader extends Component {
                     optionsCategories.map((item, index) => {
                       return (
                         <NavLink
-                          to={`/products/${item.label}`}
+                          to={`/products/${item.value}`}
                           className="dropdown-item"
                           activeClassName="active"
                           exact
