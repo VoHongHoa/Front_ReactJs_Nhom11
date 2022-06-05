@@ -35,7 +35,7 @@ class Homeheader extends Component {
   componentDidUpdate() {
     this.getDataSelect(this.props.allProduct);
   }
-  getDataSelect = (data) => {
+  getDataSelect = data => {
     //console.log("ceheck", this.props.allProduct);
     let optionSearch = [];
     if (optionsCategories.length > 0) {
@@ -65,7 +65,7 @@ class Homeheader extends Component {
       ...copyState,
     });
   };
-  handleOnchangeSelect = (selectedOption) => {
+  handleOnchangeSelect = selectedOption => {
     console.log(selectedOption);
     this.setState({
       keyword: selectedOption ? selectedOption.value : " ",
@@ -90,15 +90,15 @@ class Homeheader extends Component {
   returnToHome = () => {
     this.props.history.push("/");
   };
-  handleOpenEditUser = (id) => {
+  handleOpenEditUser = id => {
     this.props.history.push(`/user/${id}`);
   };
-  handleOnChangeInput = (event) => {
+  handleOnChangeInput = event => {
     this.setState({
       keyword: event.target.value,
     });
   };
-  getProductSearch = (keyword) => {
+  getProductSearch = keyword => {
     this.props.searchProduct(keyword);
     this.props.history.push("/search");
   };
@@ -198,9 +198,9 @@ class Homeheader extends Component {
               <Link to={"/blog"} className="nav-item nav-link" exact="true">
                 Blog
               </Link>
-              <a href="#" className="nav-item nav-link">
+              <Link to={"/contact"} className="nav-item nav-link" exact="true">
                 Liên hệ
-              </a>
+              </Link>
             </div>
             <form className="navbar-form form-inline">
               <div className="input-group search-box">
@@ -345,7 +345,7 @@ class Homeheader extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     isLogin: state.user.isLogin,
     userInfor: state.user.userInfor,
@@ -353,10 +353,10 @@ const mapStateToProps = (state) => {
     allProduct: state.products.allProduct,
   };
 };
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     logOutSuccess: () => dispatch(logOutSuccess()),
-    searchProduct: (keyword) => dispatch(searchProduct(keyword)),
+    searchProduct: keyword => dispatch(searchProduct(keyword)),
     getAllProduct: () => dispatch(getAllProducts()),
   };
 };

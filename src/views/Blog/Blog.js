@@ -10,15 +10,19 @@ import "./Blog.scss";
 import { NavLink } from "react-router-dom";
 
 class Blog extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
   render() {
     return (
       <React.Fragment>
         <Homeheader />
-        <h3 className="title-blog">Cập nhật tin tức công nghệ</h3>
+        <section id="sidebar">
+          <p>
+            <NavLink to="/" style={{ color: "black" }}>
+              Trang chủ
+            </NavLink>{" "}
+            | <b>Blog</b>
+          </p>
+        </section>
+        <h1 className="title-blog">Cập nhật tin tức công nghệ</h1>
         <h5 className="h5">Tin tức:</h5>
         <NavLink exact to="./blog/blog1">
           <div class="blog-card">

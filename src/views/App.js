@@ -26,6 +26,7 @@ import Blog1 from "./Blog/Blog1";
 import Blog2 from "./Blog/Blog2";
 import Blog3 from "./Blog/Blog3";
 import Blog4 from "./Blog/Blog4";
+import Contact from "./Contact/Contact";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -48,6 +49,9 @@ class App extends Component {
               </Route>
               <Route exact path="/blog">
                 <Blog />
+              </Route>
+              <Route exact path="/contact">
+                <Contact />
               </Route>
               <Route exact path="/blog/blog1">
                 <Blog1 />
@@ -155,14 +159,14 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     isLogin: state.user.isLogin,
     userInfor: state.user.userInfor,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
