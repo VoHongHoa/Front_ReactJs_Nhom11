@@ -27,6 +27,7 @@ import Blog2 from "./Blog/Blog2";
 import Blog3 from "./Blog/Blog3";
 import Blog4 from "./Blog/Blog4";
 import Contact from "./Contact/Contact";
+import About from "./About/About";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -52,6 +53,9 @@ class App extends Component {
               </Route>
               <Route exact path="/contact">
                 <Contact />
+              </Route>
+              <Route exact path="/about-us">
+                <About />
               </Route>
               <Route exact path="/blog/blog1">
                 <Blog1 />

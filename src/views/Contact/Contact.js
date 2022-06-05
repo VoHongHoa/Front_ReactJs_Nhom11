@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Homeheader from "../Homepage/Homeheader/Homeheader";
-import HomeFooter from "../Homepage/HomeFooter/HomeFooter";
 import { withRouter } from "react-router";
 import banner from "../../assets/images/banner-2.jpg";
+import banner2 from "../../assets/images/banner-contact.jpg";
 import "./Contact.scss";
 import { NavLink } from "react-router-dom";
 import { AiFillTwitterCircle } from "react-icons/ai";
@@ -84,9 +84,9 @@ class Contact extends Component {
                 </div>
               </div>
             </div>
+            <img className="banner-end" src={banner2} atl="banner" />
           </div>
         </div>
-        <HomeFooter />
       </React.Fragment>
     );
   }

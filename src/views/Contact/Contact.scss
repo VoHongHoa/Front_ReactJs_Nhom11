@@ -42,15 +42,21 @@
             display: flex;
             column-rule: 2px solid rgb(235, 235, 235);
             .tit{
-                width: 50%;
+                margin-left: 5%;
+                width: 60%;
                 text-align: left;
                 color: grey;
             }
             .tit-2{
                 color: grey;
-                margin-left: 10%;
+                // margin-left: 10%;
             }
         }
+       }
+       .banner-end{
+           display: block;
+           margin: 0 auto;
+           margin-top: 40px;
        }
     }
     

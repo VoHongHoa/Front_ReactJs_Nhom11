@@ -188,19 +188,34 @@ class Homeheader extends Component {
                   </NavLink> */}
                 </div>
               </div>
-              <a href="#" className="nav-item nav-link">
+              {/* <NavLink
+                to={"/about-us"}
+                className="nav-item nav-link"
+                activeClassName="active"
+                exact
+              >
                 Về chúng tôi
-              </a>
+              </NavLink> */}
 
               {/* <a href="#" className="nav-item nav-link">
                 Blog
               </a> */}
-              <Link to={"/blog"} className="nav-item nav-link" exact="true">
+              <NavLink
+                to={"/blog"}
+                className="nav-item nav-link"
+                activeClassName="active"
+                exact
+              >
                 Blog
-              </Link>
-              <Link to={"/contact"} className="nav-item nav-link" exact="true">
+              </NavLink>
+              <NavLink
+                to={"/contact"}
+                className="nav-item nav-link"
+                activeClassName="active"
+                exact="true"
+              >
                 Liên hệ
-              </Link>
+              </NavLink>
             </div>
             <form className="navbar-form form-inline">
               <div className="input-group search-box">
